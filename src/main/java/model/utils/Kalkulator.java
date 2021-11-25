@@ -21,9 +21,9 @@ public class Kalkulator {
 
     /**
      * @param casoprostor - časoprostor obsahující pouze souřadnice a čas (bez deště a nechladnějšího počasí)
-     * Nejprve dojde k zjištění nejchladnějšího počasí a zjištění, jestli bude v tomto rozmezí času pršet.
-     * Dochází k nastavení těchto hodnot v časoprostoru.
-     * Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
+     *                    Nejprve dojde k zjištění nejchladnějšího počasí a zjištění, jestli bude v tomto rozmezí času pršet.
+     *                    Dochází k nastavení těchto hodnot v časoprostoru.
+     *                    Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
      */
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
         priradNejchladnejsiPocasiADest(casoprostor);
@@ -36,28 +36,30 @@ public class Kalkulator {
         casoprostor.setNejchladnejsi(vyberNejchladnejsi(pocasi));
         casoprostor.setDest(zjistiJestliBudePrset(pocasi));
     }
+
     /**
      * V této metodě dochází ke scrapenutí dat z API
      */
     //
     //doplní Dimitrii
-    private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor){
+    private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         return null;
     }
+
     private Pocasi vyberNejchladnejsi(List<Pocasi> mnozinaPocasi) {
         return mnozinaPocasi.stream().min(Comparator.comparing(Pocasi::getTeplota)).orElse(null);
     }
-    private boolean zjistiJestliBudePrset(List<Pocasi> mnozinaPocasi){
+
+    private boolean zjistiJestliBudePrset(List<Pocasi> mnozinaPocasi) {
         return mnozinaPocasi.stream().anyMatch(Pocasi::isDest);
     }
 
     /**
      * @param casoprostor - časoprostor s nastavenými hodnotami pro déšť a nejchladnější počasí.
-     * Při existenci více uživatelem definovaných kusů oblečení (např. uživatel zadal vícero bot)
-     * se vyberou ty s nejvyšší nejnižší přípustnou hodnotou pro daný kus oblečení. (protože v časoprostoru
-     * je jinak tepleji, takže pokud je za den v Praze nejnižší teplota za den 20°C a existenci bot pro -10°C až 22°C
-     * a dalších bot pro 20°C až 40°C má samozřejmě smysl si dát boty pro 20-40)
-     *
+     *                    Při existenci více uživatelem definovaných kusů oblečení (např. uživatel zadal vícero bot)
+     *                    se vyberou ty s nejvyšší nejnižší přípustnou hodnotou pro daný kus oblečení. (protože v časoprostoru
+     *                    je jinak tepleji, takže pokud je za den v Praze nejnižší teplota za den 20°C a existenci bot pro -10°C až 22°C
+     *                    a dalších bot pro 20°C až 40°C má samozřejmě smysl si dát boty pro 20-40)
      */
 
     private Outfit vygenerujOutfit(Casoprostor casoprostor) {
@@ -69,37 +71,37 @@ public class Kalkulator {
         List<Spodek> spodky = null;
         List<Boty> boty = null;
 
-        List<Vrsek> prvniVrstvaTelo = vrsky.stream().filter(vrsek -> vrsek.getVrstva() == Vrstva.PRVNI).collect(Collectors.toList());
-        List<Vrsek> druhaVrstvaTelo = vrsky.stream().filter(vrsek -> vrsek.getVrstva() == Vrstva.DRUHA).collect(Collectors.toList());
-        List<Vrsek> tretiVrstvaTelo = vrsky.stream().filter(vrsek -> vrsek.getVrstva() == Vrstva.TRETI).collect(Collectors.toList());
+        List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI);
+        List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA);
+        List<Vrsek> tretiVrstvaTelo = vratVrstvu(vrsky, Vrstva.TRETI);
 
-        List<Spodek> prvniVrstvaSpodek = spodky.stream().filter(spodek -> spodek.getVrstva() == Vrstva.PRVNI).collect(Collectors.toList());
-        List<Spodek> druhaVrstvaSpodek = spodky.stream().filter(spodek -> spodek.getVrstva() == Vrstva.DRUHA).collect(Collectors.toList());
-        List<Spodek> tretiVrstvaSpodek = spodky.stream().filter(spodek -> spodek.getVrstva() == Vrstva.TRETI).collect(Collectors.toList());
+        List<Spodek> prvniVrstvaSpodek = vratVrstvu(spodky, Vrstva.PRVNI);
+        List<Spodek> druhaVrstvaSpodek = vratVrstvu(spodky, Vrstva.DRUHA);
+        List<Spodek> tretiVrstvaSpodek = vratVrstvu(spodky, Vrstva.TRETI);
 
-        //vybíráme oblečení, nejprve všechno, co matchuje s danou teplotou, a pak vybíráme podle nejvyšší minimální teploty (protože v časoprostoru je jinak tepleji)
-        Cepice finalniCepice = cepice.stream().filter(c -> c.getMinimalniTeplota() > teplota && c.getMaximalniTeplota() < teplota).max(Comparator.comparing(Cepice::getMinimalniTeplota)).orElse(null);
-        Boty finalniBoty = boty.stream().filter(b -> b.getMinimalniTeplota() > teplota && b.getMaximalniTeplota() < teplota).max(Comparator.comparing(Boty::getMinimalniTeplota)).orElse(null);
+        Cepice finalniCepice = vratFinalniKus(cepice, teplota);
+        Boty finalniBoty = vratFinalniKus(boty, teplota);
+
         List<Vrsek> finalniVrsky = new ArrayList<>();
         List<Spodek> finalniSpodky = new ArrayList<>();
+
         boolean destnik = casoprostor.isDest();
 
-        Vrsek prvniVrsek = prvniVrstvaTelo.stream().filter(v -> v.getMinimalniTeplota() > teplota && v.getMaximalniTeplota() < teplota).max(Comparator.comparing(Vrsek::getMinimalniTeplota)).orElse(null);
-        Vrsek druhyVrsek = druhaVrstvaTelo.stream().filter(v -> v.getMinimalniTeplota() > teplota && v.getMaximalniTeplota() < teplota).max(Comparator.comparing(Vrsek::getMinimalniTeplota)).orElse(null);
-        Vrsek tretiVrsek = tretiVrstvaTelo.stream().filter(v -> v.getMinimalniTeplota() > teplota && v.getMaximalniTeplota() < teplota).max(Comparator.comparing(Vrsek::getMinimalniTeplota)).orElse(null);
+        Vrsek prvniVrsek = vratFinalniKus(prvniVrstvaTelo, teplota);
+        Vrsek druhyVrsek = vratFinalniKus(druhaVrstvaTelo, teplota);
+        Vrsek tretiVrsek = vratFinalniKus(tretiVrstvaTelo, teplota);
 
-        Spodek prvniSpodek = prvniVrstvaSpodek.stream().filter(s -> s.getMinimalniTeplota() > teplota && s.getMaximalniTeplota() < teplota).max(Comparator.comparing(Spodek::getMinimalniTeplota)).orElse(null);
-        Spodek druhySpodek = druhaVrstvaSpodek.stream().filter(s -> s.getMinimalniTeplota() > teplota && s.getMaximalniTeplota() < teplota).max(Comparator.comparing(Spodek::getMinimalniTeplota)).orElse(null);
-        Spodek tretiSpodek = tretiVrstvaSpodek.stream().filter(s -> s.getMinimalniTeplota() > teplota && s.getMaximalniTeplota() < teplota).max(Comparator.comparing(Spodek::getMinimalniTeplota)).orElse(null);
+        Spodek prvniSpodek = vratFinalniKus(prvniVrstvaSpodek, teplota);
+        Spodek druhySpodek = vratFinalniKus(druhaVrstvaSpodek, teplota);
+        Spodek tretiSpodek = vratFinalniKus(tretiVrstvaSpodek, teplota);
 
-        finalniVrsky.add(prvniVrsek);
-        if (prvniVrsek != null){
+        if (prvniVrsek != null) {
             finalniVrsky.add(prvniVrsek);
         }
         if (druhyVrsek != null) {
             finalniVrsky.add(druhyVrsek);
         }
-        if (tretiVrsek != null){
+        if (tretiVrsek != null) {
             finalniVrsky.add(tretiVrsek);
         }
         if (prvniSpodek != null) {
@@ -113,6 +115,15 @@ public class Kalkulator {
         }
         return new Outfit(finalniCepice, finalniVrsky, finalniSpodky, finalniBoty, destnik);
     }
+
+    private <T extends Obleceni> List<T> vratVrstvu(List<T> obleceni, Vrstva vrstva) {
+        return obleceni.stream().filter(o -> o.getVrstva() == vrstva).collect(Collectors.toList());
+    }
+
+    private <T extends Obleceni> T vratFinalniKus(List<T> obleceni, int teplota) {
+        return obleceni.stream().filter(o -> o.getMinimalniTeplota() > teplota && o.getMaximalniTeplota() < teplota).max(Comparator.comparing(T::getMinimalniTeplota)).orElse(null);
+    }
+
 
 }
 

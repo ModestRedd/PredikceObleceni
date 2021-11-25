@@ -1,6 +1,6 @@
 package model.obleceni;
 
-public abstract class Obleceni {
+public class Obleceni {
     protected final String nazev;
     protected Vrstva vrstva;
     protected  CastTela castTela;
