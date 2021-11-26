@@ -8,6 +8,10 @@ public class Outfit {
     private List<Spodek> obleceniNaNohach;
     private Boty boty;
     private boolean destnik;
+    /**
+     * Alternativní oblečení obsahuje všechno oblečení, které je možné si obléknout v daném počasí
+     */
+    private AlternativniObleceni alternativniObleceni;
 
     public Outfit(Cepice cepice, List<Vrsek> obleceniNaTele, List<Spodek> obleceniNaNohach, Boty boty, boolean destnik) {
         this.cepice = cepice;
@@ -15,6 +19,14 @@ public class Outfit {
         this.obleceniNaNohach = obleceniNaNohach;
         this.boty = boty;
         this.destnik = destnik;
+    }
+
+    public AlternativniObleceni getAlternativniObleceni() {
+        return alternativniObleceni;
+    }
+
+    public void setAlternativniObleceni(AlternativniObleceni alternativniObleceni) {
+        this.alternativniObleceni = alternativniObleceni;
     }
 
     public Cepice getCepice() {
@@ -51,6 +63,8 @@ public class Outfit {
         stringBuilder.append(zkontrolujNull(boty));
         stringBuilder.append("\nDeštník:\n\t");
         stringBuilder.append(destnik ? "ano" : "ne");
+        stringBuilder.append("\n\n");
+        stringBuilder.append(alternativniObleceni.toString());
         return stringBuilder.toString();
     }
 
