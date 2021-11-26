@@ -1,19 +1,20 @@
 package model.obleceni;
 
-public class Obleceni {
-    protected final String nazev;
+public abstract class Obleceni {
+    protected String nazev;
     protected Vrstva vrstva;
-    protected  CastTela castTela;
+    protected CastTela castTela;
     protected int minimalniTeplota;
     protected int maximalniTeplota;
+    protected Formalni formalni;
 
-
-    public Obleceni(String nazev, Vrstva vrstva, CastTela castTela, int minimalniTeplota, int maximalniTeplota) {
+    public Obleceni(String nazev, Vrstva vrstva, CastTela castTela, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {
         this.nazev = nazev;
         this.vrstva = vrstva;
         this.castTela = castTela;
         this.minimalniTeplota = minimalniTeplota;
         this.maximalniTeplota = maximalniTeplota;
+        this.formalni = formalni;
     }
 
     public String getNazev() {
@@ -34,5 +35,9 @@ public class Obleceni {
 
     public int getMaximalniTeplota() {
         return maximalniTeplota;
+    }
+
+    public Formalni getFormalni() {
+        return formalni;
     }
 }

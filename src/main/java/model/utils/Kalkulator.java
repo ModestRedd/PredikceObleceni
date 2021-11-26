@@ -71,13 +71,13 @@ public class Kalkulator {
         List<Spodek> spodky = null;
         List<Boty> boty = null;
 
-        List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI);
-        List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA);
-        List<Vrsek> tretiVrstvaTelo = vratVrstvu(vrsky, Vrstva.TRETI);
+        List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI, casoprostor.getFormalni());
+        List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA, casoprostor.getFormalni());
+        List<Vrsek> tretiVrstvaTelo = vratVrstvu(vrsky, Vrstva.TRETI, casoprostor.getFormalni());
 
-        List<Spodek> prvniVrstvaSpodek = vratVrstvu(spodky, Vrstva.PRVNI);
-        List<Spodek> druhaVrstvaSpodek = vratVrstvu(spodky, Vrstva.DRUHA);
-        List<Spodek> tretiVrstvaSpodek = vratVrstvu(spodky, Vrstva.TRETI);
+        List<Spodek> prvniVrstvaSpodek = vratVrstvu(spodky, Vrstva.PRVNI, casoprostor.getFormalni());
+        List<Spodek> druhaVrstvaSpodek = vratVrstvu(spodky, Vrstva.DRUHA, casoprostor.getFormalni());
+        List<Spodek> tretiVrstvaSpodek = vratVrstvu(spodky, Vrstva.TRETI, casoprostor.getFormalni());
 
         Cepice finalniCepice = vratFinalniKus(cepice, teplota);
         Boty finalniBoty = vratFinalniKus(boty, teplota);
@@ -116,8 +116,8 @@ public class Kalkulator {
         return new Outfit(finalniCepice, finalniVrsky, finalniSpodky, finalniBoty, destnik);
     }
 
-    private <T extends Obleceni> List<T> vratVrstvu(List<T> obleceni, Vrstva vrstva) {
-        return obleceni.stream().filter(o -> o.getVrstva() == vrstva).collect(Collectors.toList());
+    private <T extends Obleceni> List<T> vratVrstvu(List<T> obleceni, Vrstva vrstva, List<Formalni> formalni) {
+        return obleceni.stream().filter(o -> o.getVrstva() == vrstva).filter(o -> formalni.contains(o.getFormalni())).collect(Collectors.toList());
     }
 
     private <T extends Obleceni> T vratFinalniKus(List<T> obleceni, int teplota) {
