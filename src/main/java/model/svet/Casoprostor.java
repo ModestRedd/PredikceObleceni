@@ -12,6 +12,11 @@ public class Casoprostor {
     private LocalDateTime konecnyCas;
     private Pocasi nejchladnejsi;
     private boolean dest;
+    /**
+     * možné formální oblečení, které je uživatel ochoten nosit,
+     * například je ochoten si vzít někam málo/středně formální oblečení, tak kalkulátor
+     * bere v potaz obě možnosti při výběru outfitu.
+     */
     private List<Formalni> formalni;
 
     public Casoprostor(double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
@@ -57,4 +62,5 @@ public class Casoprostor {
     public List<Formalni> getFormalni() {
         return formalni;
     }
+
 }

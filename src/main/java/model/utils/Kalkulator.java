@@ -3,7 +3,6 @@ package model.utils;
 import model.svet.Pocasi;
 import model.obleceni.*;
 import model.svet.Casoprostor;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,6 +24,7 @@ public class Kalkulator {
      *                    Dochází k nastavení těchto hodnot v časoprostoru.
      *                    Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
      */
+    //Viktor z UI v kontrolleru vygeneruje časoprostor, a zavolá tuto metodu. Vrátí mu hotový outfit.
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
         priradNejchladnejsiPocasiADest(casoprostor);
         return vygenerujOutfit(casoprostor);
@@ -40,8 +40,8 @@ public class Kalkulator {
     /**
      * V této metodě dochází ke scrapenutí dat z API
      */
-    //
-    //doplní Dimitrii
+    //doplní Dimitrii z údajů zemepisnaSirka, zemepisnaDelka, pocatecniCas a konecnyCas v časoprostoru
+    // a getterů na tyto proměnné, a vrati list pocasi
     private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         return null;
     }
@@ -63,6 +63,7 @@ public class Kalkulator {
      */
 
     private Outfit vygenerujOutfit(Casoprostor casoprostor) {
+
         int teplota = casoprostor.getNejchladnejsi().getTeplota();
 
         //scrape dat z databáze a mapování na oblečení - Jirka doplní metody
@@ -121,9 +122,8 @@ public class Kalkulator {
     }
 
     private <T extends Obleceni> T vratFinalniKus(List<T> obleceni, int teplota) {
-        return obleceni.stream().filter(o -> o.getMinimalniTeplota() > teplota && o.getMaximalniTeplota() < teplota).max(Comparator.comparing(T::getMinimalniTeplota)).orElse(null);
+        return obleceni.stream().filter(o -> o.getMinimalniTeplota() < teplota && o.getMaximalniTeplota() > teplota).max(Comparator.comparing(T::getMinimalniTeplota)).orElse(null);
     }
-
 
 }
 

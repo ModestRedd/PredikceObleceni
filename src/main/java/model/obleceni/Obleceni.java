@@ -40,4 +40,15 @@ public abstract class Obleceni {
     public Formalni getFormalni() {
         return formalni;
     }
+
+    @Override
+    public String toString() {
+        return nazev +
+                " {vrstva=" + vrstva +
+                ", castTela=" + castTela +
+                ", minimalniTeplota=" + minimalniTeplota +
+                ", maximalniTeplota=" + maximalniTeplota +
+                ", formalni=" + formalni +
+                '}';
+    }
 }

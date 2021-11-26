@@ -1,8 +1,6 @@
 package model.obleceni;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Outfit {
     private Cepice cepice;
@@ -37,5 +35,44 @@ public class Outfit {
 
     public boolean isDestnik() {
         return destnik;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("Outfit\n");
+        stringBuilder.append("-------------------");
+        stringBuilder.append("\nČepice:\n");
+        stringBuilder.append(zkontrolujNull(cepice));
+        stringBuilder.append("\nOblečení na těle:\n");
+        stringBuilder.append(zkontrolujNull(obleceniNaTele));
+        stringBuilder.append("\nOblečení na nohách:\n");
+        stringBuilder.append(zkontrolujNull(obleceniNaNohach));
+        stringBuilder.append("\nBoty:\n");
+        stringBuilder.append(zkontrolujNull(boty));
+        stringBuilder.append("\nDeštník:\n\t");
+        stringBuilder.append(destnik ? "ano" : "ne");
+        return stringBuilder.toString();
+    }
+
+    private <T extends Obleceni> String zkontrolujNull(T obleceni) {
+        if (obleceni == null) {
+            return "\tneedefinováno\n";
+        } else {
+            return "\t" + obleceni + "\n";
+        }
+    }
+
+    private <T extends Obleceni> String zkontrolujNull(List<T> obleceni) {
+        if (obleceni == null || obleceni.isEmpty()) {
+            return "\tneedefinováno\n";
+        } else {
+            return listNaString(obleceni);
+        }
+    }
+
+    private <T extends Obleceni> String listNaString(List<T> obleceni) {
+        StringBuilder stringBuilder = new StringBuilder();
+        obleceni.forEach(o -> stringBuilder.append("\t" + o.toString() + "\n"));
+        return stringBuilder.toString();
     }
 }
