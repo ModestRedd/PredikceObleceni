@@ -10,29 +10,29 @@ public class Casoprostor {
     private double zemepisnaDelka;
     private LocalDateTime pocatecniCas;
     private LocalDateTime konecnyCas;
-    private Pocasi nejchladnejsi;
+    private Pocasi nejchladnejsiPocasi;
     private boolean dest;
     /**
      * možné formální oblečení, které je uživatel ochoten nosit,
      * například je ochoten si vzít někam málo/středně formální oblečení, tak kalkulátor
      * bere v potaz obě možnosti při výběru outfitu.
      */
-    private List<Formalni> formalni;
+    private List<Formalni> ochotnyOblect;
 
     public Casoprostor(double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
         this.zemepisnaSirka = zemepisnaSirka;
         this.zemepisnaDelka = zemepisnaDelka;
         this.pocatecniCas = pocatecniCas;
         this.konecnyCas = konecnyCas;
-        this.formalni = formalni;
+        this.ochotnyOblect = formalni;
     }
 
-    public Pocasi getNejchladnejsi() {
-        return nejchladnejsi;
+    public Pocasi getNejchladnejsiPocasi() {
+        return nejchladnejsiPocasi;
     }
 
-    public void setNejchladnejsi(Pocasi nejchladnejsi) {
-        this.nejchladnejsi = nejchladnejsi;
+    public void setNejchladnejsiPocasi(Pocasi nejchladnejsiPocasi) {
+        this.nejchladnejsiPocasi = nejchladnejsiPocasi;
     }
 
     public boolean isDest() {
@@ -59,8 +59,8 @@ public class Casoprostor {
         return konecnyCas;
     }
 
-    public List<Formalni> getFormalni() {
-        return formalni;
+    public List<Formalni> getOchotnyOblect() {
+        return ochotnyOblect;
     }
 
 }

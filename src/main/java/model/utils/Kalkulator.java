@@ -33,7 +33,7 @@ public class Kalkulator {
 
     private void priradNejchladnejsiPocasiADest(Casoprostor casoprostor) {
         List<Pocasi> pocasi = zjistiPocasiZApi(casoprostor);
-        casoprostor.setNejchladnejsi(vyberNejchladnejsi(pocasi));
+        casoprostor.setNejchladnejsiPocasi(vyberNejchladnejsi(pocasi));
         casoprostor.setDest(zjistiJestliBudePrset(pocasi));
     }
 
@@ -64,7 +64,7 @@ public class Kalkulator {
 
     private Outfit vygenerujOutfit(Casoprostor casoprostor) {
 
-        int teplota = casoprostor.getNejchladnejsi().getTeplota();
+        int teplota = casoprostor.getNejchladnejsiPocasi().getTeplota();
 
         //scrape dat z databáze a mapování na oblečení - Jirka doplní metody
         List<Cepice> cepice = null;
@@ -72,13 +72,13 @@ public class Kalkulator {
         List<Spodek> spodky = null;
         List<Boty> boty = null;
 
-        List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI, casoprostor.getFormalni());
-        List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA, casoprostor.getFormalni());
-        List<Vrsek> tretiVrstvaTelo = vratVrstvu(vrsky, Vrstva.TRETI, casoprostor.getFormalni());
+        List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI, casoprostor.getOchotnyOblect());
+        List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA, casoprostor.getOchotnyOblect());
+        List<Vrsek> tretiVrstvaTelo = vratVrstvu(vrsky, Vrstva.TRETI, casoprostor.getOchotnyOblect());
 
-        List<Spodek> prvniVrstvaSpodek = vratVrstvu(spodky, Vrstva.PRVNI, casoprostor.getFormalni());
-        List<Spodek> druhaVrstvaSpodek = vratVrstvu(spodky, Vrstva.DRUHA, casoprostor.getFormalni());
-        List<Spodek> tretiVrstvaSpodek = vratVrstvu(spodky, Vrstva.TRETI, casoprostor.getFormalni());
+        List<Spodek> prvniVrstvaSpodek = vratVrstvu(spodky, Vrstva.PRVNI, casoprostor.getOchotnyOblect());
+        List<Spodek> druhaVrstvaSpodek = vratVrstvu(spodky, Vrstva.DRUHA, casoprostor.getOchotnyOblect());
+        List<Spodek> tretiVrstvaSpodek = vratVrstvu(spodky, Vrstva.TRETI, casoprostor.getOchotnyOblect());
 
         Cepice finalniCepice = vratFinalniKus(cepice, teplota);
         Boty finalniBoty = vratFinalniKus(boty, teplota);
