@@ -1,6 +1,8 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
-public abstract class Obleceni {
+public class Obleceni {
+    private int idObleceni = 0;
+
     protected String nazev;
     protected Vrstva vrstva;
     protected CastTela castTela;
@@ -43,13 +45,13 @@ public abstract class Obleceni {
 
     @Override
     public String toString() {
-        return nazev +
-                " {vrstva=" + vrstva +
-                ", castTela=" + castTela +
-                ", minimalniTeplota=" + minimalniTeplota +
-                ", maximalniTeplota=" + maximalniTeplota +
-                ", formalni=" + formalni +
-                '}';
-    }
+        return "\"" + idObleceni + "\":{" +
+                "\"castTela\":\"" + castTela + "\"," +
+                "\"nazev\":\"" + nazev + "\"," +
+                "\"minimalniTeplota\":\"" + minimalniTeplota + "\"," +
+                "\"maximalniTeplota\":\"" + maximalniTeplota + "\"," +
+                "\"vrstva\":\"" + vrstva + "\"," +
+                "\"formalni\":\"" + formalni + "\"}";
 
+    }
 }

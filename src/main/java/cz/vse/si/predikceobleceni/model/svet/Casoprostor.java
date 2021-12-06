@@ -2,14 +2,16 @@ package cz.vse.si.predikceobleceni.model.svet;
 
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Casoprostor {
+    private int idLokality = 0;
+
+    private String nazev;
     private double zemepisnaSirka;
     private double zemepisnaDelka;
-    private LocalDateTime pocatecniCas;
-    private LocalDateTime konecnyCas;
+    private int pocatecniCas;
+    private int konecnyCas;
     private Pocasi nejchladnejsiPocasi;
     private Pocasi nejteplejsiPocasi;
     private boolean dest;
@@ -20,7 +22,8 @@ public class Casoprostor {
      */
     private List<Formalni> formalnostObleceni;
 
-    public Casoprostor(double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
+    public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, int pocatecniCas, int konecnyCas, List<Formalni> formalni) {
+        this.nazev = nazev;
         this.zemepisnaSirka = zemepisnaSirka;
         this.zemepisnaDelka = zemepisnaDelka;
         this.pocatecniCas = pocatecniCas;
@@ -60,11 +63,11 @@ public class Casoprostor {
         return zemepisnaDelka;
     }
 
-    public LocalDateTime getPocatecniCas() {
+    public int getPocatecniCas() {
         return pocatecniCas;
     }
 
-    public LocalDateTime getKonecnyCas() {
+    public int getKonecnyCas() {
         return konecnyCas;
     }
 
@@ -72,4 +75,14 @@ public class Casoprostor {
         return formalnostObleceni;
     }
 
+    @Override
+    public String toString() {
+        return "\"" + idLokality + "\":{" +
+                "\"nazev\":\"" + nazev + "\"," +
+                "\"zemepisnaSirka\":\"" + zemepisnaSirka + "\"," +
+                "\"zemepisnaDelka\":\"" + zemepisnaDelka + "\"," +
+                "\"pocatecniCas\":\"" + pocatecniCas + "\"," +
+                "\"konecnyCas\":\"" + konecnyCas + "\"," +
+                "\"formalnostObleceni\":\"" + formalnostObleceni + "\"}";
+    }
 }
