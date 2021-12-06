@@ -1,4 +1,4 @@
-package model.obleceni;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Boty extends Obleceni{
     public Boty(String nazev, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {

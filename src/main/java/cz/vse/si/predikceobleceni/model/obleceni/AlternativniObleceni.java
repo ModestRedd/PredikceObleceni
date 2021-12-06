@@ -1,4 +1,4 @@
-package model.obleceni;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 import java.util.List;
 

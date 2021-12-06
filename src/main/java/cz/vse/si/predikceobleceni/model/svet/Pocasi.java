@@ -1,4 +1,4 @@
-package model.svet;
+package cz.vse.si.predikceobleceni.model.svet;
 
 public class Pocasi {
     private boolean dest;

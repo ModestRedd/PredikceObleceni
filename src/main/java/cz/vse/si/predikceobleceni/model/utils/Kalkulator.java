@@ -1,8 +1,8 @@
-package model.utils;
+package cz.vse.si.predikceobleceni.model.utils;
 
-import model.svet.Pocasi;
-import model.obleceni.*;
-import model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.svet.Pocasi;
+import cz.vse.si.predikceobleceni.model.obleceni.*;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;

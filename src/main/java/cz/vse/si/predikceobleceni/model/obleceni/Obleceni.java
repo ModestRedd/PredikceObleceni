@@ -1,4 +1,4 @@
-package model.obleceni;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public abstract class Obleceni {
     protected String nazev;

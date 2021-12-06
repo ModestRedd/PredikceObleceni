@@ -1,4 +1,4 @@
-package model.obleceni;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Spodek extends Obleceni{
     public Spodek(String nazev, Vrstva vrstva, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {
