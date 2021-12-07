@@ -4,11 +4,14 @@ import com.google.gson.Gson;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Start {
 
     public static void main(String[] args) {
+
+        /*
         Obleceni mikina = new Vrsek("Mikina", Vrstva.DRUHA, 10, 20, Formalni.MALO);
         System.out.println("Pouze toString(): " + mikina);
         Obleceni kalhoty = new Spodek("Kalhoty", Vrstva.PRVNI, -10, 40, Formalni.HODNE);
@@ -20,7 +23,20 @@ public class Start {
 
         System.out.println("--------------------------------------------------");
 
+        ArrayList<Obleceni> obleceni = new ArrayList<>();
+        obleceni.add(mikina);
+        obleceni.add(kalhoty);
+
         Gson g = new Gson();
+
+        System.out.println("JSONARRAY: " + g.toJson(obleceni));
+
+        ArrayList<Obleceni> obleceni2 = new ArrayList<>();
+
+        System.out.println("--------------------------------------------------");
+
+
+
 
         String mikinaJson = g.toJson(mikina);
         System.out.println("JSON: " + mikinaJson);
