@@ -18,10 +18,10 @@ public class Persistence {
     private ArrayList<Casoprostor> lokality = new ArrayList<>();
 
     boolean jsouSeznamyObleceniAktualni = true;
-    private ArrayList<Cepice> hlava = new ArrayList<Cepice>();
-    private ArrayList<Vrsek> vrsek = new ArrayList<Vrsek>();
-    private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
-    private ArrayList<Boty> boty = new ArrayList<Boty>();
+    private ArrayList<Obleceni> hlava = new ArrayList<Obleceni>();
+    private ArrayList<Obleceni> vrsek = new ArrayList<Obleceni>();
+    private ArrayList<Obleceni> spodek = new ArrayList<Obleceni>();
+    private ArrayList<Obleceni> boty = new ArrayList<Obleceni>();
 
     Persistence(String pathObleceniJson, String pathLokalityJson) throws IOException {
         String obleceniJson = Files.readString(Path.of(pathObleceniJson), StandardCharsets.UTF_8);
@@ -74,16 +74,16 @@ public class Persistence {
     private void zaradObleceni(Obleceni obleceniKZarazeni) {
         switch (obleceniKZarazeni.getCastTela()) {
             case HLAVA -> {
-                this.hlava.add((Cepice) obleceniKZarazeni);
+                this.hlava.add(obleceniKZarazeni);
             }
             case TELO -> {
-                this.vrsek.add((Vrsek) obleceniKZarazeni);
+                this.vrsek.add(obleceniKZarazeni);
             }
             case NOHY -> {
-                this.spodek.add((Spodek) obleceniKZarazeni);
+                this.spodek.add(obleceniKZarazeni);
             }
             case BOTY -> {
-                this.boty.add((Boty) obleceniKZarazeni);
+                this.boty.add(obleceniKZarazeni);
             }
         }
     }
@@ -144,15 +144,15 @@ public class Persistence {
     }
 
     private void zaradVeskereObleceni(){
-        hlava = new ArrayList<Cepice>();
-        vrsek = new ArrayList<Vrsek>();
-        spodek = new ArrayList<Spodek>();
-        boty = new ArrayList<Boty>();
-        zaradObleceni(obleceni);
+        hlava = new ArrayList<>();
+        vrsek = new ArrayList<>();
+        spodek = new ArrayList<>();
+        boty = new ArrayList<>();
+        zaradObleceni(this.obleceni);
         jsouSeznamyObleceniAktualni = true;
     }
 
-    public ArrayList<Cepice> getHlava() {
+    public ArrayList<Obleceni> getHlava() {
         if (!jsouSeznamyObleceniAktualni) {
             zaradVeskereObleceni();
         }
@@ -160,7 +160,7 @@ public class Persistence {
         return hlava;
     }
 
-    public ArrayList<Vrsek> getVrsek() {
+    public ArrayList<Obleceni> getVrsek() {
         if (!jsouSeznamyObleceniAktualni) {
             zaradVeskereObleceni();
         }
@@ -168,7 +168,7 @@ public class Persistence {
         return vrsek;
     }
 
-    public ArrayList<Spodek> getSpodek() {
+    public ArrayList<Obleceni> getSpodek() {
         if (!jsouSeznamyObleceniAktualni) {
             zaradVeskereObleceni();
         }
@@ -176,11 +176,11 @@ public class Persistence {
         return spodek;
     }
 
-    public ArrayList<Boty> getBoty() {
+    public ArrayList<Obleceni> getBoty() {
         if (!jsouSeznamyObleceniAktualni) {
             zaradVeskereObleceni();
         }
-        
+
         return boty;
     }
 }

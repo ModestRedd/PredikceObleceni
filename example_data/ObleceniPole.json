@@ -12,7 +12,7 @@
     "idObleceni": 4,
     "nazev": "Usanka",
     "vrstva": "PRVNI",
-    "castTela": "CEPICE",
+    "castTela": "HLAVA",
     "minimalniTeplota": -10,
     "maximalniTeplota": 40,
     "formalni": "HODNE"
