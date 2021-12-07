@@ -1,0 +1,20 @@
+[
+  {
+    "idObleceni": 3,
+    "nazev": "Triko",
+    "vrstva": "Prvni",
+    "castTela": "TELO",
+    "minimalniTeplota": 10,
+    "maximalniTeplota": 20,
+    "formalni": "MALO"
+  },
+  {
+    "idObleceni": 4,
+    "nazev": "Usanka",
+    "vrstva": "PRVNI",
+    "castTela": "HLAVA",
+    "minimalniTeplota": -10,
+    "maximalniTeplota": 40,
+    "formalni": "HODNE"
+  }
+]

@@ -1,7 +1,7 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Obleceni {
-    private int idObleceni = 0;
+    private int id = 0;
 
     protected String nazev;
     protected Vrstva vrstva;
@@ -43,9 +43,13 @@ public class Obleceni {
         return formalni;
     }
 
+    public void setId(int newId){
+        this.id = newId;
+    }
+
     @Override
     public String toString() {
-        return "\"" + idObleceni + "\":{" +
+        return "\"" + id + "\":{" +
                 "\"castTela\":\"" + castTela + "\"," +
                 "\"nazev\":\"" + nazev + "\"," +
                 "\"minimalniTeplota\":\"" + minimalniTeplota + "\"," +

@@ -5,7 +5,7 @@ import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 import java.util.List;
 
 public class Casoprostor {
-    private int idLokality = 0;
+    private int id;
 
     private String nazev;
     private double zemepisnaSirka;
@@ -75,9 +75,13 @@ public class Casoprostor {
         return formalnostObleceni;
     }
 
+    public void setId(int newId) {
+        this.id = newId;
+    }
+
     @Override
     public String toString() {
-        return "\"" + idLokality + "\":{" +
+        return "\"" + id + "\":{" +
                 "\"nazev\":\"" + nazev + "\"," +
                 "\"zemepisnaSirka\":\"" + zemepisnaSirka + "\"," +
                 "\"zemepisnaDelka\":\"" + zemepisnaDelka + "\"," +
