@@ -4,12 +4,30 @@ import com.google.gson.Gson;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Start {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        String obleceniJson = Files.readString(Path.of("example_data/ObleceniDefault.json"), StandardCharsets.UTF_8);
+        String lokalityJson = Files.readString(Path.of("example_data/LokalityDefault.json"), StandardCharsets.UTF_8);
+
+        Persistence persistence = new Persistence(obleceniJson, lokalityJson);
+
+        persistence.pridejObleceni(Files.readString(Path.of("example_data/ObleceniJedno.json"), StandardCharsets.UTF_8));
+        persistence.pridejLokality(Files.readString(Path.of("example_data/LokalitaJedna.json"), StandardCharsets.UTF_8));
+
+        persistence.pridejObleceni(Files.readString(Path.of("example_data/ObleceniPole.json"), StandardCharsets.UTF_8));
+        persistence.pridejLokality(Files.readString(Path.of("example_data/LokalityPole.json"), StandardCharsets.UTF_8));
+
+        System.out.println("OBLECENI:\n" + persistence.dumpObleceniJson());
+        System.out.println("LOKALITY:\n" + persistence.dumpLokalityJson());
 
         /*
         Obleceni mikina = new Vrsek("Mikina", Vrstva.DRUHA, 10, 20, Formalni.MALO);

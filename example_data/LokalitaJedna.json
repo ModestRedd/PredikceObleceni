@@ -1,0 +1,12 @@
+{
+  "idLokality": 2,
+  "nazev": "Vesnice",
+  "zemepisnaSirka": 50.123,
+  "zemepisnaDelka": 13.24,
+  "pocatecniCas": 1638822222,
+  "konecnyCas": 1638832222,
+  "dest": true,
+  "formalnostObleceni": [
+    "MALO"
+  ]
+}

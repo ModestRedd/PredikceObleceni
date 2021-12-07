@@ -1,18 +1,18 @@
 [
   {
-    "idObleceni": 0,
-    "nazev": "Mikina",
-    "vrstva": "DRUHA",
+    "idObleceni": 3,
+    "nazev": "Triko",
+    "vrstva": "Prvni",
     "castTela": "TELO",
     "minimalniTeplota": 10,
     "maximalniTeplota": 20,
     "formalni": "MALO"
   },
   {
-    "idObleceni": 0,
-    "nazev": "Kalhoty",
+    "idObleceni": 4,
+    "nazev": "Usanka",
     "vrstva": "PRVNI",
-    "castTela": "NOHY",
+    "castTela": "CEPICE",
     "minimalniTeplota": -10,
     "maximalniTeplota": 40,
     "formalni": "HODNE"

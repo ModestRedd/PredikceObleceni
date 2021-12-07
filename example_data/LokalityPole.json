@@ -1,0 +1,27 @@
+[
+  {
+    "idLokality": 3,
+    "nazev": "Hory",
+    "zemepisnaSirka": 50.123,
+    "zemepisnaDelka": 13.24,
+    "pocatecniCas": 1638822222,
+    "konecnyCas": 1638832222,
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO"
+    ]
+  },
+  {
+    "idLokality": 4,
+    "nazev": "More",
+    "zemepisnaSirka": 50.456,
+    "zemepisnaDelka": 14.987,
+    "pocatecniCas": 1531234567,
+    "konecnyCas": 1636665557,
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO",
+      "STREDNE"
+    ]
+  }
+]

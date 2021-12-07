@@ -23,10 +23,22 @@ public class Persistence {
 
         try {
             if (obleceniJson.charAt(0) == '[') {
-                this.obleceni = gson.fromJson(obleceniJson, new TypeToken<ArrayList<Obleceni>>() {
-                }.getType());
+                ArrayList<Obleceni> obleceniProPridani = new ArrayList<Obleceni>(
+                        gson.fromJson(obleceniJson,
+                                new TypeToken<ArrayList<Obleceni>>() {
+                                }.getType()));
+
+                int obleceniSize = this.obleceni.size();
+                for (int i = 0; i < obleceniProPridani.size(); i++) {
+                    obleceniProPridani.get(i).setId(obleceniSize + i);
+                }
+
+                obleceni.addAll(obleceniProPridani);
+
             } else {
-                obleceni.add(gson.fromJson(obleceniJson, Obleceni.class));
+                Obleceni obleceniProPridani = gson.fromJson(obleceniJson, Obleceni.class);
+                obleceniProPridani.setId(obleceni.size());
+                obleceni.add(obleceniProPridani);
             }
         } catch (JsonParseException exception) {
             System.out.println("ERROR: Zadany JSON s daty obleceni je nevalidni! Exception: " + exception);
@@ -38,23 +50,35 @@ public class Persistence {
 
         try {
             if (lokalityJson.charAt(0) == '[') {
-                this.lokality = gson.fromJson(lokalityJson, new TypeToken<ArrayList<Casoprostor>>() {
-                }.getType());
+                ArrayList<Casoprostor> lokalityProPridani = new ArrayList<Casoprostor>(
+                        gson.fromJson(lokalityJson,
+                                new TypeToken<ArrayList<Casoprostor>>() {
+                                }.getType()));
+
+                int lokalitySize = this.lokality.size();
+                for (int i = 0; i < lokalityProPridani.size(); i++) {
+                    lokalityProPridani.get(i).setId(lokalitySize + i);
+                }
+
+                lokality.addAll(lokalityProPridani);
+
             } else {
-                lokality.add(gson.fromJson(lokalityJson, Casoprostor.class));
+                Casoprostor lokalityProPridani = gson.fromJson(lokalityJson, Casoprostor.class);
+                lokalityProPridani.setId(lokality.size());
+                lokality.add(lokalityProPridani);
             }
         } catch (JsonParseException exception) {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
         }
     }
 
-    private String dumpObleceniJson() {
+    protected String dumpObleceniJson() {
         Gson gson = new Gson();
 
         return gson.toJson(obleceni);
     }
 
-    private String dumpLokalityJson() {
+    protected String dumpLokalityJson() {
         Gson gson = new Gson();
 
         return gson.toJson(lokality);
