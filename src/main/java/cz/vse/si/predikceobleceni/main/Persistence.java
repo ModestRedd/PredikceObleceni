@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Persistence {
+    private final String pathToObleceni = "data/Obleceni.json";
+    private final String pathToLokality = "data/Lokality.json";
+
     private ArrayList<Obleceni> obleceni = new ArrayList<>();
     private ArrayList<Casoprostor> lokality = new ArrayList<>();
 
@@ -23,9 +26,9 @@ public class Persistence {
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
 
-    Persistence(String pathObleceniJson, String pathLokalityJson) throws IOException {
-        String obleceniJson = Files.readString(Path.of(pathObleceniJson), StandardCharsets.UTF_8);
-        String lokalityJson = Files.readString(Path.of(pathLokalityJson), StandardCharsets.UTF_8);
+    Persistence() throws IOException {
+        String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
+        String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
 
         pridejObleceni(obleceniJson);
         pridejLokality(lokalityJson);
@@ -135,28 +138,20 @@ public class Persistence {
         }
     }
 
-    protected String dumpObleceniJson() {
+    protected void dumpObleceniJson() throws IOException {
         Gson gson = new Gson();
 
-        return gson.toJson(obleceni);
+        String json = gson.toJson(obleceni);
+
+        Files.write(Path.of(pathToObleceni), List.of(json), StandardCharsets.UTF_8);
     }
 
-    protected void dumpObleceniJson(String pathToFile) throws IOException {
-        String json = dumpObleceniJson();
-
-        Files.write(Path.of(pathToFile), List.of(json), StandardCharsets.UTF_8);
-    }
-
-    protected String dumpLokalityJson() {
+    protected void dumpLokalityJson() throws IOException {
         Gson gson = new Gson();
 
-        return gson.toJson(lokality);
-    }
+        String json = gson.toJson(lokality);
 
-    protected void dumpLokalityJson(String pathToFile) throws IOException {
-        String json = dumpLokalityJson();
-
-        Files.write(Path.of(pathToFile), List.of(json), StandardCharsets.UTF_8);
+        Files.write(Path.of(pathToLokality), List.of(json), StandardCharsets.UTF_8);
     }
 
     public ArrayList<Casoprostor> getLokality() {
