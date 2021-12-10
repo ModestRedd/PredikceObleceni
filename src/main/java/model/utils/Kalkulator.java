@@ -3,6 +3,7 @@ package model.utils;
 import model.svet.Pocasi;
 import model.obleceni.*;
 import model.svet.Casoprostor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -49,15 +50,23 @@ public class Kalkulator {
     }
 
     private Pocasi vyberNejchladnejsi(List<Pocasi> mnozinaPocasi) {
-        return mnozinaPocasi.stream().min(Comparator.comparing(Pocasi::getTeplota)).orElse(null);
+        return mnozinaPocasi
+                .stream()
+                .min(Comparator.comparing(Pocasi::getTeplota))
+                .orElse(null);
     }
 
     private Pocasi vyberNejteplejsi(List<Pocasi> mnozinaPocasi) {
-        return mnozinaPocasi.stream().max(Comparator.comparing(Pocasi::getTeplota)).orElse(null);
+        return mnozinaPocasi
+                .stream()
+                .max(Comparator.comparing(Pocasi::getTeplota))
+                .orElse(null);
     }
 
     private boolean zjistiJestliBudePrset(List<Pocasi> mnozinaPocasi) {
-        return mnozinaPocasi.stream().anyMatch(Pocasi::isDest);
+        return mnozinaPocasi
+                .stream()
+                .anyMatch(Pocasi::isDest);
     }
 
     /**
@@ -72,10 +81,10 @@ public class Kalkulator {
 
         //scrape dat z databáze a mapování na oblečení - Jirka doplní metody
         List<Cepice> cepice = Arrays.asList(new Cepice("Čepice", 5, 99, Formalni.MALO));
-        List<Vrsek> vrsky = Arrays.asList(new Vrsek("Mikina", Vrstva.DRUHA, -99, 11, Formalni.MALO), new Vrsek("Tričko", Vrstva.PRVNI, -99, 99, Formalni.MALO), new Vrsek("Kabát", Vrstva.TRETI, -99, 18, Formalni.STREDNE),new Vrsek("Bunda",Vrstva.TRETI,-20,15,Formalni.MALO));
+        List<Vrsek> vrsky = Arrays.asList(new Vrsek("Mikina", Vrstva.DRUHA, -99, 11, Formalni.MALO), new Vrsek("Tričko", Vrstva.PRVNI, -99, 99, Formalni.MALO), new Vrsek("Kabát", Vrstva.TRETI, -99, 18, Formalni.STREDNE), new Vrsek("Bunda", Vrstva.TRETI, -20, 15, Formalni.MALO));
 
-        List<Spodek> spodky = Arrays.asList(new Spodek("Chinos",Vrstva.DRUHA,-20,20,Formalni.STREDNE),new Spodek("Rifle",Vrstva.DRUHA,-21,20,Formalni.STREDNE));
-        List<Boty> boty = Arrays.asList(new Boty("Koženky",-20,15,Formalni.MALO));
+        List<Spodek> spodky = Arrays.asList(new Spodek("Chinos", Vrstva.DRUHA, -20, 20, Formalni.STREDNE), new Spodek("Rifle", Vrstva.DRUHA, -21, 20, Formalni.STREDNE));
+        List<Boty> boty = Arrays.asList(new Boty("Koženky", -20, 15, Formalni.MALO));
 
         List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI, casoprostor);
         List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA, casoprostor);
@@ -120,16 +129,28 @@ public class Kalkulator {
             finalniSpodky.add(tretiSpodek);
         }
         Outfit finalniOutfit = new Outfit(finalniCepice, finalniVrsky, finalniSpodky, finalniBoty, destnik);
-        finalniOutfit.setAlternativniObleceni(vygenerujAlternativniObleceni(cepice, vrsky, spodky, boty, casoprostor));
+        finalniOutfit.setAlternativniObleceni(
+                        vygenerujAlternativniObleceni(cepice, vrsky, spodky, boty, casoprostor)
+                );
         return finalniOutfit;
     }
 
     private <T extends Obleceni> List<T> vratVrstvu(List<T> obleceni, Vrstva vrstva, Casoprostor casoprostor) {
-        return obleceni.stream().filter(o -> o.getVrstva() == vrstva).filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni())).collect(Collectors.toList());
+        return obleceni
+                .stream()
+                .filter(o -> o.getVrstva() == vrstva)
+                .filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni()))
+                .collect(Collectors.toList());
     }
 
     private <T extends Obleceni> T vratFinalniKus(List<T> obleceni, Casoprostor casoprostor) {
-        return obleceni.stream().filter(o -> o.getMinimalniTeplota() < casoprostor.getNejchladnejsiPocasi().getTeplota()).filter(o -> o.getMaximalniTeplota() > casoprostor.getNejchladnejsiPocasi().getTeplota()).filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni())).max(Comparator.comparing(T::getMinimalniTeplota)).orElse(null);
+        return obleceni
+                .stream()
+                .filter(o -> o.getMinimalniTeplota() < casoprostor.getNejchladnejsiPocasi().getTeplota())
+                .filter(o -> o.getMaximalniTeplota() > casoprostor.getNejchladnejsiPocasi().getTeplota())
+                .filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni()))
+                .max(Comparator.comparing(T::getMinimalniTeplota))
+                .orElse(null);
     }
 
     private AlternativniObleceni vygenerujAlternativniObleceni(List<Cepice> cepice, List<Vrsek> vrsky, List<Spodek> spodky, List<Boty> boty, Casoprostor casoprostor) {
@@ -141,7 +162,13 @@ public class Kalkulator {
     }
 
     private <T extends Obleceni> List<T> zkontrolujVhodnostDoPocasiAFormalnost(List<T> obleceni, Casoprostor casoprostor) {
-        return obleceni.stream().filter(o -> o.getMinimalniTeplota() < casoprostor.getNejchladnejsiPocasi().getTeplota()).filter(o -> o.getMaximalniTeplota() > casoprostor.getNejchladnejsiPocasi().getTeplota()).filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni())).sorted(Comparator.comparingInt(Obleceni::getMinimalniTeplota)).collect(Collectors.toList());
+        return obleceni
+                .stream()
+                .filter(o -> o.getMinimalniTeplota() < casoprostor.getNejchladnejsiPocasi().getTeplota())
+                .filter(o -> o.getMaximalniTeplota() > casoprostor.getNejchladnejsiPocasi().getTeplota())
+                .filter(o -> casoprostor.getFormalnostObleceni().contains(o.getFormalni()))
+                .sorted(Comparator.comparingInt(Obleceni::getMinimalniTeplota))
+                .collect(Collectors.toList());
     }
 
 }
