@@ -1,7 +1,7 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Obleceni {
-    private int id = 0;
+    private int id = -1;
 
     protected String nazev;
     protected Vrstva vrstva;
@@ -9,6 +9,16 @@ public class Obleceni {
     protected int minimalniTeplota;
     protected int maximalniTeplota;
     protected Formalni formalni;
+
+    public Obleceni(int id, String nazev, Vrstva vrstva, CastTela castTela, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {
+        this.id = id;
+        this.nazev = nazev;
+        this.vrstva = vrstva;
+        this.castTela = castTela;
+        this.minimalniTeplota = minimalniTeplota;
+        this.maximalniTeplota = maximalniTeplota;
+        this.formalni = formalni;
+    }
 
     public Obleceni(String nazev, Vrstva vrstva, CastTela castTela, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {
         this.nazev = nazev;
@@ -43,7 +53,11 @@ public class Obleceni {
         return formalni;
     }
 
-    public void setId(int newId){
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int newId) {
         this.id = newId;
     }
 
