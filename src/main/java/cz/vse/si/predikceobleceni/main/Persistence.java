@@ -31,6 +31,15 @@ public class Persistence {
         pridejLokality(lokalityJson);
     }
 
+    public void pridejObleceni(Obleceni kusObleceni) {
+        jsouSeznamyObleceniAktualni = false;
+
+        zaradObleceni(kusObleceni);
+        jsouSeznamyObleceniAktualni = true;
+
+        obleceni.add(kusObleceni);
+    }
+
     protected void pridejObleceni(String obleceniJson) {
         jsouSeznamyObleceniAktualni = false;
 
@@ -143,7 +152,7 @@ public class Persistence {
         return lokality;
     }
 
-    private void zaradVeskereObleceni(){
+    private void zaradVeskereObleceni() {
         hlava = new ArrayList<>();
         vrsek = new ArrayList<>();
         spodek = new ArrayList<>();
