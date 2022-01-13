@@ -34,7 +34,7 @@ public class Persistence {
         pridejLokality(lokalityJson);
     }
 
-    public void pridejObleceni(Obleceni kusObleceni) {
+    public void pridejObleceni(Obleceni kusObleceni) throws IOException {
         jsouSeznamyObleceniAktualni = false;
 
         int id = obleceni.size();
@@ -44,9 +44,11 @@ public class Persistence {
         jsouSeznamyObleceniAktualni = true;
 
         obleceni.add(kusObleceni);
+
+        dumpObleceniJson();
     }
 
-    protected void pridejObleceni(String obleceniJson) {
+    protected void pridejObleceni(String obleceniJson) throws IOException {
         jsouSeznamyObleceniAktualni = false;
 
         Gson gson = new Gson();
@@ -137,6 +139,16 @@ public class Persistence {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
         }
     }
+
+    public void pridejLokalitu(Casoprostor lokalita) throws IOException {
+        int id = lokality.size();
+        lokalita.setId(id);
+
+        lokality.add(lokalita);
+
+        dumpLokalityJson();
+    }
+
 
     protected void dumpObleceniJson() throws IOException {
         Gson gson = new Gson();
