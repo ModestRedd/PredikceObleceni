@@ -4,8 +4,8 @@
     "nazev": "Les",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": "2017-01-13T17:09:42.411",
-    "konecnyCas": "2017-01-13T17:09:42.411",
+    "pocatecniCas": 1638822222,
+    "konecnyCas": 1638832222,
     "dest": false,
     "formalnostObleceni": [
       "MALO"
@@ -16,8 +16,8 @@
     "nazev": "Skola",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
-    "pocatecniCas": "2017-01-13T17:09:42.411",
-    "konecnyCas": "2017-01-13T17:09:42.411",
+    "pocatecniCas": 1531234567,
+    "konecnyCas": 1636665557,
     "dest": false,
     "formalnostObleceni": [
       "MALO",
@@ -29,8 +29,8 @@
     "nazev": "Vesnice",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": "2017-01-13T17:09:42.411",
-    "konecnyCas": "2017-01-13T17:09:42.411",
+    "pocatecniCas": 1638822222,
+    "konecnyCas": 1638832222,
     "dest": true,
     "formalnostObleceni": [
       "MALO"
@@ -41,8 +41,8 @@
     "nazev": "Hory",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": "2017-01-13T17:09:42.411",
-    "konecnyCas": "2017-01-13T17:09:42.411",
+    "pocatecniCas": 1638822222,
+    "konecnyCas": 1638832222,
     "dest": false,
     "formalnostObleceni": [
       "MALO"
@@ -53,8 +53,8 @@
     "nazev": "More",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
-    "pocatecniCas": "2017-01-13T17:09:42.411",
-    "konecnyCas": "2017-01-13T17:09:42.411",
+    "pocatecniCas": 1531234567,
+    "konecnyCas": 1636665557,
     "dest": false,
     "formalnostObleceni": [
       "MALO",

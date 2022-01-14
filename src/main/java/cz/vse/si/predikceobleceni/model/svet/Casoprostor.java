@@ -2,7 +2,6 @@ package cz.vse.si.predikceobleceni.model.svet;
 
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Casoprostor {
@@ -11,8 +10,8 @@ public class Casoprostor {
     private String nazev;
     private double zemepisnaSirka;
     private double zemepisnaDelka;
-    private LocalDateTime pocatecniCas;
-    private LocalDateTime konecnyCas;
+    private int pocatecniCas;
+    private int konecnyCas;
     private Pocasi nejchladnejsiPocasi;
     private Pocasi nejteplejsiPocasi;
     private boolean dest;
@@ -23,7 +22,7 @@ public class Casoprostor {
      */
     private List<Formalni> formalnostObleceni;
 
-    public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
+    public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, int pocatecniCas, int konecnyCas, List<Formalni> formalni) {
         this.nazev = nazev;
         this.zemepisnaSirka = zemepisnaSirka;
         this.zemepisnaDelka = zemepisnaDelka;
@@ -64,11 +63,11 @@ public class Casoprostor {
         return zemepisnaDelka;
     }
 
-    public LocalDateTime getPocatecniCas() {
+    public int getPocatecniCas() {
         return pocatecniCas;
     }
 
-    public LocalDateTime getKonecnyCas() {
+    public int getKonecnyCas() {
         return konecnyCas;
     }
 
