@@ -1,5 +1,7 @@
 package cz.vse.si.predikceobleceni.main;
 
+import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,7 +25,10 @@ public class Start {
         persistence.dumpLokalityJson("data/Lokality.json");
         */
 
-        persistence.dumpLokalityJson();
-        persistence.dumpObleceniJson();
+        //persistence.dumpLokalityJson();
+        //persistence.dumpObleceniJson();
+
+        Kalkulator kalkulator = new Kalkulator();
+        kalkulator.zjistiPocasiZApi(persistence.getLokality().get(0));
     }
 }

@@ -90,26 +90,25 @@ public class Persistence {
 
     private void zaradObleceni(Obleceni obleceniKZarazeni) {
         switch (obleceniKZarazeni.getCastTela()) {
-            case HLAVA -> {
+            case HLAVA:
                 Cepice cepice = new Cepice(obleceniKZarazeni);
-
                 this.hlava.add(cepice);
-            }
-            case TELO -> {
+                break;
+
+            case TELO:
                 Vrsek vrsek = new Vrsek(obleceniKZarazeni);
-
                 this.vrsek.add(vrsek);
-            }
-            case NOHY -> {
+                break;
+
+            case NOHY:
                 Spodek spodek = new Spodek(obleceniKZarazeni);
-
                 this.spodek.add(spodek);
-            }
-            case BOTY -> {
-                Boty boty = new Boty(obleceniKZarazeni);
+                break;
 
+            case BOTY:
+                Boty boty = new Boty(obleceniKZarazeni);
                 this.boty.add(boty);
-            }
+                break;
         }
     }
 

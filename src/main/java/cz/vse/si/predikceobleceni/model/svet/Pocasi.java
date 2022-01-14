@@ -1,13 +1,15 @@
 package cz.vse.si.predikceobleceni.model.svet;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Pocasi {
+    private String nazev;
     private boolean dest;
-    private int teplota;
-    private LocalDateTime cas;
+    private double teplota;
+    private int cas; //unixtime
 
-    public Pocasi(boolean dest, int teplota, LocalDateTime cas) {
+    public Pocasi(boolean dest, double teplota, int cas) {
         this.dest = dest;
         this.teplota = teplota;
         this.cas = cas;
@@ -17,12 +19,11 @@ public class Pocasi {
         return dest;
     }
 
-    public int getTeplota() {
+    public double getTeplota() {
         return teplota;
     }
 
-    public LocalDateTime getCas(){
+    public int getCas(){
         return cas;
-
     }
 }

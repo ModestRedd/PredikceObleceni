@@ -1,15 +1,14 @@
 package cz.vse.si.predikceobleceni.model.utils;
 
+import com.google.gson.*;
 import cz.vse.si.predikceobleceni.model.svet.Pocasi;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
+//todo pro testovani docasne public
 public final class Kalkulator {
     private static Kalkulator kalkulator = new Kalkulator();
 
@@ -17,7 +16,7 @@ public final class Kalkulator {
         return kalkulator;
     }
 
-    private Kalkulator() {
+    public Kalkulator() {
     }
 
     /**
@@ -44,22 +43,49 @@ public final class Kalkulator {
      * V této metodě dochází ke scrapenutí dat z API
      */
 
-    private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
-        String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(),casoprostor.getZemepisnaDelka());
-        return konvertujJsonNaListPocasi(jsonOdpoved,casoprostor);
+    //todo pro testovani docasne public
+    public List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
+        String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(), casoprostor.getZemepisnaDelka());
+        return konvertujJsonNaListPocasi(jsonOdpoved, casoprostor);
     }
 
-    private List<Pocasi> konvertujJsonNaListPocasi (String json, Casoprostor casoprostor){
+    private List<Pocasi> konvertujJsonNaListPocasi(String json, Casoprostor casoprostor) {
+        //System.out.println(json);
 
-        //TODO - Tohle udělá jirka
-        //misto null bude list všech pocasi z JSONu
-        List<Pocasi> pocasi = null;
+        JsonElement jelement = new JsonParser().parse(json);
+        JsonObject jobject = jelement.getAsJsonObject();
 
-        return filtrujPocasi(pocasi,casoprostor);
+        String nazev = jobject.getAsJsonObject("city").get("name").toString();
+
+        List<Pocasi> pocasi = new ArrayList<>();
+
+        JsonArray weatherArray = jobject.getAsJsonArray("list");
+        weatherArray.forEach(element -> {
+            //System.out.println(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString());
+            boolean dest = Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Rain");
+            int cas = Integer.parseInt(element.getAsJsonObject().get("dt").toString());
+            double teplota = Double.parseDouble(element.getAsJsonObject().getAsJsonObject("main").get("temp").toString());
+
+            /*
+            System.out.println(dest);
+            System.out.println(cas);
+            System.out.println(teplota);
+            */
+
+            pocasi.add(new Pocasi(dest, teplota, cas));
+        });
+
+        /*
+        pocasi.forEach(element->{
+            System.out.println(element.getTeplota());
+        });
+        */
+
+        return filtrujPocasi(pocasi, casoprostor);
     }
 
     //tady dojde k vyfiltrování všech počasí na ty které jsou v časoprostoru (podle počátečního a konečného času)
-    private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor){
+    private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor) {
         return null;
     }
 
