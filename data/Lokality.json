@@ -1,0 +1,64 @@
+[
+  {
+    "id": 0,
+    "nazev": "Les",
+    "zemepisnaSirka": 50.123,
+    "zemepisnaDelka": 13.24,
+    "pocatecniCas": "2017-01-13T17:09:42.411",
+    "konecnyCas": "2017-01-13T17:09:42.411",
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO"
+    ]
+  },
+  {
+    "id": 1,
+    "nazev": "Skola",
+    "zemepisnaSirka": 50.456,
+    "zemepisnaDelka": 14.987,
+    "pocatecniCas": "2017-01-13T17:09:42.411",
+    "konecnyCas": "2017-01-13T17:09:42.411",
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO",
+      "STREDNE"
+    ]
+  },
+  {
+    "id": 2,
+    "nazev": "Vesnice",
+    "zemepisnaSirka": 50.123,
+    "zemepisnaDelka": 13.24,
+    "pocatecniCas": "2017-01-13T17:09:42.411",
+    "konecnyCas": "2017-01-13T17:09:42.411",
+    "dest": true,
+    "formalnostObleceni": [
+      "MALO"
+    ]
+  },
+  {
+    "id": 3,
+    "nazev": "Hory",
+    "zemepisnaSirka": 50.123,
+    "zemepisnaDelka": 13.24,
+    "pocatecniCas": "2017-01-13T17:09:42.411",
+    "konecnyCas": "2017-01-13T17:09:42.411",
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO"
+    ]
+  },
+  {
+    "id": 4,
+    "nazev": "More",
+    "zemepisnaSirka": 50.456,
+    "zemepisnaDelka": 14.987,
+    "pocatecniCas": "2017-01-13T17:09:42.411",
+    "konecnyCas": "2017-01-13T17:09:42.411",
+    "dest": false,
+    "formalnostObleceni": [
+      "MALO",
+      "STREDNE"
+    ]
+  }
+]
