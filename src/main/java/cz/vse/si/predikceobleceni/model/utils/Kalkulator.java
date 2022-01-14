@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Kalkulator {
+public final class Kalkulator {
     private static Kalkulator kalkulator = new Kalkulator();
 
     public static Kalkulator getInstance() {
@@ -43,11 +43,26 @@ public class Kalkulator {
     /**
      * V této metodě dochází ke scrapenutí dat z API
      */
-    //doplní Dimitrii z údajů zemepisnaSirka, zemepisnaDelka, pocatecniCas a konecnyCas v časoprostoru
-    // a getterů na tyto proměnné, a vrati list pocasi
+
     private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
+        String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(),casoprostor.getZemepisnaDelka());
+        return konvertujJsonNaListPocasi(jsonOdpoved,casoprostor);
+    }
+
+    private List<Pocasi> konvertujJsonNaListPocasi (String json, Casoprostor casoprostor){
+
+        //TODO - Tohle udělá jirka
+        //misto null bude list všech pocasi z JSONu
+        List<Pocasi> pocasi = null;
+
+        return filtrujPocasi(pocasi,casoprostor);
+    }
+
+    //tady dojde k vyfiltrování všech počasí na ty které jsou v časoprostoru (podle počátečního a konečného času)
+    private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor){
         return null;
     }
+
 
     private Pocasi vyberNejchladnejsi(List<Pocasi> mnozinaPocasi) {
         return mnozinaPocasi
@@ -130,8 +145,8 @@ public class Kalkulator {
         }
         Outfit finalniOutfit = new Outfit(finalniCepice, finalniVrsky, finalniSpodky, finalniBoty, destnik);
         finalniOutfit.setAlternativniObleceni(
-                        vygenerujAlternativniObleceni(cepice, vrsky, spodky, boty, casoprostor)
-                );
+                vygenerujAlternativniObleceni(cepice, vrsky, spodky, boty, casoprostor)
+        );
         return finalniOutfit;
     }
 
@@ -172,5 +187,3 @@ public class Kalkulator {
     }
 
 }
-
-
