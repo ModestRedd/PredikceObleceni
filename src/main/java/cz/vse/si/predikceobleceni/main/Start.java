@@ -1,11 +1,13 @@
 package cz.vse.si.predikceobleceni.main;
 
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 
 public class Start {
 
@@ -30,5 +32,7 @@ public class Start {
 
         Kalkulator kalkulator = new Kalkulator();
         kalkulator.zjistiPocasiZApi(persistence.getLokality().get(0));
+
+        //Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor("abc", 12.12300, 12.12300, null, null, null));
     }
 }

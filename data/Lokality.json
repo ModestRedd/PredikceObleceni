@@ -4,8 +4,32 @@
     "nazev": "Les",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": 1638822222,
-    "konecnyCas": 1638832222,
+    "pocatecniCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "konecnyCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 11,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
     "dest": false,
     "formalnostObleceni": [
       "MALO"
@@ -16,8 +40,32 @@
     "nazev": "Skola",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
-    "pocatecniCas": 1531234567,
-    "konecnyCas": 1636665557,
+    "pocatecniCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "konecnyCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 11,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
     "dest": false,
     "formalnostObleceni": [
       "MALO",
@@ -29,8 +77,32 @@
     "nazev": "Vesnice",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": 1638822222,
-    "konecnyCas": 1638832222,
+    "pocatecniCas": {
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 11,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "konecnyCas": {
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
     "dest": true,
     "formalnostObleceni": [
       "MALO"
@@ -41,8 +113,32 @@
     "nazev": "Hory",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
-    "pocatecniCas": 1638822222,
-    "konecnyCas": 1638832222,
+    "pocatecniCas": {
+      "date": {
+        "year": 2022,
+        "month": 11,
+        "day": 12
+      },
+      "time": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "konecnyCas": {
+      "date": {
+        "year": 2022,
+        "month": 11,
+        "day": 12
+      },
+      "time": {
+        "hour": 11,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
     "dest": false,
     "formalnostObleceni": [
       "MALO"
@@ -53,8 +149,32 @@
     "nazev": "More",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
-    "pocatecniCas": 1531234567,
-    "konecnyCas": 1636665557,
+    "pocatecniCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "konecnyCas": {
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 12
+      },
+      "time": {
+        "hour": 11,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
     "dest": false,
     "formalnostObleceni": [
       "MALO",
