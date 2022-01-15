@@ -80,6 +80,10 @@ public class Casoprostor {
         this.id = newId;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     @Override
     public String toString() {
         return "\"" + id + "\":{" +

@@ -141,6 +141,16 @@ public class Persistence {
 
     public void pridejLokalitu(Casoprostor lokalita) throws IOException {
         int id = lokality.size();
+
+        for (Casoprostor element :
+                lokality) {
+            if (element.getId() == lokalita.getId()) {
+                id = element.getId();
+                lokality.remove(element);
+                break;
+            }
+        }
+
         lokalita.setId(id);
 
         lokality.add(lokalita);
