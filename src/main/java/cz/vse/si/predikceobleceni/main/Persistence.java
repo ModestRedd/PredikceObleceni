@@ -26,7 +26,7 @@ public class Persistence {
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
 
-    Persistence() throws IOException {
+    public Persistence() throws IOException {
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
 
@@ -38,6 +38,16 @@ public class Persistence {
         jsouSeznamyObleceniAktualni = false;
 
         int id = obleceni.size();
+
+        for (Obleceni element :
+                obleceni) {
+            if (element.getId() == kusObleceni.getId()) {
+                id = element.getId();
+                obleceni.remove(element);
+                break;
+            }
+        }
+
         kusObleceni.setId(id);
 
         zaradObleceni(kusObleceni);
@@ -141,6 +151,16 @@ public class Persistence {
 
     public void pridejLokalitu(Casoprostor lokalita) throws IOException {
         int id = lokality.size();
+
+        for (Casoprostor element :
+                lokality) {
+            if (element.getId() == lokalita.getId()) {
+                id = element.getId();
+                lokality.remove(element);
+                break;
+            }
+        }
+
         lokalita.setId(id);
 
         lokality.add(lokalita);
