@@ -1,13 +1,11 @@
 package cz.vse.si.predikceobleceni.model.utils;
 
 import com.google.gson.*;
-import cz.vse.si.predikceobleceni.main.Persistence;
 import cz.vse.si.predikceobleceni.model.svet.Pocasi;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,7 +20,7 @@ public final class Kalkulator {
         return kalkulator;
     }
 
-    public Kalkulator() {
+    private Kalkulator() {
     }
 
     /**
@@ -68,7 +66,9 @@ public final class Kalkulator {
         JsonArray weatherArray = jobject.getAsJsonArray("list");
         weatherArray.forEach(element -> {
             //System.out.println(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString());
-            boolean dest = Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Rain");
+            boolean dest = Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Rain")
+                    || Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Thunderstorm")
+                    || Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Drizzle");
             int cas = Integer.parseInt(element.getAsJsonObject().get("dt").toString());
             double teplota = Double.parseDouble(element.getAsJsonObject().getAsJsonObject("main").get("temp").toString());
 
@@ -80,17 +80,20 @@ public final class Kalkulator {
 
             pocasi.add(new Pocasi(dest, teplota, objektCasu));
         });
-
-
         return filtrujPocasi(pocasi, casoprostor);
     }
 
 
     //tady dojde k vyfiltrování všech počasí na ty které jsou v časoprostoru (podle počátečního a konečného času)
     private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor) {
-        return null;
+        List<Pocasi> filteredPocasi = new ArrayList<>();
+        vsechnaPocasi.forEach(element -> {
+            if (element.getLocalDateTime().isAfter(casoprostor.getPocatecniCas()) && element.getLocalDateTime().isBefore(casoprostor.getKonecnyCas())){
+                filteredPocasi.add(element);
+            }
+        });
+        return filteredPocasi;
     }
-
 
     private Pocasi vyberNejchladnejsi(List<Pocasi> mnozinaPocasi) {
         return mnozinaPocasi
