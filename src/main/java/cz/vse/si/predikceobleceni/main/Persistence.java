@@ -38,6 +38,16 @@ public class Persistence {
         jsouSeznamyObleceniAktualni = false;
 
         int id = obleceni.size();
+
+        for (Obleceni element :
+                obleceni) {
+            if (element.getId() == kusObleceni.getId()) {
+                id = element.getId();
+                obleceni.remove(element);
+                break;
+            }
+        }
+
         kusObleceni.setId(id);
 
         zaradObleceni(kusObleceni);
