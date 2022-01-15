@@ -1,5 +1,6 @@
 package cz.vse.si.predikceobleceni.model.gui;
 
+import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
