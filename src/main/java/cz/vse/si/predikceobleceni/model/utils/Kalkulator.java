@@ -5,6 +5,9 @@ import cz.vse.si.predikceobleceni.model.svet.Pocasi;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,23 +69,19 @@ public final class Kalkulator {
             int cas = Integer.parseInt(element.getAsJsonObject().get("dt").toString());
             double teplota = Double.parseDouble(element.getAsJsonObject().getAsJsonObject("main").get("temp").toString());
 
-            /*
-            System.out.println(dest);
-            System.out.println(cas);
-            System.out.println(teplota);
-            */
+            LocalDateTime objektCasu = LocalDateTime.ofInstant(Instant.ofEpochSecond(cas), ZoneId.systemDefault());
 
-            pocasi.add(new Pocasi(dest, teplota, cas));
+            //System.out.println(dest);
+            //System.out.println(objektCasu);
+            //System.out.println(teplota);
+
+            pocasi.add(new Pocasi(dest, teplota, objektCasu));
         });
 
-        /*
-        pocasi.forEach(element->{
-            System.out.println(element.getTeplota());
-        });
-        */
 
         return filtrujPocasi(pocasi, casoprostor);
     }
+
 
     //tady dojde k vyfiltrování všech počasí na ty které jsou v časoprostoru (podle počátečního a konečného času)
     private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor) {

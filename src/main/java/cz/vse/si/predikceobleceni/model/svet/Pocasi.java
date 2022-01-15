@@ -7,12 +7,12 @@ public class Pocasi {
     private String nazev;
     private boolean dest;
     private double teplota;
-    private int cas; //unixtime
+    private LocalDateTime localDateTime;
 
-    public Pocasi(boolean dest, double teplota, int cas) {
+    public Pocasi(boolean dest, double teplota, LocalDateTime localDateTime) {
         this.dest = dest;
         this.teplota = teplota;
-        this.cas = cas;
+        this.localDateTime = localDateTime;
     }
 
     public boolean isDest() {
@@ -23,7 +23,7 @@ public class Pocasi {
         return teplota;
     }
 
-    public int getCas(){
-        return cas;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 }
