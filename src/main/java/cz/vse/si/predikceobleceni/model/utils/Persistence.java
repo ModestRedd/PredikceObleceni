@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,12 @@ public class Persistence {
     private ArrayList<Boty> boty = new ArrayList<Boty>();
 
     public Persistence() throws IOException {
+        /*
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
+         */
+        String obleceniJson=new String(Files.readAllBytes(Paths.get(pathToObleceni)));
+        String lokalityJson=new String(Files.readAllBytes(Paths.get(pathToLokality)));
 
         pridejObleceni(obleceniJson);
         pridejLokality(lokalityJson);
@@ -174,7 +179,8 @@ public class Persistence {
 
         String json = gson.toJson(obleceni);
 
-        Files.write(Path.of(pathToObleceni), List.of(json), StandardCharsets.UTF_8);
+        Files.write(Paths.get(pathToObleceni), json.getBytes());
+        //Files.write(Path.of(pathToObleceni), List.of(json), StandardCharsets.UTF_8);
     }
 
     protected void dumpLokalityJson() throws IOException {
@@ -182,7 +188,8 @@ public class Persistence {
 
         String json = gson.toJson(lokality);
 
-        Files.write(Path.of(pathToLokality), List.of(json), StandardCharsets.UTF_8);
+        Files.write(Paths.get(pathToLokality), json.getBytes());
+        //Files.write(Path.of(pathToLokality), List.of(json), StandardCharsets.UTF_8);
     }
 
     public ArrayList<Casoprostor> getLokality() {
