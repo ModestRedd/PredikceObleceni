@@ -71,9 +71,9 @@ public final class Kalkulator {
 
             LocalDateTime objektCasu = LocalDateTime.ofInstant(Instant.ofEpochSecond(cas), ZoneId.systemDefault());
 
-            System.out.println(dest);
-            System.out.println(objektCasu);
-            System.out.println(teplota);
+            //System.out.println(dest);
+            //System.out.println(objektCasu);
+            //System.out.println(teplota);
 
             pocasi.add(new Pocasi(dest, teplota, objektCasu));
         });
