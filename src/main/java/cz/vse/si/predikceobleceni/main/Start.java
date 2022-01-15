@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Start {
 
     public static void main(String[] args) throws IOException {
-        Persistence persistence = new Persistence();
+        //Persistence persistence = new Persistence();
 
         /*
         persistence.pridejObleceni(Files.readString(Path.of("example_data/ObleceniJedno.json"), StandardCharsets.UTF_8));
@@ -30,9 +30,6 @@ public class Start {
         //persistence.dumpLokalityJson();
         //persistence.dumpObleceniJson();
 
-        Kalkulator kalkulator = new Kalkulator();
-        kalkulator.zjistiPocasiZApi(persistence.getLokality().get(0));
-
-        //Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor("abc", 12.12300, 12.12300, null, null, null));
+        //Kalkulator.getInstance().zjistiPocasiZApi(persistence.getLokality().get(0));
     }
 }
