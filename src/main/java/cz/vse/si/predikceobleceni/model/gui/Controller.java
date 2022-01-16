@@ -7,21 +7,28 @@ import com.dlsc.gmapsfx.javascript.object.GoogleMap;
 import com.dlsc.gmapsfx.javascript.object.LatLong;
 import com.dlsc.gmapsfx.javascript.object.MapOptions;
 import com.dlsc.gmapsfx.javascript.object.MapTypeIdEnum;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    static double latitude;
-    static double longtitude;
-    static LocalDateTime from;
-    static LocalDateTime to;
+    private double latitude;
+    private double longtitude;
     @FXML
     private Label latitudeLabel;
     @FXML
@@ -29,20 +36,34 @@ public class Controller implements Initializable {
     @FXML
     private GoogleMapView googleMapView;
     @FXML
-    private TextField fromTime;
+    private DatePicker startDate;
     @FXML
-    private TextField toTime;
+    private DatePicker endDate;
+    @FXML
+    private Slider startTime;
+    @FXML
+    private Slider endTime;
+    @FXML
+    private Label appendLabel;
 
     @FXML
-    public void save() {
-        System.out.println(LocalDateTime.parse(fromTime.getText()));
-        System.out.println(LocalDateTime.parse(toTime.getText()));
+    public void handleOk() {
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0){
+            appendLabel.setText("Musíš zadat všechy údaje");
+            return;
+        }
+;
+        appendLabel.setText("");
+        LocalDateTime convertedStartDate = LocalDateTime.of(startDate.getValue(), LocalTime.of((int) startTime.getValue(), 0));
+        LocalDateTime convertedEndDate = LocalDateTime.of(endDate.getValue(), LocalTime.of((int) endTime.getValue(), 0));
+        LocalDateTime check = LocalDateTime.now();
 
-        from = (LocalDateTime.parse(fromTime.getText()));
-        to = (LocalDateTime.parse(toTime.getText()));
 
-        System.out.println(latitude);
-        System.out.println(longtitude);
+        if ( convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
+            appendLabel.setText("Chyba v datumech");
+        } else {
+            Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(null, latitude, longtitude, convertedStartDate, convertedEndDate, Arrays.asList(Formalni.MALO)));
+        }
     }
 
     private GoogleMap map;
@@ -71,4 +92,5 @@ public class Controller implements Initializable {
         });
 
     }
+
 }

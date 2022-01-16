@@ -50,6 +50,7 @@ public final class Kalkulator {
     //todo pro testovani docasne public
     public List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(), casoprostor.getZemepisnaDelka());
+        System.out.println(jsonOdpoved);
         return konvertujJsonNaListPocasi(jsonOdpoved, casoprostor);
     }
 
@@ -86,13 +87,7 @@ public final class Kalkulator {
 
     //tady dojde k vyfiltrování všech počasí na ty které jsou v časoprostoru (podle počátečního a konečného času)
     private List<Pocasi> filtrujPocasi(List<Pocasi> vsechnaPocasi, Casoprostor casoprostor) {
-        List<Pocasi> filteredPocasi = new ArrayList<>();
-        vsechnaPocasi.forEach(element -> {
-            if (element.getLocalDateTime().isAfter(casoprostor.getPocatecniCas()) && element.getLocalDateTime().isBefore(casoprostor.getKonecnyCas())){
-                filteredPocasi.add(element);
-            }
-        });
-        return filteredPocasi;
+        return vsechnaPocasi.stream().filter(pocasi -> pocasi.getLocalDateTime().isAfter(casoprostor.getPocatecniCas()) && pocasi.getLocalDateTime().isBefore(casoprostor.getKonecnyCas())).collect(Collectors.toList());
     }
 
     private Pocasi vyberNejchladnejsi(List<Pocasi> mnozinaPocasi) {
