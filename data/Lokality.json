@@ -1,7 +1,6 @@
 [
   {
     "id": 0,
-    "nazev": "Les",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
     "pocatecniCas": {
@@ -37,7 +36,6 @@
   },
   {
     "id": 1,
-    "nazev": "Skola",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
     "pocatecniCas": {
@@ -74,7 +72,6 @@
   },
   {
     "id": 2,
-    "nazev": "Vesnice",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
     "pocatecniCas": {
@@ -110,7 +107,6 @@
   },
   {
     "id": 3,
-    "nazev": "Hory",
     "zemepisnaSirka": 50.123,
     "zemepisnaDelka": 13.24,
     "pocatecniCas": {
@@ -146,7 +142,6 @@
   },
   {
     "id": 4,
-    "nazev": "More",
     "zemepisnaSirka": 50.456,
     "zemepisnaDelka": 14.987,
     "pocatecniCas": {
