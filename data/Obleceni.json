@@ -28,6 +28,7 @@
   {
     "id": 3,
     "nazev": "Triko",
+    "vrstva": "PRVNI",
     "castTela": "TELO",
     "minimalniTeplota": 10,
     "maximalniTeplota": 20,
