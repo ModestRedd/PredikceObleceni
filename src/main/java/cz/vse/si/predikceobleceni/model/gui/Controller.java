@@ -12,10 +12,18 @@ import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Window;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,6 +58,9 @@ public class Controller implements Initializable {
     private CheckBox stredne;
     @FXML
     private CheckBox neformalni;
+    @FXML
+    private GridPane mainGridPane;
+
 
     @FXML
     public void handleOk() {
@@ -110,4 +121,23 @@ public class Controller implements Initializable {
 
     }
 
+    public void otevriPridavaciOkno() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/pridatobleceni.fxml");
+
+        try{
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        dialog.showAndWait();
+
+    }
 }
