@@ -24,9 +24,8 @@ public class GUIMain extends Application {
         //Parent root = loader.load(getClass().getClassLoader().getResource("gui.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("styles.css");
 
-        stage.setTitle("GUI test");
+        stage.setTitle("Předpověď oblečení");
         stage.setScene(scene);
         stage.show();
     }

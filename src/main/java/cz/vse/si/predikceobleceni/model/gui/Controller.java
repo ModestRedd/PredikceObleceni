@@ -133,6 +133,7 @@ public class Controller implements Initializable {
         try{
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
+            dialog.setTitle("Úprava oblečení");
         } catch (IOException e) {
             e.printStackTrace();
             return;
