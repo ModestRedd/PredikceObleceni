@@ -14,7 +14,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persistence {
+public final class Persistence {
+    private static cz.vse.si.predikceobleceni.model.utils.Persistence persistence;
+
+    static {
+        try {
+            persistence = new Persistence();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static cz.vse.si.predikceobleceni.model.utils.Persistence getInstance() {
+        return persistence;
+    }
+
     private final String pathToObleceni = "data/Obleceni.json";
     private final String pathToLokality = "data/Lokality.json";
 
@@ -32,8 +46,8 @@ public class Persistence {
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
          */
-        String obleceniJson=new String(Files.readAllBytes(Paths.get(pathToObleceni)));
-        String lokalityJson=new String(Files.readAllBytes(Paths.get(pathToLokality)));
+        String obleceniJson = new String(Files.readAllBytes(Paths.get(pathToObleceni)));
+        String lokalityJson = new String(Files.readAllBytes(Paths.get(pathToLokality)));
 
         pridejObleceni(obleceniJson);
         pridejLokality(lokalityJson);
