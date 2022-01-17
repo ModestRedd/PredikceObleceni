@@ -8,7 +8,6 @@ import java.util.List;
 public class Casoprostor {
     private int id;
 
-    private String nazev;
     private double zemepisnaSirka;
     private double zemepisnaDelka;
     private LocalDateTime pocatecniCas;
@@ -23,8 +22,18 @@ public class Casoprostor {
      */
     private List<Formalni> formalnostObleceni;
 
+    /*
     public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
         this.nazev = nazev;
+        this.zemepisnaSirka = zemepisnaSirka;
+        this.zemepisnaDelka = zemepisnaDelka;
+        this.pocatecniCas = pocatecniCas;
+        this.konecnyCas = konecnyCas;
+        this.formalnostObleceni = formalni;
+    }
+     */
+
+    public Casoprostor(double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
         this.zemepisnaSirka = zemepisnaSirka;
         this.zemepisnaDelka = zemepisnaDelka;
         this.pocatecniCas = pocatecniCas;
@@ -87,7 +96,6 @@ public class Casoprostor {
     @Override
     public String toString() {
         return "\"" + id + "\":{" +
-                "\"nazev\":\"" + nazev + "\"," +
                 "\"zemepisnaSirka\":\"" + zemepisnaSirka + "\"," +
                 "\"zemepisnaDelka\":\"" + zemepisnaDelka + "\"," +
                 "\"pocatecniCas\":\"" + pocatecniCas + "\"," +
