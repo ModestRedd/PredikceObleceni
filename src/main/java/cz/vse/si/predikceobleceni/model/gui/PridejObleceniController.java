@@ -4,11 +4,13 @@ import cz.vse.si.predikceobleceni.model.obleceni.CastTela;
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
+import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class PridejObleceniController {
     @FXML
     private Label appendArea;
 
-    public void pridejObleceni() {
+    public void pridejObleceni() throws IOException {
         appendArea.setText("");
         if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null){
             appendArea.setText("Chybějící hodnoty");
@@ -46,6 +48,9 @@ public class PridejObleceniController {
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(),getVrstva(),getCastTela(),minimalniTeplota.getValue(),maximalniTeplota.getValue(), getFormalni());
 
         //jirka uloží
+        Persistence persistence = new Persistence();
+        persistence.pridejObleceni(obleceniKUlozeni);
+
         Stage stage = (Stage) nazev.getScene().getWindow();
         stage.close();
     }
