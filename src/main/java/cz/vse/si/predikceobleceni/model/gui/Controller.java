@@ -13,17 +13,16 @@ import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -45,14 +44,32 @@ public class Controller implements Initializable {
     private Slider endTime;
     @FXML
     private Label appendLabel;
+    @FXML
+    private CheckBox formalni;
+    @FXML
+    private CheckBox stredne;
+    @FXML
+    private CheckBox neformalni;
 
     @FXML
     public void handleOk() {
-        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0){
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())){
             appendLabel.setText("Musíš zadat všechy údaje");
             return;
         }
-;
+
+        List<Formalni> formalniList = new ArrayList<>();
+
+        if (formalni.isSelected()){
+            formalniList.add(Formalni.HODNE);
+        }
+        if (stredne.isSelected()){
+            formalniList.add(Formalni.STREDNE);
+        }
+        if (neformalni.isSelected()){
+            formalniList.add(Formalni.MALO);
+        }
+
         appendLabel.setText("");
         LocalDateTime convertedStartDate = LocalDateTime.of(startDate.getValue(), LocalTime.of((int) startTime.getValue(), 0));
         LocalDateTime convertedEndDate = LocalDateTime.of(endDate.getValue(), LocalTime.of((int) endTime.getValue(), 0));
@@ -62,7 +79,7 @@ public class Controller implements Initializable {
         if ( convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
-            Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, Arrays.asList(Formalni.MALO)));
+            Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
         }
     }
 
