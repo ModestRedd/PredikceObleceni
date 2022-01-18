@@ -19,37 +19,28 @@
   },
   {
     "id": 2,
+    "nazev": "Capka",
+    "vrstva": "PRVNI",
+    "castTela": "HLAVA",
+    "minimalniTeplota": 0,
+    "maximalniTeplota": 6
+  },
+  {
+    "id": 3,
     "nazev": "Boticky",
+    "vrstva": "PRVNI",
     "castTela": "BOTY",
     "minimalniTeplota": -20,
     "maximalniTeplota": 40,
     "formalni": "MALO"
   },
   {
-    "id": 3,
+    "id": 4,
     "nazev": "Triko",
     "vrstva": "PRVNI",
     "castTela": "TELO",
     "minimalniTeplota": 10,
     "maximalniTeplota": 20,
     "formalni": "MALO"
-  },
-  {
-    "id": 4,
-    "nazev": "Usanka",
-    "vrstva": "PRVNI",
-    "castTela": "HLAVA",
-    "minimalniTeplota": -10,
-    "maximalniTeplota": 40,
-    "formalni": "HODNE"
-  },
-  {
-    "id": 5,
-    "nazev": "Capka",
-    "vrstva": "PRVNI",
-    "castTela": "HLAVA",
-    "minimalniTeplota": 0,
-    "maximalniTeplota": 6,
-    "formalni": "STREDNE"
   }
 ]

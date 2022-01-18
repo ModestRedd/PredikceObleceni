@@ -8,12 +8,17 @@ import com.dlsc.gmapsfx.javascript.object.LatLong;
 import com.dlsc.gmapsfx.javascript.object.MapOptions;
 import com.dlsc.gmapsfx.javascript.object.MapTypeIdEnum;
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
+import cz.vse.si.predikceobleceni.model.utils.Persistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
@@ -64,20 +69,20 @@ public class Controller implements Initializable {
 
     @FXML
     public void handleOk() {
-        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())){
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
             appendLabel.setText("Musíš zadat všechy údaje");
             return;
         }
 
         List<Formalni> formalniList = new ArrayList<>();
 
-        if (formalni.isSelected()){
+        if (formalni.isSelected()) {
             formalniList.add(Formalni.HODNE);
         }
-        if (stredne.isSelected()){
+        if (stredne.isSelected()) {
             formalniList.add(Formalni.STREDNE);
         }
-        if (neformalni.isSelected()){
+        if (neformalni.isSelected()) {
             formalniList.add(Formalni.MALO);
         }
 
@@ -87,9 +92,10 @@ public class Controller implements Initializable {
         LocalDateTime check = LocalDateTime.now();
 
 
-        if ( convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
+        if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
+            //todo
             Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
         }
     }
@@ -130,15 +136,79 @@ public class Controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/pridatobleceni.fxml");
 
-        try{
+        try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Úprava oblečení");
+            dialog.setTitle("Přidání oblečení");
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
         dialog.showAndWait();
 
+    }
+
+    public void otevriUpravovaciOkno() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/upravitobleceni.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+
+            Node content = fxmlLoader.load();
+
+            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
+
+            Persistence persistence = new Persistence();
+            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+            obleceniListView.setItems(obleceniObservableList);
+
+            dialog.getDialogPane().setContent(content);
+            dialog.setTitle("Úprava oblečení");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.showAndWait();
+    }
+
+    public void otevriMazaciOkno() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/smazatobleceni.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+
+            Node content = fxmlLoader.load();
+
+            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
+
+            Persistence persistence = new Persistence();
+            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+            obleceniListView.setItems(obleceniObservableList);
+
+            dialog.getDialogPane().setContent(content);
+            dialog.setTitle("Smazat oblečení");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.showAndWait();
     }
 }

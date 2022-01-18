@@ -30,7 +30,7 @@ public final class Kalkulator {
      *                    Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
      */
     //Viktor z UI v kontrolleru vygeneruje časoprostor, a zavolá tuto metodu. Vrátí mu hotový outfit.
-    public Outfit predpovedObleceni(Casoprostor casoprostor) throws IOException {
+    public Outfit predpovedObleceni(Casoprostor casoprostor) {
         priradNejchladnejsiPocasiADest(casoprostor);
         return vygenerujOutfit(casoprostor);
     }
@@ -118,7 +118,7 @@ public final class Kalkulator {
      *                    a dalších bot pro 20°C až 40°C má samozřejmě smysl si dát boty pro 20-40)
      */
 
-    private Outfit vygenerujOutfit(Casoprostor casoprostor) throws IOException {
+    private Outfit vygenerujOutfit(Casoprostor casoprostor) {
 
         Persistence persistence = new Persistence();
 
