@@ -103,56 +103,59 @@ public class UpravitObleceniController {
 
             nazev.setText(obleceni.getNazev());
 
-            switch (obleceni.getCastTela()) {
-                case HLAVA:
-                    castTela.setValue("hlava");
-                    break;
-                case TELO:
-                    castTela.setValue("tělo");
-                    break;
-                case NOHY:
-                    castTela.setValue("nohy");
-                    break;
-                case BOTY:
-                    castTela.setValue("boty");
-                    break;
-                default:
-                    break;
-            }
+            castTela.setValue(determineCastTela(obleceni.getCastTela()));
 
-            switch (obleceni.getVrstva()) {
-                case PRVNI:
-                    vrstva.setValue("první");
-                    break;
-                case DRUHA:
-                    vrstva.setValue("druhá");
-                    break;
-                case TRETI:
-                    vrstva.setValue("třetí");
-                    break;
-                default:
-                    break;
-            }
+
+            vrstva.setValue(determineVrstva(obleceni.getVrstva()));
 
             minimalniTeplota.getValueFactory().setValue(obleceni.getMinimalniTeplota());
             maximalniTeplota.getValueFactory().setValue(obleceni.getMaximalniTeplota());
 
-            switch (obleceni.getFormalni()) {
-                case MALO:
-                    formalnost.setValue("neformalní");
-                    break;
-                case STREDNE:
-                    formalnost.setValue("stredne");
-                    break;
-                case HODNE:
-                    formalnost.setValue("formalní");
-                    break;
-                default:
-                    break;
-            }
+            formalnost.setValue(determineFormalnost(obleceni.getFormalni()));
         }
 
         ulozitButton.setDisable(false);
+    }
+
+    private String determineCastTela(CastTela castTela) {
+        switch (castTela) {
+            case HLAVA:
+                return "hlava";
+            case TELO:
+                return "tělo";
+            case NOHY:
+                return "nohy";
+            case BOTY:
+                return "boty";
+        }
+
+        return null;
+    }
+
+    private String determineFormalnost(Formalni formalni) {
+        switch (formalni) {
+            case MALO:
+                return "neformalní";
+            case STREDNE:
+                return "stredne";
+            case HODNE:
+                return "formalní";
+        }
+
+        return null;
+    }
+
+    private String determineVrstva(Vrstva vrstva) {
+        switch (vrstva) {
+            case PRVNI:
+                return "první";
+            case DRUHA:
+                return "druhá";
+            case TRETI:
+                return "třetí";
+        }
+
+        return null;
     }
 
     public void upravObleceni() {
