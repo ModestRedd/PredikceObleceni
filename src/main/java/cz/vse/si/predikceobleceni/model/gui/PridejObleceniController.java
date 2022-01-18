@@ -33,9 +33,9 @@ public class PridejObleceniController {
     @FXML
     private Label appendArea;
 
-    public void pridejObleceni(){
+    public void pridejObleceni() {
         appendArea.setText("");
-        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null){
+        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
             appendArea.setText("Chybějící hodnoty");
             return;
         }
@@ -43,12 +43,12 @@ public class PridejObleceniController {
         CastTela castTela = getCastTela();
         Vrstva vrstva = getVrstva();
 
-        if ((castTela == CastTela.HLAVA && vrstva != Vrstva.PRVNI) || (castTela == CastTela.BOTY && vrstva != Vrstva.PRVNI )){
+        if ((castTela == CastTela.HLAVA && vrstva != Vrstva.PRVNI) || (castTela == CastTela.BOTY && vrstva != Vrstva.PRVNI)) {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
 
-        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(),getVrstva(),getCastTela(),minimalniTeplota.getValue(),maximalniTeplota.getValue(), getFormalni());
+        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
 
         //jirka uloží
         Persistence persistence = new Persistence();
@@ -59,9 +59,9 @@ public class PridejObleceniController {
     }
 
 
-    private Formalni getFormalni(){
+    private Formalni getFormalni() {
         String vybranaFormalnost = formalnost.getSelectionModel().getSelectedItem().toString();
-        switch (vybranaFormalnost){
+        switch (vybranaFormalnost) {
             case "neformalní":
                 return Formalni.MALO;
             case "středně":
@@ -72,9 +72,10 @@ public class PridejObleceniController {
                 return null;
         }
     }
-    private Vrstva getVrstva(){
+
+    private Vrstva getVrstva() {
         String vybranaVrstva = vrstva.getSelectionModel().getSelectedItem().toString();
-        switch (vybranaVrstva){
+        switch (vybranaVrstva) {
             case "první":
                 return Vrstva.PRVNI;
             case "druhá":
@@ -85,9 +86,10 @@ public class PridejObleceniController {
                 return null;
         }
     }
-    private CastTela getCastTela(){
+
+    private CastTela getCastTela() {
         String vybranaCastTela = castTela.getSelectionModel().getSelectedItem().toString();
-        switch (vybranaCastTela){
+        switch (vybranaCastTela) {
             case "čepice":
                 return CastTela.HLAVA;
             case "tělo":
