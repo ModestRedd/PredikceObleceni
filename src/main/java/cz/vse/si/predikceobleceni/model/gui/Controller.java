@@ -97,7 +97,7 @@ public class Controller implements Initializable {
             appendLabel.setText("Chyba v datumech");
         } else {
             Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
-            System.out.println(vygenerovanyOutfit.toString());
+            //System.out.println(vygenerovanyOutfit.toString());
             zobrazOknoOutfitu(vygenerovanyOutfit);
         }
     }
