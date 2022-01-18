@@ -98,7 +98,6 @@ public class PridejObleceniController {
         }
     }
 
-
     public void zavriOkno() {
         Stage stage = (Stage) nazev.getScene().getWindow();
         stage.close();

@@ -68,13 +68,13 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                             <children>
                                 <Label text="Minimální teplota "/>
-                                <Spinner fx:id="minimalniTeplota" max="70" min="-70">
+                                <Spinner fx:id="minimalniTeplota" max="70" min="-70"/>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                             <children>
                                 <Label text="Maximální teplota "/>
-                                <Spinner fx:id="maximalniTeplota" max="70" min="-70">
+                                <Spinner fx:id="maximalniTeplota" max="70" min="-70"/>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
