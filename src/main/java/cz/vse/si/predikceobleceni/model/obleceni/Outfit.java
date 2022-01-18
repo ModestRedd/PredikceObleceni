@@ -8,6 +8,7 @@ public class Outfit {
     private List<Spodek> obleceniNaNohach;
     private Boty boty;
     private boolean destnik;
+
     /**
      * Alternativní oblečení obsahuje všechno oblečení, které je možné si obléknout v daném počasí
      */
