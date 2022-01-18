@@ -97,6 +97,7 @@ public class Controller implements Initializable {
             appendLabel.setText("Chyba v datumech");
         } else {
             Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
+            System.out.println(vygenerovanyOutfit.toString());
             zobrazOknoOutfitu(vygenerovanyOutfit);
         }
     }
@@ -240,7 +241,7 @@ public class Controller implements Initializable {
             alternativniObleceniListView.setItems(alternativniObleceniObservableList);
 
             Label destnikLabel = (Label) content.lookup("#destnikLabel");
-            if(vzitSiDestnik){
+            if (vzitSiDestnik) {
                 destnikLabel.setText("Pravdepodobnost deste. Vezmi si destnik.");
             } else {
                 destnikLabel.setText("Zrejme nebude prset. Nemusis si brat destnik");
