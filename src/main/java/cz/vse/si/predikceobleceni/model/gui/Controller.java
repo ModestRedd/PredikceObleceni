@@ -69,20 +69,20 @@ public class Controller implements Initializable {
 
     @FXML
     public void handleOk() {
-        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())){
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
             appendLabel.setText("Musíš zadat všechy údaje");
             return;
         }
 
         List<Formalni> formalniList = new ArrayList<>();
 
-        if (formalni.isSelected()){
+        if (formalni.isSelected()) {
             formalniList.add(Formalni.HODNE);
         }
-        if (stredne.isSelected()){
+        if (stredne.isSelected()) {
             formalniList.add(Formalni.STREDNE);
         }
-        if (neformalni.isSelected()){
+        if (neformalni.isSelected()) {
             formalniList.add(Formalni.MALO);
         }
 
@@ -92,7 +92,7 @@ public class Controller implements Initializable {
         LocalDateTime check = LocalDateTime.now();
 
 
-        if ( convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
+        if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
             Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
@@ -135,7 +135,7 @@ public class Controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/pridatobleceni.fxml");
 
-        try{
+        try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
             dialog.setTitle("Přidání oblečení");
@@ -156,7 +156,7 @@ public class Controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/upravitobleceni.fxml");
 
-        try{
+        try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
 
             Node content = fxmlLoader.load();

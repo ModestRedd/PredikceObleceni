@@ -50,7 +50,6 @@ public class PridejObleceniController {
 
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
 
-        //jirka uloží
         Persistence persistence = new Persistence();
         persistence.pridejObleceni(obleceniKUlozeni);
 

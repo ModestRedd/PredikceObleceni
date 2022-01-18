@@ -35,6 +35,8 @@ public class UpravitObleceniController {
     private Label appendArea;
 
     int currentId = Integer.MIN_VALUE;
+    CastTela currentCastTela;
+    Vrstva currentVrstva;
 
     private void nacistListView() {
         Persistence persistence = new Persistence();
@@ -103,10 +105,11 @@ public class UpravitObleceniController {
 
             nazev.setText(obleceni.getNazev());
 
-            castTela.setValue(determineCastTela(obleceni.getCastTela()));
+            currentCastTela = obleceni.getCastTela();
+            castTela.setValue(determineCastTela(currentCastTela));
 
-
-            vrstva.setValue(determineVrstva(obleceni.getVrstva()));
+            currentVrstva = obleceni.getVrstva();
+            vrstva.setValue(determineVrstva(currentVrstva));
 
             minimalniTeplota.getValueFactory().setValue(obleceni.getMinimalniTeplota());
             maximalniTeplota.getValueFactory().setValue(obleceni.getMaximalniTeplota());
@@ -165,15 +168,12 @@ public class UpravitObleceniController {
             return;
         }
 
-        CastTela castTela = getCastTela();
-        Vrstva vrstva = getVrstva();
-
-        if ((castTela == CastTela.HLAVA && vrstva != Vrstva.PRVNI) || (castTela == CastTela.BOTY && vrstva != Vrstva.PRVNI)) {
+        if ((currentCastTela == CastTela.HLAVA && currentVrstva != Vrstva.PRVNI) || (currentCastTela == CastTela.BOTY && currentVrstva != Vrstva.PRVNI)) {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
 
-        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
+        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), currentVrstva, currentCastTela, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
 
         Persistence persistence = new Persistence();
