@@ -9,6 +9,7 @@ import com.dlsc.gmapsfx.javascript.object.MapOptions;
 import com.dlsc.gmapsfx.javascript.object.MapTypeIdEnum;
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Outfit;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
@@ -95,8 +96,8 @@ public class Controller implements Initializable {
         if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
-            //todo
-            Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
+            Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
+
         }
     }
 

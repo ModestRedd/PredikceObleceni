@@ -177,8 +177,10 @@ public class UpravitObleceniController {
             return;
         }
 
+        /*
         System.out.println(castTelaKZapisu);
         System.out.println(vrstvaKZapisu);
+        */
 
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
