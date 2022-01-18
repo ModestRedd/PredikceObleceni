@@ -95,11 +95,16 @@ public class Casoprostor {
 
     @Override
     public String toString() {
-        return "\"" + id + "\":{" +
-                "\"zemepisnaSirka\":\"" + zemepisnaSirka + "\"," +
-                "\"zemepisnaDelka\":\"" + zemepisnaDelka + "\"," +
-                "\"pocatecniCas\":\"" + pocatecniCas + "\"," +
-                "\"konecnyCas\":\"" + konecnyCas + "\"," +
-                "\"formalnostObleceni\":\"" + formalnostObleceni + "\"}";
+        return "Casoprostor{" +
+                "id=" + id +
+                ", zemepisnaSirka=" + zemepisnaSirka +
+                ", zemepisnaDelka=" + zemepisnaDelka +
+                ", pocatecniCas=" + pocatecniCas +
+                ", konecnyCas=" + konecnyCas +
+                ", nejchladnejsiPocasi=" + nejchladnejsiPocasi +
+                ", nejteplejsiPocasi=" + nejteplejsiPocasi +
+                ", dest=" + dest +
+                ", formalnostObleceni=" + formalnostObleceni +
+                '}';
     }
 }

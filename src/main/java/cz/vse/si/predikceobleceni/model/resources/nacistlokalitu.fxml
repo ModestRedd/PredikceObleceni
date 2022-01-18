@@ -25,7 +25,7 @@
          </font>
       </Label>
       <ListView fx:id="lokace" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-      <Button fx:id="okButton" mnemonicParsing="false" prefWidth="100.0" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="okButton" mnemonicParsing="false" prefWidth="100.0" onAction="#predpovedObleceni" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -234,7 +234,7 @@ public class Controller implements Initializable {
         dialog.showAndWait();
     }
 
-    private void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
+    public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
         List<Obleceni> zakladniObleceni = vygenerovanyOutfit.vratVsechnoZakladniObleceni();
         List<Obleceni> alternativniObleceni = vygenerovanyOutfit.vratVsechnoAlternativniObleceni();
         boolean vzitSiDestnik = vygenerovanyOutfit.isDestnik();
