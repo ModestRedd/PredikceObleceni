@@ -5,8 +5,11 @@ import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 

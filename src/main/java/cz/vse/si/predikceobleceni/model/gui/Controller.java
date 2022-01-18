@@ -159,6 +159,9 @@ public class Controller implements Initializable {
             e.printStackTrace();
             return;
         }
+
+        UpravitObleceniController controller = new UpravitObleceniController();
+        dialog.setOnShowing(e->controller.nactiObleceni());
         dialog.showAndWait();
 
     }

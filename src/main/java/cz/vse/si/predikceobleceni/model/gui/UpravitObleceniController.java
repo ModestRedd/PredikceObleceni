@@ -2,14 +2,17 @@ package cz.vse.si.predikceobleceni.model.gui;
 
 import cz.vse.si.predikceobleceni.model.obleceni.CastTela;
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
+import cz.vse.si.predikceobleceni.model.utils.Persistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class UpravitObleceniController {
     @FXML
@@ -24,6 +27,18 @@ public class UpravitObleceniController {
     private Spinner<Integer> maximalniTeplota;
     @FXML
     private ComboBox formalnost;
+    @FXML
+    private ListView<Obleceni> obleceniListView;
+
+    public void nactiObleceni(){
+        System.out.println("Nacti obleceni");
+
+        Persistence persistence = new Persistence();
+        ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+        ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+        obleceniListView = new ListView<>(obleceniObservableList);
+    }
 
     public void ulozitObleceni(ActionEvent actionEvent) {
     }

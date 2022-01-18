@@ -263,4 +263,8 @@ public final class Persistence {
 
         return boty;
     }
+
+    public ArrayList<Obleceni> getAllObleceni() {
+        return obleceni;
+    }
 }
