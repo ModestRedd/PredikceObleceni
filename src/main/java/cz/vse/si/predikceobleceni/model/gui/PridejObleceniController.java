@@ -30,7 +30,7 @@ public class PridejObleceniController {
     @FXML
     private Label appendArea;
 
-    public void pridejObleceni() throws IOException {
+    public void pridejObleceni(){
         appendArea.setText("");
         if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null){
             appendArea.setText("Chybějící hodnoty");

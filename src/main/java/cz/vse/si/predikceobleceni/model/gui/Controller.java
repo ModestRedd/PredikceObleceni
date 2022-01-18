@@ -133,6 +133,27 @@ public class Controller implements Initializable {
         try{
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
+            dialog.setTitle("Přidání oblečení");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        dialog.showAndWait();
+
+    }
+
+    public void otevriUpravovaciOkno() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/upravitobleceni.fxml");
+
+        try{
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+            dialog.getDialogPane().setContent(fxmlLoader.load());
             dialog.setTitle("Úprava oblečení");
         } catch (IOException e) {
             e.printStackTrace();

@@ -15,14 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Persistence {
-    private static cz.vse.si.predikceobleceni.model.utils.Persistence persistence;
+    private static final cz.vse.si.predikceobleceni.model.utils.Persistence persistence;
 
     static {
-        try {
-            persistence = new Persistence();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        persistence = new Persistence();
     }
 
     public static cz.vse.si.predikceobleceni.model.utils.Persistence getInstance() {
@@ -41,19 +37,28 @@ public final class Persistence {
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
 
-    public Persistence() throws IOException {
+    public Persistence() {
         /*
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
          */
-        String obleceniJson = new String(Files.readAllBytes(Paths.get(pathToObleceni)));
-        String lokalityJson = new String(Files.readAllBytes(Paths.get(pathToLokality)));
+
+
+        String obleceniJson = "";
+        String lokalityJson = "";
+
+        try {
+            obleceniJson = new String(Files.readAllBytes(Paths.get(pathToObleceni)));
+            lokalityJson = new String(Files.readAllBytes(Paths.get(pathToLokality)));
+        } catch (Exception e) {
+            System.out.println("[ERROR] Doslo k chybe pri nacitani dat. Jsou dostupne datove soubory?" + e);
+        }
 
         pridejObleceni(obleceniJson);
         pridejLokality(lokalityJson);
     }
 
-    public void pridejObleceni(Obleceni kusObleceni) throws IOException {
+    public void pridejObleceni(Obleceni kusObleceni) {
         jsouSeznamyObleceniAktualni = false;
 
         int id = obleceni.size();
@@ -77,7 +82,7 @@ public final class Persistence {
         dumpObleceniJson();
     }
 
-    protected void pridejObleceni(String obleceniJson) throws IOException {
+    protected void pridejObleceni(String obleceniJson) {
         jsouSeznamyObleceniAktualni = false;
 
         Gson gson = new Gson();
@@ -168,7 +173,7 @@ public final class Persistence {
         }
     }
 
-    public void pridejLokalitu(Casoprostor lokalita) throws IOException {
+    public void pridejLokalitu(Casoprostor lokalita) {
         int id = lokality.size();
 
         for (Casoprostor element :
@@ -188,21 +193,29 @@ public final class Persistence {
     }
 
 
-    protected void dumpObleceniJson() throws IOException {
+    private void dumpObleceniJson() {
         Gson gson = new Gson();
 
         String json = gson.toJson(obleceni);
 
-        Files.write(Paths.get(pathToObleceni), json.getBytes());
+        try {
+            Files.write(Paths.get(pathToObleceni), json.getBytes());
+        } catch (Exception exception) {
+            System.out.println("[ERROR] Nelze zapisovat do souboru obleceni!" + exception);
+        }
         //Files.write(Path.of(pathToObleceni), List.of(json), StandardCharsets.UTF_8);
     }
 
-    protected void dumpLokalityJson() throws IOException {
+    private void dumpLokalityJson() {
         Gson gson = new Gson();
 
         String json = gson.toJson(lokality);
 
-        Files.write(Paths.get(pathToLokality), json.getBytes());
+        try {
+            Files.write(Paths.get(pathToLokality), json.getBytes());
+        } catch (Exception exception) {
+            System.out.println("[ERROR] Nelze zapisovat do souboru lokalit!" + exception);
+        }
         //Files.write(Path.of(pathToLokality), List.of(json), StandardCharsets.UTF_8);
     }
 
