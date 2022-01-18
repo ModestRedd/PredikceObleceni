@@ -7,7 +7,6 @@ import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -35,7 +34,14 @@ public class UpravitObleceniController {
     @FXML
     private Label appendArea;
 
-    public void ulozitObleceni(ActionEvent actionEvent) {
+    int currentId = Integer.MIN_VALUE;
+
+    private void nacistListView() {
+        Persistence persistence = new Persistence();
+        ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+        ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+        obleceniListView.setItems(obleceniObservableList);
     }
 
     private Formalni getFormalni() {
@@ -91,9 +97,9 @@ public class UpravitObleceniController {
         if (obleceniListView.equals(mouseEvent.getSource())) {
             appendArea.setText("");
 
-            Persistence persistence = new Persistence();
-
             Obleceni obleceni = obleceniListView.getSelectionModel().getSelectedItem();
+
+            currentId = obleceni.getId();
 
             nazev.setText(obleceni.getNazev());
 
@@ -114,23 +120,18 @@ public class UpravitObleceniController {
                     break;
             }
 
-            if (obleceni.getCastTela() == CastTela.BOTY) {
-                vrstva.setDisable(true);
-            } else {
-                vrstva.setDisable(false);
-                switch (obleceni.getVrstva()) {
-                    case PRVNI:
-                        vrstva.setValue("první");
-                        break;
-                    case DRUHA:
-                        vrstva.setValue("druhá");
-                        break;
-                    case TRETI:
-                        vrstva.setValue("třetí");
-                        break;
-                    default:
-                        break;
-                }
+            switch (obleceni.getVrstva()) {
+                case PRVNI:
+                    vrstva.setValue("první");
+                    break;
+                case DRUHA:
+                    vrstva.setValue("druhá");
+                    break;
+                case TRETI:
+                    vrstva.setValue("třetí");
+                    break;
+                default:
+                    break;
             }
 
             minimalniTeplota.getValueFactory().setValue(obleceni.getMinimalniTeplota());
@@ -154,10 +155,9 @@ public class UpravitObleceniController {
         ulozitButton.setDisable(false);
     }
 
-    public void upravObleceni(){
-
+    public void upravObleceni() {
         appendArea.setText("");
-        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null){
+        if (nazev.getText().equals("") || this.castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
             appendArea.setText("Chybějící hodnoty");
             return;
         }
@@ -165,14 +165,17 @@ public class UpravitObleceniController {
         CastTela castTela = getCastTela();
         Vrstva vrstva = getVrstva();
 
-        if ((castTela == CastTela.HLAVA && vrstva != Vrstva.PRVNI) || (castTela == CastTela.BOTY && vrstva != Vrstva.PRVNI )){
+        if ((castTela == CastTela.HLAVA && vrstva != Vrstva.PRVNI) || (castTela == CastTela.BOTY && vrstva != Vrstva.PRVNI)) {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
 
-        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(),getVrstva(),getCastTela(),minimalniTeplota.getValue(),maximalniTeplota.getValue(), getFormalni());
+        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
+        obleceniKUlozeni.setId(currentId);
 
         Persistence persistence = new Persistence();
         persistence.pridejObleceni(obleceniKUlozeni);
+
+        nacistListView();
     }
 }
