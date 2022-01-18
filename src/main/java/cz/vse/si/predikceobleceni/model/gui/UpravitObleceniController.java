@@ -50,11 +50,11 @@ public class UpravitObleceniController {
     private Formalni getFormalni() {
         String vybranaFormalnost = formalnost.getSelectionModel().getSelectedItem().toString();
         switch (vybranaFormalnost) {
-            case "neformalní":
+            case "neformální":
                 return Formalni.MALO;
             case "středně":
                 return Formalni.STREDNE;
-            case "formalní":
+            case "formální":
                 return Formalni.HODNE;
             default:
                 return null;
@@ -139,11 +139,11 @@ public class UpravitObleceniController {
     private String determineFormalnost(Formalni formalni) {
         switch (formalni) {
             case MALO:
-                return "neformalní";
+                return "neformální";
             case STREDNE:
-                return "stredne";
+                return "středně";
             case HODNE:
-                return "formalní";
+                return "formální";
         }
 
         return null;
@@ -176,11 +176,12 @@ public class UpravitObleceniController {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
+        if(minimalniTeplota.getValue() > maximalniTeplota.getValue()){
+            appendArea.setText("Problémy v teplotách");
+            return;
+        }
 
-        System.out.println(castTelaKZapisu);
-        System.out.println(vrstvaKZapisu);
-
-        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
+       Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
 
         Persistence persistence = new Persistence();
