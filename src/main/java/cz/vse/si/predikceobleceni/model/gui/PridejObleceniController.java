@@ -89,7 +89,7 @@ public class PridejObleceniController {
     private CastTela getCastTela() {
         String vybranaCastTela = castTela.getSelectionModel().getSelectedItem().toString();
         switch (vybranaCastTela) {
-            case "čepice":
+            case "hlava":
                 return CastTela.HLAVA;
             case "tělo":
                 return CastTela.TELO;

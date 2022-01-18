@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class UpravitObleceniController {
@@ -60,8 +61,8 @@ public class UpravitObleceniController {
         }
     }
 
-    private Vrstva getVrstva() {
-        String vybranaVrstva = vrstva.getSelectionModel().getSelectedItem().toString();
+    private Vrstva getVrstva(String vybranaVrstva) {
+        //String vybranaVrstva = vrstva.getSelectionModel().getSelectedItem().toString();
         switch (vybranaVrstva) {
             case "první":
                 return Vrstva.PRVNI;
@@ -74,10 +75,10 @@ public class UpravitObleceniController {
         }
     }
 
-    private CastTela getCastTela() {
-        String vybranaCastTela = castTela.getSelectionModel().getSelectedItem().toString();
+    private CastTela getCastTela(String vybranaCastTela) {
+        //String vybranaCastTela = castTela.getSelectionModel().getSelectedItem().toString();
         switch (vybranaCastTela) {
-            case "čepice":
+            case "hlava":
                 return CastTela.HLAVA;
             case "tělo":
                 return CastTela.TELO;
@@ -168,12 +169,18 @@ public class UpravitObleceniController {
             return;
         }
 
-        if ((currentCastTela == CastTela.HLAVA && currentVrstva != Vrstva.PRVNI) || (currentCastTela == CastTela.BOTY && currentVrstva != Vrstva.PRVNI)) {
+        CastTela castTelaKZapisu = getCastTela(castTela.getValue().toString());
+        Vrstva vrstvaKZapisu = getVrstva(vrstva.getValue().toString());
+
+        if ((castTelaKZapisu == CastTela.HLAVA && vrstvaKZapisu != Vrstva.PRVNI) || (castTelaKZapisu == CastTela.BOTY && vrstvaKZapisu != Vrstva.PRVNI)) {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
 
-        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), currentVrstva, currentCastTela, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
+        System.out.println(castTelaKZapisu);
+        System.out.println(vrstvaKZapisu);
+
+        Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
 
         Persistence persistence = new Persistence();

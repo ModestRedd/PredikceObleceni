@@ -72,7 +72,7 @@
         <ComboBox fx:id="castTela" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="čepice"/>
+                    <String fx:value="hlava"/>
                     <String fx:value="tělo"/>
                     <String fx:value="nohy"/>
                     <String fx:value="boty"/>
