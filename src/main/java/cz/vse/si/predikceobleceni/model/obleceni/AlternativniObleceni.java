@@ -1,5 +1,6 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlternativniObleceni {
@@ -29,6 +30,17 @@ public class AlternativniObleceni {
 
     public List<Boty> getBoty() {
         return boty;
+    }
+
+    public List<Obleceni> getVsechnoObleceni(){
+        List<Obleceni> vsechnoObleceni=new ArrayList<>();
+
+        vsechnoObleceni.addAll(cepice);
+        vsechnoObleceni.addAll(vrsky);
+        vsechnoObleceni.addAll(spodky);
+        vsechnoObleceni.addAll(boty);
+
+        return vsechnoObleceni;
     }
 
     @Override

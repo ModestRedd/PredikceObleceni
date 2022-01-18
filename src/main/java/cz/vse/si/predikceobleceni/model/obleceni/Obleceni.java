@@ -77,6 +77,6 @@ public class Obleceni {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Název: " + nazev;
+        return "ID: " + id + ", název: " + nazev + ", vrstva: " + vrstva;
     }
 }

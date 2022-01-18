@@ -1,5 +1,6 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Outfit {
@@ -48,6 +49,21 @@ public class Outfit {
 
     public boolean isDestnik() {
         return destnik;
+    }
+
+    public List<Obleceni> vratVsechnoZakladniObleceni() {
+        List<Obleceni> vsechnoObleceni = new ArrayList<>();
+
+        vsechnoObleceni.add(cepice);
+        vsechnoObleceni.addAll(obleceniNaTele);
+        vsechnoObleceni.addAll(obleceniNaNohach);
+        vsechnoObleceni.add(boty);
+
+        return vsechnoObleceni;
+    }
+
+    public List<Obleceni> vratVsechnoAlternativniObleceni() {
+        return alternativniObleceni.getVsechnoObleceni();
     }
 
     @Override

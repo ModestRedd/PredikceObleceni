@@ -50,7 +50,7 @@ public final class Kalkulator {
     //todo pro testovani docasne public
     public List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(), casoprostor.getZemepisnaDelka());
-        System.out.println(jsonOdpoved);
+        //System.out.println(jsonOdpoved);
         return konvertujJsonNaListPocasi(jsonOdpoved, casoprostor);
     }
 
