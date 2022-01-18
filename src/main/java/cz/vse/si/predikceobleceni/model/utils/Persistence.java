@@ -146,6 +146,20 @@ public final class Persistence {
         }
     }
 
+    public void odeberObleceniPodleId(int id) {
+        for (Obleceni element :
+                obleceni) {
+            if (element.getId() == id) {
+                jsouSeznamyObleceniAktualni = false;
+                obleceni.remove(element);
+                break;
+            }
+        }
+
+        dumpObleceniJson();
+        zaradVeskereObleceni();
+    }
+
     protected void pridejLokality(String lokalityJson) {
         Gson gson = new Gson();
 

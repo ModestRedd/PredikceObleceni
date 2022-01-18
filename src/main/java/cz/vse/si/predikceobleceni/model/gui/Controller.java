@@ -177,6 +177,37 @@ public class Controller implements Initializable {
         }
 
         dialog.showAndWait();
+    }
 
+    public void otevriMazaciOkno() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/smazatobleceni.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+
+            Node content = fxmlLoader.load();
+
+            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
+
+            Persistence persistence = new Persistence();
+            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+            obleceniListView.setItems(obleceniObservableList);
+
+            dialog.getDialogPane().setContent(content);
+            dialog.setTitle("Smazat oblečení");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.showAndWait();
     }
 }

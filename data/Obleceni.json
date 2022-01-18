@@ -18,7 +18,7 @@
     "formalni": "HODNE"
   },
   {
-    "id": 3,
+    "id": 2,
     "nazev": "Capka",
     "vrstva": "PRVNI",
     "castTela": "HLAVA",
@@ -26,7 +26,7 @@
     "maximalniTeplota": 6
   },
   {
-    "id": 4,
+    "id": 3,
     "nazev": "Boticky",
     "vrstva": "PRVNI",
     "castTela": "BOTY",
@@ -35,7 +35,7 @@
     "formalni": "MALO"
   },
   {
-    "id": 2,
+    "id": 4,
     "nazev": "Triko",
     "vrstva": "PRVNI",
     "castTela": "TELO",

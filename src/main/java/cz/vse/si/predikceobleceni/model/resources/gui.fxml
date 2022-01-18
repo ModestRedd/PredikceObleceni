@@ -164,7 +164,8 @@
                                         <MenuItem mnemonicParsing="false" text="Upravit oblečení"
                                                   onAction="#otevriUpravovaciOkno"/>
                                         <SeparatorMenuItem mnemonicParsing="false"/>
-                                        <MenuItem mnemonicParsing="false" text="Odeber oblečení"/>
+                                        <MenuItem mnemonicParsing="false" text="Odeber oblečení"
+                                                  onAction="#otevriMazaciOkno"/>
                                     </items>
                                 </Menu>
                             </menus>
