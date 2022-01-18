@@ -8,12 +8,17 @@ import com.dlsc.gmapsfx.javascript.object.LatLong;
 import com.dlsc.gmapsfx.javascript.object.MapOptions;
 import com.dlsc.gmapsfx.javascript.object.MapTypeIdEnum;
 import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
+import cz.vse.si.predikceobleceni.model.utils.Persistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
@@ -153,15 +158,24 @@ public class Controller implements Initializable {
 
         try{
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
+
+            Node content = fxmlLoader.load();
+
+            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
+
+            Persistence persistence = new Persistence();
+            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+
+            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+            obleceniListView.setItems(obleceniObservableList);
+
+            dialog.getDialogPane().setContent(content);
             dialog.setTitle("Úprava oblečení");
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
-        UpravitObleceniController controller = new UpravitObleceniController();
-        dialog.setOnShowing(e->controller.nactiObleceni());
         dialog.showAndWait();
 
     }

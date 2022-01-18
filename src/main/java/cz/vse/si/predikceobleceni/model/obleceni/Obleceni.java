@@ -61,6 +61,7 @@ public class Obleceni {
         this.id = newId;
     }
 
+    /*
     @Override
     public String toString() {
         return "\"" + id + "\":{" +
@@ -71,5 +72,11 @@ public class Obleceni {
                 "\"vrstva\":\"" + vrstva + "\"," +
                 "\"formalni\":\"" + formalni + "\"}";
 
+    }
+     */
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Název: " + nazev;
     }
 }

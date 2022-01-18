@@ -51,5 +51,39 @@
     "minimalniTeplota": 0,
     "maximalniTeplota": 6,
     "formalni": "STREDNE"
+  },
+  {
+    "id": 6,
+    "nazev": "Triko",
+    "vrstva": "PRVNI",
+    "castTela": "TELO",
+    "minimalniTeplota": 10,
+    "maximalniTeplota": 20,
+    "formalni": "STREDNE"
+  },
+  {
+    "id": 7,
+    "nazev": "Triko",
+    "vrstva": "DRUHA",
+    "castTela": "TELO",
+    "minimalniTeplota": 10,
+    "maximalniTeplota": 20,
+    "formalni": "STREDNE"
+  },
+  {
+    "id": 8,
+    "nazev": "Triko",
+    "vrstva": "PRVNI",
+    "castTela": "TELO",
+    "minimalniTeplota": 10,
+    "maximalniTeplota": 20
+  },
+  {
+    "id": 9,
+    "nazev": "Triko",
+    "vrstva": "PRVNI",
+    "castTela": "TELO",
+    "minimalniTeplota": 10,
+    "maximalniTeplota": 20
   }
 ]

@@ -27,14 +27,15 @@
                         <RowConstraints maxHeight="361.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="361.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="361.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="361.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button fx:id="ulozitButton" alignment="CENTER" mnemonicParsing="false" onAction="#ulozitObleceni" text="Uložit" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Button fx:id="ulozitButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#upravObleceni" text="Uložit" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="0">
                             <children>
                                 <Label text="Název " />
-                                <TextField />
+                                <TextField fx:id="nazev" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -88,9 +89,10 @@
                                 </ComboBox>
                             </children>
                         </HBox>
+                  <Label fx:id="appendArea" text="" GridPane.rowIndex="6" />
                     </children>
                 </GridPane>
-                <ListView fx:id="obleceniListView" prefHeight="200.0" prefWidth="200.0" />
+                <ListView fx:id="obleceniListView" onMouseClicked="#zpracujKliknutiMysi" prefHeight="200.0" prefWidth="200.0" />
             </children>
         </GridPane>
     </children>
