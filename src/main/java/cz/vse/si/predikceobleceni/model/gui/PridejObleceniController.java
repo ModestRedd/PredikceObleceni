@@ -65,7 +65,7 @@ public class PridejObleceniController {
                 return Formalni.MALO;
             case "středně":
                 return Formalni.STREDNE;
-            case "formalní":
+            case "formální":
                 return Formalni.HODNE;
             default:
                 return null;
