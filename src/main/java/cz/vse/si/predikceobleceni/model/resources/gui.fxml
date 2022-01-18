@@ -148,6 +148,11 @@
                                   <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOkno" text="Odeber oblečení" />
                               </items>
                           </Menu>
+                  <Menu mnemonicParsing="false" text="Načtení lokalit">
+                    <items>
+                      <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit" text="Uložené lokality" />
+                    </items>
+                  </Menu>
                       </menus>
                   </MenuBar>
             </children>
