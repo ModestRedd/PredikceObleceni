@@ -30,14 +30,14 @@
     "id": 3,
     "nazev": "Kalhoty",
     "vrstva": "PRVNI",
-    "castTela": "HLAVA",
+    "castTela": "NOHY",
     "minimalniTeplota": -40,
     "maximalniTeplota": 40,
     "formalni": "HODNE"
   },
   {
     "id": 4,
-    "nazev": "Boticky",
+    "nazev": "Boty",
     "vrstva": "PRVNI",
     "castTela": "BOTY",
     "minimalniTeplota": -40,
