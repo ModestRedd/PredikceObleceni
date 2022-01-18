@@ -95,6 +95,7 @@ public class Controller implements Initializable {
         if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
+            //todo
             Kalkulator.getInstance().zjistiPocasiZApi(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
         }
     }
