@@ -99,8 +99,9 @@ public class UpravitObleceniController {
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (obleceniListView.equals(mouseEvent.getSource())) {
             appendArea.setText("");
-
-            Obleceni obleceni = obleceniListView.getSelectionModel().getSelectedItem();
+            Obleceni obleceni = null;
+            try {
+                obleceni = obleceniListView.getSelectionModel().getSelectedItem();
 
             currentId = obleceni.getId();
 
@@ -116,8 +117,11 @@ public class UpravitObleceniController {
             maximalniTeplota.getValueFactory().setValue(obleceni.getMaximalniTeplota());
 
             formalnost.setValue(determineFormalnost(obleceni.getFormalni()));
+            } catch (NullPointerException e){
+                ulozitButton.setDisable(true);
+                return;
+            }
         }
-
         ulozitButton.setDisable(false);
     }
 
