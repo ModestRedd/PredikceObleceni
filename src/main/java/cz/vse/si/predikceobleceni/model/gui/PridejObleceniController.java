@@ -48,6 +48,11 @@ public class PridejObleceniController {
             return;
         }
 
+        if(minimalniTeplota.getValue() > maximalniTeplota.getValue()){
+            appendArea.setText("Problémy v teplotách");
+            return;
+        }
+
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
 
         Persistence persistence = new Persistence();
@@ -61,7 +66,7 @@ public class PridejObleceniController {
     private Formalni getFormalni() {
         String vybranaFormalnost = formalnost.getSelectionModel().getSelectedItem().toString();
         switch (vybranaFormalnost) {
-            case "neformalní":
+            case "neformální":
                 return Formalni.MALO;
             case "středně":
                 return Formalni.STREDNE;
