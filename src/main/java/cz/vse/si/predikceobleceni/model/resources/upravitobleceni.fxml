@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="cz.vse.si.predikceobleceni.model.gui.UpravitObleceniController">
     <children>
@@ -93,13 +92,7 @@
                                 </ComboBox>
                             </children>
                         </HBox>
-                        <Label id="appendArea" fx:id="appendArea" textFill="RED" GridPane.columnSpan="2"
-                               GridPane.halignment="CENTER"
-                               GridPane.rowIndex="7">
-                            <font>
-                                <Font name="System Bold" size="15.0"/>
-                            </font>
-                        </Label>
+                        <Label fx:id="appendArea" text="" GridPane.rowIndex="6" alignment="CENTER"/>
                     </children>
                 </GridPane>
                 <ListView fx:id="obleceniListView" onMouseClicked="#zpracujKliknutiMysi" prefHeight="200.0"
