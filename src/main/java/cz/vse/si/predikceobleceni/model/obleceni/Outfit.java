@@ -54,10 +54,14 @@ public class Outfit {
     public List<Obleceni> vratVsechnoZakladniObleceni() {
         List<Obleceni> vsechnoObleceni = new ArrayList<>();
 
-        vsechnoObleceni.add(cepice);
+        if (!(cepice == null)) {
+            vsechnoObleceni.add(cepice);
+        }
         vsechnoObleceni.addAll(obleceniNaTele);
         vsechnoObleceni.addAll(obleceniNaNohach);
-        vsechnoObleceni.add(boty);
+        if (!(boty == null)) {
+            vsechnoObleceni.add(boty);
+        }
 
         return vsechnoObleceni;
     }
