@@ -42,12 +42,12 @@
         <Label text="Maximální teplota" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
         <Label text="Formálnost" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Label text="Minimální teplota" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <TextField fx:id="nazev" prefHeight="26.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TextField fx:id="nazev" onAction="#zkontrolujVsechnyUdaje" onKeyPressed="#zkontrolujVsechnyUdaje" prefHeight="26.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets right="100.0" />
             </GridPane.margin>
         </TextField>
-        <ComboBox fx:id="vrstva" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <ComboBox fx:id="vrstva" onAction="#zkontrolujVsechnyUdaje" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="první" />
@@ -56,7 +56,7 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <ComboBox fx:id="castTela" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <ComboBox fx:id="castTela" onAction="#zkontrolujVsechnyUdaje" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="hlava" />
@@ -71,9 +71,9 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Spinner fx:id="minimalniTeplota" max="70" min="-70" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Spinner fx:id="maximalniTeplota" max="70" min="-70" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <ComboBox id="combo-box" fx:id="formalnost" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <Spinner fx:id="minimalniTeplota" max="70" min="-70" onInputMethodTextChanged="#zkontrolujVsechnyUdaje" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Spinner fx:id="maximalniTeplota" max="70" min="-70" onInputMethodTextChanged="#zkontrolujVsechnyUdaje" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <ComboBox id="combo-box" fx:id="formalnost" onAction="#zkontrolujVsechnyUdaje" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="neformální" />

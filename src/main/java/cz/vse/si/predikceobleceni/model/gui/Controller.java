@@ -73,6 +73,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void zkontrolujVsechnyUdaje(){
+        appendLabel.setText("");
         okButton.setDisable(false);
         if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
             okButton.setDisable(true);

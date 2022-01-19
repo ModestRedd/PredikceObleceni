@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,7 +33,14 @@ public class PridejObleceniController {
     private ComboBox formalnost;
     @FXML
     private Label appendArea;
+    @FXML
+    private Button pridat;
 
+
+    @FXML
+    private void initialize(){
+        pridat.setDisable(true);
+    }
     public void pridejObleceni() {
         appendArea.setText("");
         if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
@@ -110,5 +118,14 @@ public class PridejObleceniController {
     public void zavriOkno() {
         Stage stage = (Stage) nazev.getScene().getWindow();
         stage.close();
+    }
+
+    public void zkontrolujVsechnyUdaje() {
+        appendArea.setText("");
+        pridat.setDisable(false);
+        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
+            pridat.setDisable(true);
+        }
+
     }
 }
