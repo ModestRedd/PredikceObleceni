@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -44,8 +45,12 @@ public class NacistLokalituController {
 
         ObservableList<Casoprostor> obleceniObservableList = FXCollections.observableArrayList(lokality);
         lokace.setItems(obleceniObservableList);
+    }
 
-
+    public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
+        if (lokace.equals(mouseEvent.getSource())) {
+            okButton.setDisable(false);
+        }
     }
 
     @FXML
@@ -69,7 +74,7 @@ public class NacistLokalituController {
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
-         dialog.initOwner(okButton.getScene().getWindow());
+        dialog.initOwner(okButton.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/model/resources/predpovedbleceni.fxml");
 

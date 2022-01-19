@@ -176,7 +176,8 @@
                             <items>
                                 <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit"
                                           text="Uložené lokality"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoLokalit" text="Smaž lokalitu"/>
+                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoLokalit"
+                                          text="Smaž lokalitu"/>
 
                             </items>
                         </Menu>
