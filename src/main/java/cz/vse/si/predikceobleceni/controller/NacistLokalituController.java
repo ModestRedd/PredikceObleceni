@@ -6,6 +6,7 @@ import cz.vse.si.predikceobleceni.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.utils.Persistence;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,6 +31,8 @@ public class NacistLokalituController {
     private Button zrusitButton;
     @FXML
     private ListView<Casoprostor> lokace;
+    @FXML
+    private Label appendArea;
 
 
     @FXML
@@ -46,6 +49,7 @@ public class NacistLokalituController {
         lokace.setItems(obleceniObservableList);
     }
 
+
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (lokace.equals(mouseEvent.getSource())) {
             okButton.setDisable(false);
@@ -59,13 +63,20 @@ public class NacistLokalituController {
 
     public void predpovedObleceni() {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
+        this.zobrazZFXThread("Načítání...");
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
         if (outfit == null) {
             InternetAlert.generujAlert();
             return;
         }
+        this.zobrazZFXThread("");
 
         zobrazOknoOutfitu(outfit);
+    }
+
+    private void zobrazZFXThread(String text){
+        Runnable task = () -> Platform.runLater(() -> appendArea.setText(text));
+        new Thread(task).start();
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
