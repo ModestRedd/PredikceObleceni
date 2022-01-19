@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import com.dlsc.gmapsfx.GoogleMapView?>
-<GridPane id="main-pane" fx:id="mainGridPane" prefHeight="623.0" prefWidth="841.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.si.predikceobleceni.controller.MainController">
+<GridPane id="main-pane" fx:id="mainGridPane" prefHeight="623.0" prefWidth="841.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.si.predikceobleceni.controller.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.39996337890625" minWidth="10.0" prefWidth="356.6" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.3999877929688" minWidth="10.0" prefWidth="442.4" />
@@ -72,7 +72,7 @@
                             </font>
                         </Label>
                         <DatePicker fx:id="startDate" onAction="#zkontrolujVsechnyUdaje" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Slider fx:id="startTime" blockIncrement="2.0" majorTickUnit="2.0" max="23.0" minorTickCount="2" onMouseReleased="#zkontrolujVsechnyUdaje" showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2" />
+                        <Slider fx:id="startTime" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" minorTickCount="1" onMouseReleased="#zkontrolujVsechnyUdaje" showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">

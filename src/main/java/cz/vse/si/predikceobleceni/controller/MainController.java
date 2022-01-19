@@ -116,11 +116,12 @@ public class MainController implements Initializable {
                 appendLabel.setText("");
                 return;
             }
-            if(outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE){
-                InternetAlert.zobrazMalyRozsahAlert();
-                return;
+            if (outfit.getCepice() != null) {
+                if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
+                    InternetAlert.zobrazMalyRozsahAlert();
+                    return;
+                }
             }
-
             zobrazOknoOutfitu(outfit);
         }
     }
@@ -288,11 +289,6 @@ public class MainController implements Initializable {
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
-
-        if (vygenerovanyOutfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE){
-            appendLabel.setText("Zkus zvětšit čas pobytu");
-            return;
-        }
 
         List<Obleceni> zakladniObleceni = vygenerovanyOutfit.vratVsechnoZakladniObleceni();
         List<Obleceni> alternativniObleceni = vygenerovanyOutfit.vratVsechnoAlternativniObleceni();
