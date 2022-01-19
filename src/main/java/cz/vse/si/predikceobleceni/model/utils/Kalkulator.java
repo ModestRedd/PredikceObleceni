@@ -32,6 +32,7 @@ public final class Kalkulator {
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
         Persistence persistence = new Persistence();
         persistence.pridejLokalitu(casoprostor);
+
         priradNejchladnejsiPocasiADest(casoprostor);
         //System.out.println(casoprostor);
         return vygenerujOutfit(casoprostor);
