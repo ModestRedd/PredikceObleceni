@@ -27,8 +27,11 @@ public class SmazatLokalituController {
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (lokalityListView.equals(mouseEvent.getSource())) {
             Casoprostor lokalita = lokalityListView.getSelectionModel().getSelectedItem();
-
-            currentId = lokalita.getId();
+            if (lokalita != null) {
+                currentId = lokalita.getId();
+            } else {
+                return;
+            }
         }
 
         smazatButton.setDisable(false);

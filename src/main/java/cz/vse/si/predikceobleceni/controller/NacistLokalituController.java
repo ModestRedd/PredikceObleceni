@@ -51,6 +51,11 @@ public class NacistLokalituController {
 
 
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
+        Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
+        if (casoprostor == null){
+            okButton.setDisable(true);
+            return;
+        }
         if (lokace.equals(mouseEvent.getSource())) {
             okButton.setDisable(false);
         }
@@ -63,6 +68,7 @@ public class NacistLokalituController {
 
     public void predpovedObleceni() {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
+
         this.zobrazZFXThread("Načítání...");
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
         this.zobrazZFXThread("");

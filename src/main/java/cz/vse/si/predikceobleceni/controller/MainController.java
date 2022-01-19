@@ -162,23 +162,7 @@ public class MainController implements Initializable {
     }
 
     public void otevriPridavaciOkno() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/pridatobleceni.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Přidání oblečení");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
+        otevriOknoPodleJmena("pridatobleceni.fxml", "Přidání oblečení");
 
     }
 
@@ -214,24 +198,28 @@ public class MainController implements Initializable {
     }
 
     public void otevriOknoLokalit() {
+        otevriOknoPodleJmena("nacistlokalitu.fxml", "Načti lokalitu");
+
+    }
+
+    private void otevriOknoPodleJmena(String s, String s2) {
         Dialog<ButtonType> dialog = new Dialog<>();
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
         dialog.initOwner(mainGridPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/nacistlokalitu.fxml");
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/" + s);
 
         try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Načti lokalitu");
+            dialog.setTitle(s2);
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
         dialog.showAndWait();
-
     }
 
     public void otevriMazaciOkno() {
@@ -266,23 +254,7 @@ public class MainController implements Initializable {
     }
 
     public void otevriMazaciOknoLokalit() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/smazatlokalitu.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Odeber lokalitu");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
+        otevriOknoPodleJmena("smazatlokalitu.fxml", "Odeber lokalitu");
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
@@ -330,22 +302,6 @@ public class MainController implements Initializable {
     }
 
     public void otevriInformaceOAplikaci() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/oaplikaci.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("O aplikaci");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
+        otevriOknoPodleJmena("oaplikaci.fxml", "O aplikaci");
     }
 }
