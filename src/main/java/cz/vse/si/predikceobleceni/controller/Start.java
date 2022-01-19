@@ -40,7 +40,7 @@ public class Start extends Application {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            InternetAlert.generujAlert();
+            InternetAlert.zobrazNoInternetAlert();
             System.exit(0);
         }
     }

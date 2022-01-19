@@ -70,6 +70,7 @@ public class MainController implements Initializable {
     private void zkontrolujVsechnyUdaje() {
         appendLabel.setText("");
         okButton.setDisable(false);
+
         if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
             okButton.setDisable(true);
         }
@@ -108,15 +109,18 @@ public class MainController implements Initializable {
 
             Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
 
-
             this.zobrazZFXThread("");
 
             if (outfit == null) {
-                InternetAlert.generujAlert();
+                InternetAlert.zobrazNoInternetAlert();
                 appendLabel.setText("");
                 return;
             }
-            appendLabel.setText("");
+            if(outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE){
+                InternetAlert.zobrazMalyRozsahAlert();
+                return;
+            }
+
             zobrazOknoOutfitu(outfit);
         }
     }
@@ -284,6 +288,12 @@ public class MainController implements Initializable {
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
+
+        if (vygenerovanyOutfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE){
+            appendLabel.setText("Zkus zvětšit čas pobytu");
+            return;
+        }
+
         List<Obleceni> zakladniObleceni = vygenerovanyOutfit.vratVsechnoZakladniObleceni();
         List<Obleceni> alternativniObleceni = vygenerovanyOutfit.vratVsechnoAlternativniObleceni();
         boolean vzitSiDestnik = vygenerovanyOutfit.isDestnik();

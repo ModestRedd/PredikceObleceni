@@ -22,7 +22,9 @@ public class SmazatObleceniController {
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (obleceniListView.equals(mouseEvent.getSource())) {
             Obleceni obleceni = obleceniListView.getSelectionModel().getSelectedItem();
-
+            if (obleceni == null){
+                return;
+            }
             currentId = obleceni.getId();
         }
 
