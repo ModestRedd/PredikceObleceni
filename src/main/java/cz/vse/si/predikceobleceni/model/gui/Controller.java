@@ -243,7 +243,7 @@ public class Controller implements Initializable {
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
+ //       dialog.initOwner(mainGridPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/model/resources/predpovedbleceni.fxml");
 

@@ -4,6 +4,7 @@ import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class Casoprostor {
     private int id;
@@ -106,5 +107,18 @@ public class Casoprostor {
                 ", dest=" + dest +
                 ", formalnostObleceni=" + formalnostObleceni +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Casoprostor that = (Casoprostor) o;
+        return Double.compare(that.zemepisnaSirka, zemepisnaSirka) == 0 && Double.compare(that.zemepisnaDelka, zemepisnaDelka) == 0 && Objects.equals(pocatecniCas, that.pocatecniCas) && Objects.equals(konecnyCas, that.konecnyCas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zemepisnaSirka, zemepisnaDelka, pocatecniCas, konecnyCas);
     }
 }

@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,22 +185,27 @@ public final class Persistence {
             }
         } catch (JsonParseException exception) {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
+        } finally{
+            lokality.forEach(lokalita -> {
+                if (lokalita.getPocatecniCas().isBefore(LocalDateTime.now())){
+                    lokality.remove(lokalita);
+                }
+            });
         }
     }
 
     public void pridejLokalitu(Casoprostor lokalita) {
         int id = lokality.size();
+        lokalita.setId(id);
 
         for (Casoprostor element :
                 lokality) {
-            if (element.getId() == lokalita.getId()) {
-                id = element.getId();
-                lokality.remove(element);
-                break;
+            if (lokalita.equals(element)){
+
+                return;
             }
         }
 
-        lokalita.setId(id);
 
         lokality.add(lokalita);
 
