@@ -181,6 +181,12 @@
 
                             </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="O aplikaci">
+                        <items>
+                            <MenuItem mnemonicParsing="false" onAction="#otevriInformaceOAplikaci"
+                                      text="O aplikaci"/>
+                        </items>
+                    </Menu>
                     </menus>
                 </MenuBar>
             </children>
