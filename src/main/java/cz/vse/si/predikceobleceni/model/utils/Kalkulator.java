@@ -31,7 +31,10 @@ public final class Kalkulator {
      */
     //Viktor z UI v kontrolleru vygeneruje časoprostor, a zavolá tuto metodu. Vrátí mu hotový outfit.
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
+        Persistence persistence = new Persistence();
+        persistence.pridejLokalitu(casoprostor);
         priradNejchladnejsiPocasiADest(casoprostor);
+        System.out.println(casoprostor);
         return vygenerujOutfit(casoprostor);
     }
 
