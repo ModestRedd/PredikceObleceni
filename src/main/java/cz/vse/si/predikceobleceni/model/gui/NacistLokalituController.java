@@ -3,6 +3,7 @@ package cz.vse.si.predikceobleceni.model.gui;
 import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.obleceni.Outfit;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;
@@ -56,6 +57,10 @@ public class NacistLokalituController {
     public void predpovedObleceni() {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+        if (outfit == null){
+            InternetAlert.generujAlert();
+            return;
+        }
 
         zobrazOknoOutfitu(outfit);
     }
@@ -90,7 +95,7 @@ public class NacistLokalituController {
             if (vzitSiDestnik) {
                 destnikLabel.setText("Pravděpodobnost deště. Vezmi si deštník.");
             } else {
-                destnikLabel.setText("Zrejmě nebude pršet. Nemusíš si brát deštník");
+                destnikLabel.setText("Zřejmě nebude pršet. Nemusíš si brát deštník.");
             }
 
             dialog.getDialogPane().setContent(content);

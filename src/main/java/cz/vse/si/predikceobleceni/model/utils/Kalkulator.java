@@ -33,17 +33,25 @@ public final class Kalkulator {
         Persistence persistence = new Persistence();
         persistence.pridejLokalitu(casoprostor);
 
-        priradNejchladnejsiPocasiADest(casoprostor);
+        if (!priradNejchladnejsiPocasiADest(casoprostor)){
+            return null;
+        }
+
         //System.out.println(casoprostor);
         return vygenerujOutfit(casoprostor);
     }
 
 
-    private void priradNejchladnejsiPocasiADest(Casoprostor casoprostor) {
-        List<Pocasi> pocasi = zjistiPocasiZApi(casoprostor);
-        casoprostor.setNejchladnejsiPocasi(vyberNejchladnejsi(pocasi));
-        casoprostor.setNejteplejsiPocasi(vyberNejteplejsi(pocasi));
-        casoprostor.setDest(zjistiJestliBudePrset(pocasi));
+    private boolean priradNejchladnejsiPocasiADest(Casoprostor casoprostor) {
+        try {
+            List<Pocasi> pocasi = zjistiPocasiZApi(casoprostor);
+            casoprostor.setNejchladnejsiPocasi(vyberNejchladnejsi(pocasi));
+            casoprostor.setNejteplejsiPocasi(vyberNejteplejsi(pocasi));
+            casoprostor.setDest(zjistiJestliBudePrset(pocasi));
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -51,14 +59,17 @@ public final class Kalkulator {
      */
     private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(), casoprostor.getZemepisnaDelka());
-        //System.out.println(jsonOdpoved);
         return konvertujJsonNaListPocasi(jsonOdpoved, casoprostor);
     }
 
     private List<Pocasi> konvertujJsonNaListPocasi(String json, Casoprostor casoprostor) {
         //System.out.println(json);
-
-        JsonElement jelement = new JsonParser().parse(json);
+        JsonElement jelement = null;
+        try {
+            jelement = new JsonParser().parse(json);
+        } catch (NullPointerException e){
+            return null;
+        }
         JsonObject jobject = jelement.getAsJsonObject();
 
         String nazev = jobject.getAsJsonObject("city").get("name").toString();
