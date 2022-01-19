@@ -311,4 +311,24 @@ public class Controller implements Initializable {
 
         dialog.showAndWait();
     }
+
+    public void otevriInformaceOAplikaci() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/oaplikaci.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+            dialog.setTitle("O aplikaci");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        dialog.showAndWait();
+    }
 }
