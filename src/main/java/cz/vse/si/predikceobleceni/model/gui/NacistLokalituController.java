@@ -55,7 +55,6 @@ public class NacistLokalituController {
 
     public void predpovedObleceni() {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
-        zavriOkno();
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
 
         zobrazOknoOutfitu(outfit);
@@ -70,7 +69,7 @@ public class NacistLokalituController {
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
-        // dialog.initOwner(mainGridPane.getScene().getWindow());
+         dialog.initOwner(okButton.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/model/resources/predpovedbleceni.fxml");
 
