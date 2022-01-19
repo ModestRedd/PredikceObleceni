@@ -14,6 +14,7 @@ import cz.vse.si.predikceobleceni.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.utils.Persistence;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -97,19 +98,32 @@ public class MainController implements Initializable {
         if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
+
+           this.zobrazZFXThread("Načítání...");
+
             Casoprostor casoprostor = new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList);
 
             Persistence persistence = new Persistence();
             persistence.pridejLokalitu(casoprostor);
 
             Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+
+
+            this.zobrazZFXThread("");
+
             if (outfit == null) {
                 InternetAlert.generujAlert();
+                appendLabel.setText("");
                 return;
             }
-            //System.out.println(vygenerovanyOutfit.toString());
+            appendLabel.setText("");
             zobrazOknoOutfitu(outfit);
         }
+    }
+
+    private void zobrazZFXThread(String text){
+        Runnable task = () -> Platform.runLater(() -> appendLabel.setText(text));
+        new Thread(task).start();
     }
 
     private GoogleMap map;

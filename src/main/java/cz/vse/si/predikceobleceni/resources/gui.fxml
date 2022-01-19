@@ -1,187 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
 <?import com.dlsc.gmapsfx.GoogleMapView?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<GridPane id="main-pane" fx:id="mainGridPane" stylesheets="@styles.css" prefHeight="623.0" prefWidth="841.0"
-          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="cz.vse.si.predikceobleceni.controller.MainController">
+<GridPane id="main-pane" fx:id="mainGridPane" prefHeight="623.0" prefWidth="841.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.si.predikceobleceni.controller.MainController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.39996337890625" minWidth="10.0" prefWidth="356.6"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.3999877929688" minWidth="10.0" prefWidth="442.4"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.39996337890625" minWidth="10.0" prefWidth="356.6" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.3999877929688" minWidth="10.0" prefWidth="442.4" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
 
         <GridPane prefHeight="505.0" prefWidth="464.0" GridPane.columnIndex="1">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.4000244140625" minWidth="0.0"
-                                   prefWidth="33.39997749328613"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="10.0" prefWidth="399.80002250671384"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="0.0" prefWidth="32.99995117187501"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.4000244140625" minWidth="0.0" prefWidth="33.39997749328613" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="10.0" prefWidth="399.80002250671384" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="0.0" prefWidth="32.99995117187501" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="102.20000610351562" minHeight="1.0" prefHeight="66.59999084472656"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="217.8" minHeight="10.0" prefHeight="188.80000915527344" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="219.2" minHeight="10.0" prefHeight="149.99998779296874" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="113.19998779296878" minHeight="10.0" prefHeight="103.60001220703128"
-                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="102.20000610351562" minHeight="1.0" prefHeight="66.59999084472656" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="217.8" minHeight="10.0" prefHeight="188.80000915527344" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="219.2" minHeight="10.0" prefHeight="149.99998779296874" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="113.19998779296878" minHeight="10.0" prefHeight="103.60001220703128" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <GridPane id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="52.000006103515624" minHeight="10.0" prefHeight="39.99998168945312"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="89.00001831054688" minHeight="10.0" prefHeight="76.799951171875"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="72.00004882812502" minHeight="10.0" prefHeight="72.00004882812502"
-                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="52.000006103515624" minHeight="10.0" prefHeight="39.99998168945312" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="89.00001831054688" minHeight="10.0" prefHeight="76.799951171875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="72.00004882812502" minHeight="10.0" prefHeight="72.00004882812502" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="DO" GridPane.halignment="CENTER">
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
-                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="endDate" GridPane.halignment="CENTER"
-                                    GridPane.rowIndex="1"
-                                    GridPane.valignment="CENTER"/>
-                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="endTime" blockIncrement="1.0"
-                                majorTickUnit="2.0" max="23.0" minorTickCount="1"
-                                showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="endDate" onAction="#zkontrolujVsechnyUdaje" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Slider fx:id="endTime" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" minorTickCount="1" onMouseReleased="#zkontrolujVsechnyUdaje" showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="66.60001220703126" minHeight="10.0" prefHeight="30.800014114379884"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="106.79998588562012" minHeight="10.0" prefHeight="88.7999984741211"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="99.20000152587889" minHeight="10.0" prefHeight="99.20000152587889"
-                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="66.60001220703126" minHeight="10.0" prefHeight="30.800014114379884" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="106.79998588562012" minHeight="10.0" prefHeight="88.7999984741211" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="99.20000152587889" minHeight="10.0" prefHeight="99.20000152587889" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="OD" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
-                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="startDate" GridPane.halignment="CENTER"
-                                    GridPane.rowIndex="1"
-                                    GridPane.valignment="CENTER"/>
-                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="startTime" blockIncrement="2.0"
-                                majorTickUnit="2.0" max="23.0" minorTickCount="2"
-                                showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="startDate" onAction="#zkontrolujVsechnyUdaje" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Slider fx:id="startTime" blockIncrement="2.0" majorTickUnit="2.0" max="23.0" minorTickCount="2" onMouseReleased="#zkontrolujVsechnyUdaje" showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="41.599951171875" minHeight="10.0" prefHeight="30.4"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="62.4" minHeight="10.0" prefHeight="40.19998779296875"
-                                        vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="46.60001220703124" minHeight="10.0" prefHeight="46.60001220703124"
-                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="41.599951171875" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="62.4" minHeight="10.0" prefHeight="40.19998779296875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="46.60001220703124" minHeight="10.0" prefHeight="46.60001220703124" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label fx:id="appendLabel" textFill="RED" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label fx:id="appendLabel" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                             <font>
-                                <Font name="System Bold" size="15.0"/>
+                                <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Ok"
-                                GridPane.halignment="CENTER"
-                                GridPane.rowIndex="2">
+                        <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
                         <GridPane>
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="neformalni"
-                                          mnemonicParsing="false" text="neformální"
-                                          GridPane.halignment="CENTER"/>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="stredne"
-                                          mnemonicParsing="false" text="středně"
-                                          GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="formalni"
-                                          mnemonicParsing="false" text="formální"
-                                          GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
+                                <CheckBox fx:id="neformalni" mnemonicParsing="false" onMouseReleased="#zkontrolujVsechnyUdaje" text="neformální" GridPane.halignment="CENTER" />
+                                <CheckBox fx:id="stredne" mnemonicParsing="false" onMouseReleased="#zkontrolujVsechnyUdaje" text="středně" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                <CheckBox fx:id="formalni" mnemonicParsing="false" onMouseReleased="#zkontrolujVsechnyUdaje" text="formální" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                             </children>
                         </GridPane>
                     </children>
                 </GridPane>
                 <GridPane prefHeight="67.0" prefWidth="464.0" GridPane.columnIndex="1">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Zeměpisná šířka:" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-                               GridPane.valignment="CENTER">
+                        <Label text="Zeměpisná šířka:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
                         <Label text="Zeměpisná délka:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
-                        <Label fx:id="latitudeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <Label fx:id="longitudeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label fx:id="latitudeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="longitudeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
                 <MenuBar GridPane.columnSpan="3" GridPane.valignment="TOP">
                     <menus>
                         <Menu mnemonicParsing="false" text="Úprava oblečení">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriPridavaciOkno"
-                                          text="Přidej oblečení"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriUpravovaciOkno"
-                                          text="Upravit oblečení"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOkno" text="Odeber oblečení"/>
+                                <MenuItem mnemonicParsing="false" onAction="#otevriPridavaciOkno" text="Přidej oblečení" />
+                                <MenuItem mnemonicParsing="false" onAction="#otevriUpravovaciOkno" text="Upravit oblečení" />
+                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOkno" text="Odeber oblečení" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Načtení lokalit">
                             <items>
-                                <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit"
-                                          text="Uložené lokality"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoLokalit"
-                                          text="Smaž lokalitu"/>
+                                <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit" text="Uložené lokality" />
+                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoLokalit" text="Smaž lokalitu" />
 
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="O aplikaci">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriInformaceOAplikaci"
-                                          text="O aplikaci"/>
+                                <MenuItem mnemonicParsing="false" onAction="#otevriInformaceOAplikaci" text="O aplikaci" />
                             </items>
                         </Menu>
                     </menus>
