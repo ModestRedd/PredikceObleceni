@@ -1,20 +1,25 @@
 package cz.vse.si.predikceobleceni.model.utils;
 
-import com.google.gson.*;
-import cz.vse.si.predikceobleceni.model.svet.Pocasi;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.svet.Pocasi;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 //todo pro testovani docasne public
 public final class Kalkulator {
-    private static Kalkulator kalkulator = new Kalkulator();
+    private static final Kalkulator kalkulator = new Kalkulator();
 
     public static Kalkulator getInstance() {
         return kalkulator;
@@ -33,7 +38,7 @@ public final class Kalkulator {
         Persistence persistence = new Persistence();
         persistence.pridejLokalitu(casoprostor);
 
-        if (!priradNejchladnejsiPocasiADest(casoprostor)){
+        if (!priradNejchladnejsiPocasiADest(casoprostor)) {
             return null;
         }
 
@@ -48,7 +53,7 @@ public final class Kalkulator {
             casoprostor.setNejchladnejsiPocasi(vyberNejchladnejsi(pocasi));
             casoprostor.setNejteplejsiPocasi(vyberNejteplejsi(pocasi));
             casoprostor.setDest(zjistiJestliBudePrset(pocasi));
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -67,7 +72,7 @@ public final class Kalkulator {
         JsonElement jelement = null;
         try {
             jelement = new JsonParser().parse(json);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return null;
         }
         JsonObject jobject = jelement.getAsJsonObject();

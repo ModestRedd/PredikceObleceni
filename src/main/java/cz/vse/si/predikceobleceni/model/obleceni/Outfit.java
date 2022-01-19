@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Outfit {
-    private Cepice cepice;
-    private List<Vrsek> obleceniNaTele;
-    private List<Spodek> obleceniNaNohach;
-    private Boty boty;
-    private boolean destnik;
+    private final Cepice cepice;
+    private final List<Vrsek> obleceniNaTele;
+    private final List<Spodek> obleceniNaNohach;
+    private final Boty boty;
+    private final boolean destnik;
 
     /**
      * Alternativní oblečení obsahuje všechno oblečení, které je možné si obléknout v daném počasí

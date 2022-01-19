@@ -6,10 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import cz.vse.si.predikceobleceni.model.obleceni.*;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,8 +26,8 @@ public final class Persistence {
     private final String pathToObleceni = "data/Obleceni.json";
     private final String pathToLokality = "data/Lokality.json";
 
-    private ArrayList<Obleceni> obleceni = new ArrayList<>();
-    private ArrayList<Casoprostor> lokality = new ArrayList<>();
+    private final ArrayList<Obleceni> obleceni = new ArrayList<>();
+    private final ArrayList<Casoprostor> lokality = new ArrayList<>();
 
     boolean jsouSeznamyObleceniAktualni = true;
     private ArrayList<Cepice> hlava = new ArrayList<Cepice>();
@@ -50,9 +47,16 @@ public final class Persistence {
 
         try {
             obleceniJson = new String(Files.readAllBytes(Paths.get(pathToObleceni)));
+        } catch (Exception e) {
+            //System.out.println("[ERROR] Doslo k chybe pri nacitani dat. Jsou dostupne datove soubory?" + e);
+            obleceniJson = "[]";
+        }
+
+        try {
             lokalityJson = new String(Files.readAllBytes(Paths.get(pathToLokality)));
         } catch (Exception e) {
-            System.out.println("[ERROR] Doslo k chybe pri nacitani dat. Jsou dostupne datove soubory?" + e);
+            //System.out.println("[ERROR] Doslo k chybe pri nacitani dat. Jsou dostupne datove soubory?" + e);
+            lokalityJson = "[]";
         }
 
         pridejObleceni(obleceniJson);
@@ -199,7 +203,7 @@ public final class Persistence {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
         } finally {
             List<Casoprostor> kOdstraneni = new ArrayList<>();
-            for (Casoprostor lokalita: lokality) {
+            for (Casoprostor lokalita : lokality) {
                 if (lokalita.getPocatecniCas().isBefore(LocalDateTime.now())) {
                     kOdstraneni.add(lokalita);
                 }

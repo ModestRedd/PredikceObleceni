@@ -1,6 +1,5 @@
 package cz.vse.si.predikceobleceni.model.gui;
 
-import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;

@@ -16,7 +16,6 @@ import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,20 +23,15 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
-import netscape.javascript.JSException;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -72,7 +66,7 @@ public class Controller implements Initializable {
     private Button okButton;
 
     @FXML
-    private void zkontrolujVsechnyUdaje(){
+    private void zkontrolujVsechnyUdaje() {
         appendLabel.setText("");
         okButton.setDisable(false);
         if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
@@ -120,7 +114,7 @@ public class Controller implements Initializable {
 
     private GoogleMap map;
 
-    private DecimalFormat formatter = new DecimalFormat("###.00000");
+    private final DecimalFormat formatter = new DecimalFormat("###.00000");
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,21 +124,21 @@ public class Controller implements Initializable {
     }
 
     protected void configureMap() {
-            MapOptions mapOptions = new MapOptions();
+        MapOptions mapOptions = new MapOptions();
 
-            mapOptions.center(new LatLong(50.0832, 14.4353))
-                    .mapType(MapTypeIdEnum.ROADMAP)
-                    .zoom(10);
-            map = googleMapView.createMap(mapOptions, false);
+        mapOptions.center(new LatLong(50.0832, 14.4353))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .zoom(10);
+        map = googleMapView.createMap(mapOptions, false);
 
-            map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
-                LatLong latLong = event.getLatLong();
-                latitudeLabel.setText(formatter.format(latLong.getLatitude()));
-                longitudeLabel.setText(formatter.format(latLong.getLongitude()));
-                latitude = latLong.getLatitude();
-                longtitude = latLong.getLongitude();
-                zkontrolujVsechnyUdaje();
-            });
+        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+            LatLong latLong = event.getLatLong();
+            latitudeLabel.setText(formatter.format(latLong.getLatitude()));
+            longitudeLabel.setText(formatter.format(latLong.getLongitude()));
+            latitude = latLong.getLatitude();
+            longtitude = latLong.getLongitude();
+            zkontrolujVsechnyUdaje();
+        });
 
 
     }

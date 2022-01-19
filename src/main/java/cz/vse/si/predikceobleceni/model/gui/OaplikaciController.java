@@ -1,6 +1,5 @@
 package cz.vse.si.predikceobleceni.model.gui;
 
-import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;

@@ -1,6 +1,6 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
-public class Spodek extends Obleceni{
+public class Spodek extends Obleceni {
     public Spodek(Obleceni obleceni) {
         super(obleceni.getId(),
                 obleceni.getNazev(),

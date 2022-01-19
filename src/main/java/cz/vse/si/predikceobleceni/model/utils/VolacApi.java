@@ -12,9 +12,10 @@ public final class VolacApi {
     private static final String KLIC = "417282c5e6578006d33fca782cb9e0d5";
     private static final String API_URL = "https://api.openweathermap.org/data/2.5/forecast?lat=%f&lon=%f&units=metric&lang=cz&appid=%s";
 
-    private VolacApi(){};
+    private VolacApi() {
+    }
 
-    public static VolacApi getInstance(){
+    public static VolacApi getInstance() {
         return instance;
     }
 
@@ -34,10 +35,10 @@ public final class VolacApi {
             }
             bufferedReader.close();
             return odpoved.toString();
-        } catch (IOException e){
+        } catch (IOException e) {
             return null;
         } finally {
-            if (spojeniSApi != null){
+            if (spojeniSApi != null) {
                 spojeniSApi.disconnect();
             }
         }

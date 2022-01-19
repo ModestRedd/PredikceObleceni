@@ -1,8 +1,6 @@
 package cz.vse.si.predikceobleceni.model.gui;
 
 import cz.vse.si.predikceobleceni.model.utils.InternetAlert;
-import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
-import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import cz.vse.si.predikceobleceni.model.utils.VolacApi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +13,6 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Objects;
 
 
 public class GUIMain extends Application {
@@ -25,8 +22,8 @@ public class GUIMain extends Application {
 
         try {
 
-            String json = VolacApi.getInstance().zavolejApi(10,10);
-            if (json == null){
+            String json = VolacApi.getInstance().zavolejApi(10, 10);
+            if (json == null) {
                 throw new Exception("Bez internetového připojení");
             }
             FXMLLoader loader = new FXMLLoader();
@@ -42,7 +39,7 @@ public class GUIMain extends Application {
             stage.setTitle("Předpověď oblečení");
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             InternetAlert.generujAlert();
             System.exit(0);
         }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlternativniObleceni {
-    private List<Cepice> cepice;
-    private List<Vrsek> vrsky;
-    private List<Spodek> spodky;
-    private List<Boty> boty;
+    private final List<Cepice> cepice;
+    private final List<Vrsek> vrsky;
+    private final List<Spodek> spodky;
+    private final List<Boty> boty;
 
     public AlternativniObleceni(List<Cepice> cepice, List<Vrsek> vrsky, List<Spodek> spodky, List<Boty> boty) {
         this.cepice = cepice;
@@ -32,8 +32,8 @@ public class AlternativniObleceni {
         return boty;
     }
 
-    public List<Obleceni> getVsechnoObleceni(){
-        List<Obleceni> vsechnoObleceni=new ArrayList<>();
+    public List<Obleceni> getVsechnoObleceni() {
+        List<Obleceni> vsechnoObleceni = new ArrayList<>();
 
         vsechnoObleceni.addAll(cepice);
         vsechnoObleceni.addAll(vrsky);

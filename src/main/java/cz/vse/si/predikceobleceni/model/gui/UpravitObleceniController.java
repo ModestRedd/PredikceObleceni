@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class UpravitObleceniController {

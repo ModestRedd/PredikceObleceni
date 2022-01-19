@@ -9,10 +9,10 @@ import java.util.Objects;
 public class Casoprostor {
     private int id;
 
-    private double zemepisnaSirka;
-    private double zemepisnaDelka;
-    private LocalDateTime pocatecniCas;
-    private LocalDateTime konecnyCas;
+    private final double zemepisnaSirka;
+    private final double zemepisnaDelka;
+    private final LocalDateTime pocatecniCas;
+    private final LocalDateTime konecnyCas;
     private Pocasi nejchladnejsiPocasi;
     private Pocasi nejteplejsiPocasi;
     private boolean dest;
@@ -21,7 +21,7 @@ public class Casoprostor {
      * například je ochoten si vzít někam málo/středně formální oblečení, tak kalkulátor
      * bere v potaz obě možnosti při výběru outfitu.
      */
-    private List<Formalni> formalnostObleceni;
+    private final List<Formalni> formalnostObleceni;
 
     /*
     public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {

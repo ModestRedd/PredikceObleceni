@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-
 <?import com.dlsc.gmapsfx.GoogleMapView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <GridPane id="main-pane" fx:id="mainGridPane" stylesheets="@styles.css" prefHeight="623.0" prefWidth="841.0"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="cz.vse.si.predikceobleceni.model.gui.Controller">
@@ -61,9 +50,11 @@
                                 <Font name="System Bold" size="12.0"/>
                             </font>
                         </Label>
-                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="endDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="endDate" GridPane.halignment="CENTER"
+                                    GridPane.rowIndex="1"
                                     GridPane.valignment="CENTER"/>
-                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="endTime" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" minorTickCount="1"
+                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="endTime" blockIncrement="1.0"
+                                majorTickUnit="2.0" max="23.0" minorTickCount="1"
                                 showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
                     </children>
                 </GridPane>
@@ -85,9 +76,11 @@
                                 <Font name="System Bold" size="12.0"/>
                             </font>
                         </Label>
-                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="startDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="startDate" GridPane.halignment="CENTER"
+                                    GridPane.rowIndex="1"
                                     GridPane.valignment="CENTER"/>
-                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="startTime" blockIncrement="2.0" majorTickUnit="2.0" max="23.0" minorTickCount="2"
+                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="startTime" blockIncrement="2.0"
+                                majorTickUnit="2.0" max="23.0" minorTickCount="2"
                                 showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
                     </children>
                 </GridPane>
@@ -109,7 +102,8 @@
                                 <Font name="System Bold" size="15.0"/>
                             </font>
                         </Label>
-                        <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Ok" GridPane.halignment="CENTER"
+                        <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Ok"
+                                GridPane.halignment="CENTER"
                                 GridPane.rowIndex="2">
                             <font>
                                 <Font name="System Bold" size="13.0"/>
@@ -125,11 +119,14 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="neformalni" mnemonicParsing="false" text="neformální"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="neformalni"
+                                          mnemonicParsing="false" text="neformální"
                                           GridPane.halignment="CENTER"/>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="stredne" mnemonicParsing="false" text="středně"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="stredne"
+                                          mnemonicParsing="false" text="středně"
                                           GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
-                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="formalni" mnemonicParsing="false" text="formální"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="formalni"
+                                          mnemonicParsing="false" text="formální"
                                           GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
                             </children>
                         </GridPane>
@@ -182,11 +179,11 @@
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="O aplikaci">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#otevriInformaceOAplikaci"
-                                      text="O aplikaci"/>
-                        </items>
-                    </Menu>
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#otevriInformaceOAplikaci"
+                                          text="O aplikaci"/>
+                            </items>
+                        </Menu>
                     </menus>
                 </MenuBar>
             </children>

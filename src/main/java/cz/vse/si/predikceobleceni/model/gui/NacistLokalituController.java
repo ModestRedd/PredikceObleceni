@@ -8,11 +8,9 @@ import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -31,7 +29,7 @@ public class NacistLokalituController {
     @FXML
     private Button zrusitButton;
     @FXML
-    private ListView<Casoprostor> lokace; //string?
+    private ListView<Casoprostor> lokace;
 
 
     @FXML
@@ -62,7 +60,7 @@ public class NacistLokalituController {
     public void predpovedObleceni() {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
-        if (outfit == null){
+        if (outfit == null) {
             InternetAlert.generujAlert();
             return;
         }
