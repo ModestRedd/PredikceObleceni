@@ -137,6 +137,9 @@ public final class Kalkulator {
 
     private Outfit vygenerujOutfit(Casoprostor casoprostor) {
 
+        if (casoprostor.getNejchladnejsiPocasi() == null){
+            return new Outfit(new Cepice("",Integer.MIN_VALUE,Integer.MAX_VALUE,null),null,null,null,false);
+        }
         Persistence persistence = new Persistence();
 
         ArrayList<Cepice> cepice = persistence.getHlava(); //array cepic z databaze

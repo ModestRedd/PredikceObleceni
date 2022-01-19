@@ -34,7 +34,6 @@ public final class VolacApi {
                 odpoved.append(radek);
             }
             bufferedReader.close();
-
             return odpoved.toString();
         } catch (IOException e) {
             return null;

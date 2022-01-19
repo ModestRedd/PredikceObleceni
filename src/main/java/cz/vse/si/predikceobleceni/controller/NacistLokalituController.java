@@ -65,16 +65,18 @@ public class NacistLokalituController {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
         this.zobrazZFXThread("Načítání...");
         Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+        this.zobrazZFXThread("");
         if (outfit == null) {
-            InternetAlert.generujAlert();
+            InternetAlert.zobrazNoInternetAlert();
+            return;
+        } else if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
+            InternetAlert.zobrazMalyRozsahAlert();
             return;
         }
-        this.zobrazZFXThread("");
-
         zobrazOknoOutfitu(outfit);
     }
 
-    private void zobrazZFXThread(String text){
+    private void zobrazZFXThread(String text) {
         Runnable task = () -> Platform.runLater(() -> appendArea.setText(text));
         new Thread(task).start();
     }
