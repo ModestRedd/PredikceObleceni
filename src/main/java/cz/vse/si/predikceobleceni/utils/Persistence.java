@@ -13,13 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Persistence {
-    private static final cz.vse.si.predikceobleceni.utils.Persistence persistence;
+    private static final Persistence persistence = new Persistence();
 
-    static {
-        persistence = new Persistence();
-    }
-
-    public static cz.vse.si.predikceobleceni.utils.Persistence getInstance() {
+    public static Persistence getInstance() {
         return persistence;
     }
 
@@ -35,7 +31,7 @@ public final class Persistence {
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
 
-    public Persistence() {
+    private Persistence() {
         /*
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);

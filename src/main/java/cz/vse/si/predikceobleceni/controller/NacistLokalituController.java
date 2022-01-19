@@ -42,8 +42,8 @@ public class NacistLokalituController {
     }
 
     private void nacistListView() {
-        Persistence persistence = new Persistence();
-        ArrayList<Casoprostor> lokality = persistence.getLokality();
+        //Persistence persistence = new Persistence();
+        ArrayList<Casoprostor> lokality = Persistence.getInstance().getLokality();
 
         ObservableList<Casoprostor> obleceniObservableList = FXCollections.observableArrayList(lokality);
         lokace.setItems(obleceniObservableList);
