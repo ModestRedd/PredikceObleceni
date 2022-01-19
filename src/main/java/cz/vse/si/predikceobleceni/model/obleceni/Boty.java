@@ -1,4 +1,4 @@
-package cz.vse.si.predikceobleceni.model;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Boty extends Obleceni {
     public Boty(Obleceni obleceni) {

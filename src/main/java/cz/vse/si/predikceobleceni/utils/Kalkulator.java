@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import cz.vse.si.predikceobleceni.model.*;
-import cz.vse.si.predikceobleceni.svet.Casoprostor;
-import cz.vse.si.predikceobleceni.svet.Pocasi;
+import cz.vse.si.predikceobleceni.model.obleceni.*;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.svet.Pocasi;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -40,8 +40,6 @@ public final class Kalkulator {
         if (!priradNejchladnejsiPocasiADest(casoprostor)) {
             return null;
         }
-
-        //System.out.println(casoprostor);
         return vygenerujOutfit(casoprostor);
     }
 
@@ -82,7 +80,6 @@ public final class Kalkulator {
 
         JsonArray weatherArray = jobject.getAsJsonArray("list");
         weatherArray.forEach(element -> {
-            //System.out.println(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString());
             boolean dest = Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Rain")
                     || Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Thunderstorm")
                     || Objects.equals(element.getAsJsonObject().getAsJsonArray("weather").get(0).getAsJsonObject().get("main").toString(), "Drizzle");
@@ -90,10 +87,6 @@ public final class Kalkulator {
             double teplota = Double.parseDouble(element.getAsJsonObject().getAsJsonObject("main").get("temp").toString());
 
             LocalDateTime objektCasu = LocalDateTime.ofInstant(Instant.ofEpochSecond(cas), ZoneId.systemDefault());
-
-            //System.out.println(dest);
-            //System.out.println(objektCasu);
-            //System.out.println(teplota);
 
             pocasi.add(new Pocasi(dest, teplota, objektCasu));
         });
@@ -146,15 +139,6 @@ public final class Kalkulator {
         ArrayList<Vrsek> vrsky = Persistence.getInstance().getVrsek(); //array vrsku z databaze
         ArrayList<Spodek> spodky = Persistence.getInstance().getSpodek(); //array spodku z databaze
         ArrayList<Boty> boty = Persistence.getInstance().getBoty(); //array bot z databaze
-
-        //scrape dat z databáze a mapování na oblečení - Jirka doplní metody
-        /*
-        List<Cepice> cepice = Arrays.asList(new Cepice("Čepice", 5, 99, Formalni.MALO));
-        List<Vrsek> vrsky = Arrays.asList(new Vrsek("Mikina", Vrstva.DRUHA, -99, 11, Formalni.MALO), new Vrsek("Tričko", Vrstva.PRVNI, -99, 99, Formalni.MALO), new Vrsek("Kabát", Vrstva.TRETI, -99, 18, Formalni.STREDNE), new Vrsek("Bunda", Vrstva.TRETI, -20, 15, Formalni.MALO));
-
-        List<Spodek> spodky = Arrays.asList(new Spodek("Chinos", Vrstva.DRUHA, -20, 20, Formalni.STREDNE), new Spodek("Rifle", Vrstva.DRUHA, -21, 20, Formalni.STREDNE));
-        List<Boty> boty = Arrays.asList(new Boty("Koženky", -20, 15, Formalni.MALO));
-         */
 
         List<Vrsek> prvniVrstvaTelo = vratVrstvu(vrsky, Vrstva.PRVNI, casoprostor);
         List<Vrsek> druhaVrstvaTelo = vratVrstvu(vrsky, Vrstva.DRUHA, casoprostor);

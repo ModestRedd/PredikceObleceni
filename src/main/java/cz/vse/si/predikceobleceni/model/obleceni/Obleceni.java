@@ -1,4 +1,4 @@
-package cz.vse.si.predikceobleceni.model;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Obleceni {
     private int id = -1;
@@ -61,23 +61,8 @@ public class Obleceni {
         this.id = newId;
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "\"" + id + "\":{" +
-                "\"castTela\":\"" + castTela + "\"," +
-                "\"nazev\":\"" + nazev + "\"," +
-                "\"minimalniTeplota\":\"" + minimalniTeplota + "\"," +
-                "\"maximalniTeplota\":\"" + maximalniTeplota + "\"," +
-                "\"vrstva\":\"" + vrstva + "\"," +
-                "\"formalni\":\"" + formalni + "\"}";
-
-    }
-     */
-
     @Override
     public String toString() {
         return "Název: " + nazev + ", umístění: " + castTela + ", vrstva: " + vrstva;
-        //return "ID: " + id + ", název: " + nazev + ", vrstva: " + vrstva;
     }
 }

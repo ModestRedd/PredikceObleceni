@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane stylesheets="@styles.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cz.vse.si.predikceobleceni.controller.SmazatLokalituController">
+    <children>
+        <GridPane prefHeight="400.0" prefWidth="601.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="348.0" minHeight="10.0" prefHeight="348.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Button fx:id="smazatButton" disable="true" mnemonicParsing="false" onAction="#smazatLokalitu"
+                        text="Smazat" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+                <ListView fx:id="lokalityListView" onMouseClicked="#zpracujKliknutiMysi" prefHeight="200.0"
+                          prefWidth="200.0"/>
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>

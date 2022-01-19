@@ -1,6 +1,6 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.model.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,14 +32,12 @@ public class SmazatObleceniController {
     }
 
     public void smazatObleceni() {
-        //Persistence persistence = new Persistence();
         Persistence.getInstance().odeberObleceniPodleId(currentId);
 
         nacistListView();
     }
 
     private void nacistListView() {
-        //Persistence persistence = new Persistence();
         ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
         ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);

@@ -1,4 +1,4 @@
-package cz.vse.si.predikceobleceni.model;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Cepice extends Obleceni {
     public Cepice(Obleceni obleceni) {

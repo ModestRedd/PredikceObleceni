@@ -18,22 +18,18 @@ import java.nio.file.Path;
 public class Start extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
 
         try {
-
             String json = VolacApi.getInstance().zavolejApi(10, 10);
             if (json == null) {
                 throw new Exception("Bez internetového připojení");
             }
-            FXMLLoader loader = new FXMLLoader();
-            URL url = new File("src/main/java/cz/vse/si/predikceobleceni/resources/gui.fxml").toURI().toURL();
+            URL url = new File("src/main/java/cz/vse/si/predikceobleceni/view/gui.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
 
-            //Parent root = loader.load(getClass().getClassLoader().getResource("gui.fxml"));
-
             Scene scene = new Scene(root);
-            Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/clouds.png");
+            Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/clouds.png");
 
             stage.getIcons().add(new Image("file:" + path.toAbsolutePath()));
             stage.setTitle("Předpověď oblečení");

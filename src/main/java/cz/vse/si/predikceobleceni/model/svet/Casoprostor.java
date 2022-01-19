@@ -1,6 +1,6 @@
-package cz.vse.si.predikceobleceni.svet;
+package cz.vse.si.predikceobleceni.model.svet;
 
-import cz.vse.si.predikceobleceni.model.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 
 import java.time.LocalDateTime;
 import java.util.List;

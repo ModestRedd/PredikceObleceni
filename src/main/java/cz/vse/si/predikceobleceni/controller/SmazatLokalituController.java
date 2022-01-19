@@ -1,6 +1,6 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +30,7 @@ public class SmazatLokalituController {
             if (lokalita != null) {
                 currentId = lokalita.getId();
             } else {
+                smazatButton.setDisable(true);
                 return;
             }
         }
@@ -38,14 +39,12 @@ public class SmazatLokalituController {
     }
 
     public void smazatLokalitu() {
-        //Persistence persistence = new Persistence();
         Persistence.getInstance().odeberLokalituPodleId(currentId);
-
         nacistListView();
+        smazatButton.setDisable(true);
     }
 
     private void nacistListView() {
-        //Persistence persistence = new Persistence();
         ArrayList<Casoprostor> lokality = Persistence.getInstance().getLokality();
 
         ObservableList<Casoprostor> lokalityObservableList = FXCollections.observableArrayList(lokality);

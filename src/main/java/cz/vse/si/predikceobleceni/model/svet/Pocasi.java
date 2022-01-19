@@ -1,4 +1,4 @@
-package cz.vse.si.predikceobleceni.svet;
+package cz.vse.si.predikceobleceni.model.svet;
 
 import java.time.LocalDateTime;
 
