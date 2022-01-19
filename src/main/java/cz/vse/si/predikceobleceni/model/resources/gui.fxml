@@ -15,8 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import com.dlsc.gmapsfx.GoogleMapView?>
-<GridPane fx:id="mainGridPane" prefHeight="623.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.si.predikceobleceni.model.gui.Controller">
+<GridPane id="main-pane" fx:id="mainGridPane" stylesheets="@styles.css" prefHeight="623.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.si.predikceobleceni.model.gui.Controller">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.39996337890625" minWidth="10.0" prefWidth="356.6"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.3999877929688" minWidth="10.0" prefWidth="442.4"/>
@@ -160,29 +159,22 @@
                         <Label fx:id="longitudeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                     </children>
                 </GridPane>
-                <MenuBar GridPane.columnSpan="3" GridPane.valignment="TOP">
-                    <menus>
-                        <Menu mnemonicParsing="false" text="Správa oblečení">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriPridavaciOkno"
-                                          text="Přidej oblečení"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriUpravovaciOkno"
-                                          text="Upravit oblečení"/>
-                                <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoObleceni"
-                                          text="Odeber oblečení"/>
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Správa lokalit">
-                            <items>
-                                <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit"
-                                          text="Uložené lokality"/>
-                                <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOknoLokalit"
-                                          text="Odeber lokality"/>
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
+                  <MenuBar GridPane.columnSpan="3" GridPane.valignment="TOP">
+                      <menus>
+                          <Menu mnemonicParsing="false" text="Úprava oblečení">
+                              <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#otevriPridavaciOkno" text="Přidej oblečení" />
+                                  <MenuItem mnemonicParsing="false" onAction="#otevriUpravovaciOkno" text="Upravit oblečení" />
+                                  <MenuItem mnemonicParsing="false" onAction="#otevriMazaciOkno" text="Odeber oblečení" />
+                              </items>
+                          </Menu>
+                  <Menu mnemonicParsing="false" text="Načtení lokalit">
+                    <items>
+                      <MenuItem fx:id="ulozeneLokality" mnemonicParsing="false" onAction="#otevriOknoLokalit" text="Uložené lokality" />
+                    </items>
+                  </Menu>
+                      </menus>
+                  </MenuBar>
             </children>
         </GridPane>
         <GoogleMapView fx:id="googleMapView" prefHeight="371.0" prefWidth="324.0" GridPane.halignment="CENTER"/>

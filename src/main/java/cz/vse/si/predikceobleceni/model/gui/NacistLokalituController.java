@@ -88,9 +88,9 @@ public class NacistLokalituController {
 
             Label destnikLabel = (Label) content.lookup("#destnikLabel");
             if (vzitSiDestnik) {
-                destnikLabel.setText("Pravdepodobnost deste. Vezmi si destnik.");
+                destnikLabel.setText("Pravděpodobnost deště. Vezmi si deštník.");
             } else {
-                destnikLabel.setText("Zrejme nebude prset. Nemusis si brat destnik");
+                destnikLabel.setText("Zrejmě nebude pršet. Nemusíš si brát deštník");
             }
 
             dialog.getDialogPane().setContent(content);
