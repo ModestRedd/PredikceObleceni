@@ -35,7 +35,6 @@ public final class VolacApi {
             bufferedReader.close();
             return odpoved.toString();
         } catch (IOException e){
-            System.out.println(e.getMessage());
             return null;
         } finally {
             if (spojeniSApi != null){

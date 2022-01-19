@@ -11,6 +11,7 @@ import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.model.obleceni.Outfit;
 import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.model.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.model.utils.Persistence;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import netscape.javascript.JSException;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -101,9 +103,13 @@ public class Controller implements Initializable {
             Persistence persistence = new Persistence();
             persistence.pridejLokalitu(casoprostor);
 
-            Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+            Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+            if (outfit == null) {
+                InternetAlert.generujAlert();
+                return;
+            }
             //System.out.println(vygenerovanyOutfit.toString());
-            zobrazOknoOutfitu(vygenerovanyOutfit);
+            zobrazOknoOutfitu(outfit);
         }
     }
 
@@ -113,24 +119,27 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        googleMapView.addMapInitializedListener(() -> configureMap());
+
+        googleMapView.addMapInitializedListener(this::configureMap);
+
     }
 
     protected void configureMap() {
-        MapOptions mapOptions = new MapOptions();
+            MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(50.0832, 14.4353))
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .zoom(10);
-        map = googleMapView.createMap(mapOptions, false);
+            mapOptions.center(new LatLong(50.0832, 14.4353))
+                    .mapType(MapTypeIdEnum.ROADMAP)
+                    .zoom(10);
+            map = googleMapView.createMap(mapOptions, false);
 
-        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
-            LatLong latLong = event.getLatLong();
-            latitudeLabel.setText(formatter.format(latLong.getLatitude()));
-            longitudeLabel.setText(formatter.format(latLong.getLongitude()));
-            latitude = latLong.getLatitude();
-            longtitude = latLong.getLongitude();
-        });
+            map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+                LatLong latLong = event.getLatLong();
+                latitudeLabel.setText(formatter.format(latLong.getLatitude()));
+                longitudeLabel.setText(formatter.format(latLong.getLongitude()));
+                latitude = latLong.getLatitude();
+                longtitude = latLong.getLongitude();
+            });
+
 
     }
 
@@ -288,9 +297,9 @@ public class Controller implements Initializable {
 
             Label destnikLabel = (Label) content.lookup("#destnikLabel");
             if (vzitSiDestnik) {
-                destnikLabel.setText("Pravdepodobnost deste. Vezmi si destnik.");
+                destnikLabel.setText("Pravděpodobnost deště. Vezmi si deštník.");
             } else {
-                destnikLabel.setText("Zrejme nebude prset. Nemusis si brat destnik");
+                destnikLabel.setText("Zřejmě nebude pršet. Nemusíš si brát deštník.");
             }
 
             dialog.getDialogPane().setContent(content);
