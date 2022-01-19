@@ -161,6 +161,18 @@ public final class Persistence {
         zaradVeskereObleceni();
     }
 
+    public void odeberLokalituPodleId(int id) {
+        for (Casoprostor element :
+                lokality) {
+            if (element.getId() == id) {
+                lokality.remove(element);
+                break;
+            }
+        }
+
+        dumpLokalityJson();
+    }
+
     protected void pridejLokality(String lokalityJson) {
         Gson gson = new Gson();
 
@@ -185,9 +197,9 @@ public final class Persistence {
             }
         } catch (JsonParseException exception) {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
-        } finally{
+        } finally {
             lokality.forEach(lokalita -> {
-                if (lokalita.getPocatecniCas().isBefore(LocalDateTime.now())){
+                if (lokalita.getPocatecniCas().isBefore(LocalDateTime.now())) {
                     lokality.remove(lokalita);
                 }
             });
@@ -200,7 +212,7 @@ public final class Persistence {
 
         for (Casoprostor element :
                 lokality) {
-            if (lokalita.equals(element)){
+            if (lokalita.equals(element)) {
 
                 return;
             }

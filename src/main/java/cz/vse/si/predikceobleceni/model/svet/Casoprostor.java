@@ -96,6 +96,13 @@ public class Casoprostor {
 
     @Override
     public String toString() {
+        return "Zem. sirka: " + String.format("%.6g", zemepisnaSirka) +
+                ", zem. delka: " + String.format("%.6g", zemepisnaDelka) +
+                ",\npočáteční čas: " + pocatecniCas +
+                ", konečný čas: " + konecnyCas +
+                ",\nformálnost: " + formalnostObleceni;
+
+        /*
         return "Casoprostor{" +
                 "id=" + id +
                 ", zemepisnaSirka=" + zemepisnaSirka +
@@ -107,6 +114,7 @@ public class Casoprostor {
                 ", dest=" + dest +
                 ", formalnostObleceni=" + formalnostObleceni +
                 '}';
+         */
     }
 
     @Override
