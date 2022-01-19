@@ -69,9 +69,12 @@ public class NacistLokalituController {
         if (outfit == null) {
             InternetAlert.zobrazNoInternetAlert();
             return;
-        } else if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
-            InternetAlert.zobrazMalyRozsahAlert();
-            return;
+        }
+        if (outfit.getCepice() != null) {
+            if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
+                InternetAlert.zobrazMalyRozsahAlert();
+                return;
+            }
         }
         zobrazOknoOutfitu(outfit);
     }
