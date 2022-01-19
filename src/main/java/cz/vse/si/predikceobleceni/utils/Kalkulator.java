@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-//todo pro testovani docasne public
 public final class Kalkulator {
     private static final Kalkulator kalkulator = new Kalkulator();
 
@@ -35,8 +34,8 @@ public final class Kalkulator {
      *                    Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
      */
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
-        Persistence persistence = new Persistence();
-        persistence.pridejLokalitu(casoprostor);
+        //Persistence persistence = new Persistence();
+        Persistence.getInstance().pridejLokalitu(casoprostor);
 
         if (!priradNejchladnejsiPocasiADest(casoprostor)) {
             return null;
@@ -140,12 +139,13 @@ public final class Kalkulator {
         if (casoprostor.getNejchladnejsiPocasi() == null){
             return new Outfit(new Cepice("",Integer.MIN_VALUE,Integer.MAX_VALUE,null),null,null,null,false);
         }
-        Persistence persistence = new Persistence();
 
-        ArrayList<Cepice> cepice = persistence.getHlava(); //array cepic z databaze
-        ArrayList<Vrsek> vrsky = persistence.getVrsek(); //array vrsku z databaze
-        ArrayList<Spodek> spodky = persistence.getSpodek(); //array spodku z databaze
-        ArrayList<Boty> boty = persistence.getBoty(); //array bot z databaze
+        //Persistence persistence = new Persistence();
+
+        ArrayList<Cepice> cepice = Persistence.getInstance().getHlava(); //array cepic z databaze
+        ArrayList<Vrsek> vrsky = Persistence.getInstance().getVrsek(); //array vrsku z databaze
+        ArrayList<Spodek> spodky = Persistence.getInstance().getSpodek(); //array spodku z databaze
+        ArrayList<Boty> boty = Persistence.getInstance().getBoty(); //array bot z databaze
 
         //scrape dat z databáze a mapování na oblečení - Jirka doplní metody
         /*

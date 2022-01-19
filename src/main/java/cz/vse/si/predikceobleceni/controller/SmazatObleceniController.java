@@ -32,16 +32,15 @@ public class SmazatObleceniController {
     }
 
     public void smazatObleceni() {
-        Persistence persistence = new Persistence();
-
-        persistence.odeberObleceniPodleId(currentId);
+        //Persistence persistence = new Persistence();
+        Persistence.getInstance().odeberObleceniPodleId(currentId);
 
         nacistListView();
     }
 
     private void nacistListView() {
-        Persistence persistence = new Persistence();
-        ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+        //Persistence persistence = new Persistence();
+        ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
         ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
         obleceniListView.setItems(obleceniObservableList);

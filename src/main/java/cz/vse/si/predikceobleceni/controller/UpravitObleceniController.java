@@ -39,8 +39,8 @@ public class UpravitObleceniController {
     Vrstva currentVrstva;
 
     private void nacistListView() {
-        Persistence persistence = new Persistence();
-        ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+        //Persistence persistence = new Persistence();
+        ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
         ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
         obleceniListView.setItems(obleceniObservableList);
@@ -187,8 +187,8 @@ public class UpravitObleceniController {
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
 
-        Persistence persistence = new Persistence();
-        persistence.pridejObleceni(obleceniKUlozeni);
+        //Persistence persistence = new Persistence();
+        Persistence.getInstance().pridejObleceni(obleceniKUlozeni);
 
         nacistListView();
     }

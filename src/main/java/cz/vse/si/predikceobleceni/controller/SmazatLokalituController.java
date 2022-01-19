@@ -35,15 +35,15 @@ public class SmazatLokalituController {
     }
 
     public void smazatLokalitu() {
-        Persistence persistence = new Persistence();
-        persistence.odeberLokalituPodleId(currentId);
+        //Persistence persistence = new Persistence();
+        Persistence.getInstance().odeberLokalituPodleId(currentId);
 
         nacistListView();
     }
 
     private void nacistListView() {
-        Persistence persistence = new Persistence();
-        ArrayList<Casoprostor> lokality = persistence.getLokality();
+        //Persistence persistence = new Persistence();
+        ArrayList<Casoprostor> lokality = Persistence.getInstance().getLokality();
 
         ObservableList<Casoprostor> lokalityObservableList = FXCollections.observableArrayList(lokality);
         lokalityListView.setItems(lokalityObservableList);

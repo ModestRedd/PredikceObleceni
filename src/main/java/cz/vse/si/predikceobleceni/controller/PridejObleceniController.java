@@ -55,8 +55,8 @@ public class PridejObleceniController {
 
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
 
-        Persistence persistence = new Persistence();
-        persistence.pridejObleceni(obleceniKUlozeni);
+        //Persistence persistence = new Persistence();
+        Persistence.getInstance().pridejObleceni(obleceniKUlozeni);
 
         Stage stage = (Stage) nazev.getScene().getWindow();
         stage.close();

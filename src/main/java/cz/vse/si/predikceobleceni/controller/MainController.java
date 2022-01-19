@@ -104,8 +104,7 @@ public class MainController implements Initializable {
 
             Casoprostor casoprostor = new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList);
 
-            Persistence persistence = new Persistence();
-            persistence.pridejLokalitu(casoprostor);
+            Persistence.getInstance().pridejLokalitu(casoprostor);
 
             Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
 
@@ -199,8 +198,7 @@ public class MainController implements Initializable {
 
             ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
 
-            Persistence persistence = new Persistence();
-            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+            ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
             ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
             obleceniListView.setItems(obleceniObservableList);
@@ -252,8 +250,7 @@ public class MainController implements Initializable {
 
             ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
 
-            Persistence persistence = new Persistence();
-            ArrayList<Obleceni> obleceni = persistence.getAllObleceni();
+            ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
             ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
             obleceniListView.setItems(obleceniObservableList);
