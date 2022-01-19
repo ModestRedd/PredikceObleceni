@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0"
-          prefWidth="604.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.si.predikceobleceni.controller.OaplikaciController">
+<GridPane xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="426.0" prefWidth="604.0" stylesheets="@styles.css"
+          xmlns="http://javafx.com/javafx" fx:controller="cz.vse.si.predikceobleceni.controller.OaplikaciController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>

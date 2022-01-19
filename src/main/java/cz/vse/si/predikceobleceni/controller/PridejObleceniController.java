@@ -1,9 +1,9 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.model.CastTela;
-import cz.vse.si.predikceobleceni.model.Formalni;
-import cz.vse.si.predikceobleceni.model.Obleceni;
-import cz.vse.si.predikceobleceni.model.Vrstva;
+import cz.vse.si.predikceobleceni.model.obleceni.CastTela;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
 import cz.vse.si.predikceobleceni.utils.Persistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,9 +33,23 @@ public class PridejObleceniController {
         pridat.setDisable(true);
     }
 
+
+    public void zavriOkno() {
+        Stage stage = (Stage) nazev.getScene().getWindow();
+        stage.close();
+    }
+
+    public void zkontrolujVsechnyUdaje() {
+        appendArea.setText("");
+        pridat.setDisable(false);
+        if (existujePrazdnaHodnota()) {
+            pridat.setDisable(true);
+        }
+    }
+
     public void pridejObleceni() {
         appendArea.setText("");
-        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
+        if (existujePrazdnaHodnota()) {
             appendArea.setText("Chybějící hodnoty");
             return;
         }
@@ -55,13 +69,15 @@ public class PridejObleceniController {
 
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), getVrstva(), getCastTela(), minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
 
-        //Persistence persistence = new Persistence();
         Persistence.getInstance().pridejObleceni(obleceniKUlozeni);
 
         Stage stage = (Stage) nazev.getScene().getWindow();
         stage.close();
     }
 
+    private boolean existujePrazdnaHodnota() {
+        return nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null;
+    }
 
     private Formalni getFormalni() {
         String vybranaFormalnost = formalnost.getSelectionModel().getSelectedItem().toString();
@@ -107,17 +123,4 @@ public class PridejObleceniController {
         }
     }
 
-    public void zavriOkno() {
-        Stage stage = (Stage) nazev.getScene().getWindow();
-        stage.close();
-    }
-
-    public void zkontrolujVsechnyUdaje() {
-        appendArea.setText("");
-        pridat.setDisable(false);
-        if (nazev.getText().equals("") || castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
-            pridat.setDisable(true);
-        }
-
-    }
 }

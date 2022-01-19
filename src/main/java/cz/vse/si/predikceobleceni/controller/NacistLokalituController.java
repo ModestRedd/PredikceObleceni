@@ -1,8 +1,8 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.model.Obleceni;
-import cz.vse.si.predikceobleceni.model.Outfit;
-import cz.vse.si.predikceobleceni.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Outfit;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.utils.Persistence;
@@ -27,8 +27,7 @@ import java.util.List;
 public class NacistLokalituController {
     @FXML
     private Button okButton;
-    @FXML
-    private Button zrusitButton;
+
     @FXML
     private ListView<Casoprostor> lokace;
     @FXML
@@ -36,52 +35,14 @@ public class NacistLokalituController {
 
 
     @FXML
-    public void zavriOkno() {
-        Stage stage = (Stage) okButton.getScene().getWindow();
-        stage.close();
-    }
-
-    private void nacistListView() {
-        //Persistence persistence = new Persistence();
-        ArrayList<Casoprostor> lokality = Persistence.getInstance().getLokality();
-
-        ObservableList<Casoprostor> obleceniObservableList = FXCollections.observableArrayList(lokality);
-        lokace.setItems(obleceniObservableList);
-    }
-
-
-    public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
-        if (lokace.equals(mouseEvent.getSource())) {
-            okButton.setDisable(false);
-        }
-    }
-
-    @FXML
-    public void initialize() {
+    private void initialize() {
         nacistListView();
     }
 
-    public void predpovedObleceni() {
-        Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
-        this.zobrazZFXThread("Načítání...");
-        Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
-        this.zobrazZFXThread("");
-        if (outfit == null) {
-            InternetAlert.zobrazNoInternetAlert();
-            return;
-        }
-        if (outfit.getCepice() != null) {
-            if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
-                InternetAlert.zobrazMalyRozsahAlert();
-                return;
-            }
-        }
-        zobrazOknoOutfitu(outfit);
-    }
-
-    private void zobrazZFXThread(String text) {
-        Runnable task = () -> Platform.runLater(() -> appendArea.setText(text));
-        new Thread(task).start();
+    @FXML
+    public void zavriOkno() {
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
@@ -95,7 +56,7 @@ public class NacistLokalituController {
         window.setOnCloseRequest(event -> window.hide());
         dialog.initOwner(okButton.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/predpovedbleceni.fxml");
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/predpovedbleceni.fxml");
 
         try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
@@ -126,5 +87,49 @@ public class NacistLokalituController {
 
         dialog.showAndWait();
     }
+
+    public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
+        Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
+        if (casoprostor == null) {
+            okButton.setDisable(true);
+            return;
+        }
+        if (lokace.equals(mouseEvent.getSource())) {
+            okButton.setDisable(false);
+        }
+    }
+
+    public void predpovedObleceni() {
+        Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
+
+        this.zobrazZFXThread("Načítání...");
+        Outfit outfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
+        this.zobrazZFXThread("");
+        if (outfit == null) {
+            InternetAlert.zobrazNoInternetAlert();
+            return;
+        }
+        if (outfit.getCepice() != null) {
+            if (outfit.getCepice().getMinimalniTeplota() == Integer.MIN_VALUE) {
+                InternetAlert.zobrazMalyRozsahAlert();
+                return;
+            }
+        }
+        zobrazOknoOutfitu(outfit);
+    }
+
+    private void zobrazZFXThread(String text) {
+        Runnable task = () -> Platform.runLater(() -> appendArea.setText(text));
+        new Thread(task).start();
+    }
+
+
+    private void nacistListView() {
+        ArrayList<Casoprostor> lokality = Persistence.getInstance().getLokality();
+
+        ObservableList<Casoprostor> obleceniObservableList = FXCollections.observableArrayList(lokality);
+        lokace.setItems(obleceniObservableList);
+    }
+
 
 }

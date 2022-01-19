@@ -1,6 +1,6 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.model.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
 import cz.vse.si.predikceobleceni.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,17 +12,16 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class SmazatObleceniController {
+    int currentId = Integer.MIN_VALUE;
     @FXML
     private ListView<Obleceni> obleceniListView;
     @FXML
     private Button smazatButton;
 
-    int currentId = Integer.MIN_VALUE;
-
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (obleceniListView.equals(mouseEvent.getSource())) {
             Obleceni obleceni = obleceniListView.getSelectionModel().getSelectedItem();
-            if (obleceni == null){
+            if (obleceni == null) {
                 return;
             }
             currentId = obleceni.getId();
@@ -32,14 +31,12 @@ public class SmazatObleceniController {
     }
 
     public void smazatObleceni() {
-        //Persistence persistence = new Persistence();
         Persistence.getInstance().odeberObleceniPodleId(currentId);
 
         nacistListView();
     }
 
     private void nacistListView() {
-        //Persistence persistence = new Persistence();
         ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
         ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);

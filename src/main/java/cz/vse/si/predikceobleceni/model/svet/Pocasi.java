@@ -1,12 +1,12 @@
-package cz.vse.si.predikceobleceni.svet;
+package cz.vse.si.predikceobleceni.model.svet;
 
 import java.time.LocalDateTime;
 
 public class Pocasi {
-    private String nazev;
     private final boolean dest;
     private final double teplota;
     private final LocalDateTime localDateTime;
+    private String nazev;
 
     public Pocasi(boolean dest, double teplota, LocalDateTime localDateTime) {
         this.dest = dest;

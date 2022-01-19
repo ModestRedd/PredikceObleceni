@@ -1,9 +1,9 @@
 package cz.vse.si.predikceobleceni.controller;
 
-import cz.vse.si.predikceobleceni.model.CastTela;
-import cz.vse.si.predikceobleceni.model.Formalni;
-import cz.vse.si.predikceobleceni.model.Obleceni;
-import cz.vse.si.predikceobleceni.model.Vrstva;
+import cz.vse.si.predikceobleceni.model.obleceni.CastTela;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Vrstva;
 import cz.vse.si.predikceobleceni.utils.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class UpravitObleceniController {
+    int currentId = Integer.MIN_VALUE;
+    CastTela currentCastTela;
+    Vrstva currentVrstva;
     @FXML
     private TextField nazev;
     @FXML
@@ -34,12 +37,7 @@ public class UpravitObleceniController {
     @FXML
     private Label appendArea;
 
-    int currentId = Integer.MIN_VALUE;
-    CastTela currentCastTela;
-    Vrstva currentVrstva;
-
     private void nacistListView() {
-        //Persistence persistence = new Persistence();
         ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
 
         ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
@@ -75,7 +73,6 @@ public class UpravitObleceniController {
     }
 
     private CastTela getCastTela(String vybranaCastTela) {
-        //String vybranaCastTela = castTela.getSelectionModel().getSelectedItem().toString();
         switch (vybranaCastTela) {
             case "hlava":
                 return CastTela.HLAVA;
@@ -167,7 +164,7 @@ public class UpravitObleceniController {
 
     public void upravObleceni() {
         appendArea.setText("");
-        if (nazev.getText().equals("") || this.castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null) {
+        if (existujePrazdnaHodnota()) {
             appendArea.setText("Chybějící hodnoty");
             return;
         }
@@ -175,7 +172,7 @@ public class UpravitObleceniController {
         CastTela castTelaKZapisu = getCastTela(castTela.getValue().toString());
         Vrstva vrstvaKZapisu = getVrstva(vrstva.getValue().toString());
 
-        if ((castTelaKZapisu == CastTela.HLAVA && vrstvaKZapisu != Vrstva.PRVNI) || (castTelaKZapisu == CastTela.BOTY && vrstvaKZapisu != Vrstva.PRVNI)) {
+        if (spatnaVrstva(castTelaKZapisu, vrstvaKZapisu)) {
             appendArea.setText("Daný kus oblečení může být pouze první vrstvou");
             return;
         }
@@ -187,9 +184,16 @@ public class UpravitObleceniController {
         Obleceni obleceniKUlozeni = new Obleceni(nazev.getText(), vrstvaKZapisu, castTelaKZapisu, minimalniTeplota.getValue(), maximalniTeplota.getValue(), getFormalni());
         obleceniKUlozeni.setId(currentId);
 
-        //Persistence persistence = new Persistence();
         Persistence.getInstance().pridejObleceni(obleceniKUlozeni);
 
         nacistListView();
+    }
+
+    private boolean spatnaVrstva(CastTela castTelaKZapisu, Vrstva vrstvaKZapisu) {
+        return (castTelaKZapisu == CastTela.HLAVA && vrstvaKZapisu != Vrstva.PRVNI) || (castTelaKZapisu == CastTela.BOTY && vrstvaKZapisu != Vrstva.PRVNI);
+    }
+
+    private boolean existujePrazdnaHodnota() {
+        return nazev.getText().equals("") || this.castTela.getSelectionModel().getSelectedItem() == null || vrstva.getSelectionModel().getSelectedItem() == null || formalnost.getSelectionModel().getSelectedItem() == null;
     }
 }

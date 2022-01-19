@@ -7,10 +7,10 @@ import com.dlsc.gmapsfx.javascript.object.GoogleMap;
 import com.dlsc.gmapsfx.javascript.object.LatLong;
 import com.dlsc.gmapsfx.javascript.object.MapOptions;
 import com.dlsc.gmapsfx.javascript.object.MapTypeIdEnum;
-import cz.vse.si.predikceobleceni.model.Formalni;
-import cz.vse.si.predikceobleceni.model.Obleceni;
-import cz.vse.si.predikceobleceni.model.Outfit;
-import cz.vse.si.predikceobleceni.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Obleceni;
+import cz.vse.si.predikceobleceni.model.obleceni.Outfit;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 import cz.vse.si.predikceobleceni.utils.InternetAlert;
 import cz.vse.si.predikceobleceni.utils.Kalkulator;
 import cz.vse.si.predikceobleceni.utils.Persistence;
@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private final DecimalFormat formatter = new DecimalFormat("###.00000");
     private double latitude;
     private double longtitude;
     @FXML
@@ -65,16 +66,7 @@ public class MainController implements Initializable {
     private GridPane mainGridPane;
     @FXML
     private Button okButton;
-
-    @FXML
-    private void zkontrolujVsechnyUdaje() {
-        appendLabel.setText("");
-        okButton.setDisable(false);
-
-        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
-            okButton.setDisable(true);
-        }
-    }
+    private GoogleMap map;
 
     @FXML
     public void handleOk() {
@@ -96,11 +88,11 @@ public class MainController implements Initializable {
         LocalDateTime check = LocalDateTime.now();
 
 
-        if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
+        if (chybaVDatumech(convertedStartDate, convertedEndDate, check)) {
             appendLabel.setText("Chyba v datumech");
         } else {
 
-           this.zobrazZFXThread("Načítání...");
+            this.zobrazZFXThread("Načítání...");
 
             Casoprostor casoprostor = new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList);
 
@@ -125,123 +117,12 @@ public class MainController implements Initializable {
         }
     }
 
-    private void zobrazZFXThread(String text){
-        Runnable task = () -> Platform.runLater(() -> appendLabel.setText(text));
-        new Thread(task).start();
-    }
-
-    private GoogleMap map;
-
-    private final DecimalFormat formatter = new DecimalFormat("###.00000");
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        okButton.setDisable(true);
-        googleMapView.addMapInitializedListener(this::configureMap);
-
-    }
-
-    protected void configureMap() {
-        MapOptions mapOptions = new MapOptions();
-
-        mapOptions.center(new LatLong(50.0832, 14.4353))
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .zoom(10);
-        map = googleMapView.createMap(mapOptions, false);
-
-        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
-            LatLong latLong = event.getLatLong();
-            latitudeLabel.setText(formatter.format(latLong.getLatitude()));
-            longitudeLabel.setText(formatter.format(latLong.getLongitude()));
-            latitude = latLong.getLatitude();
-            longtitude = latLong.getLongitude();
-            zkontrolujVsechnyUdaje();
-        });
-
-
-    }
-
-    public void otevriPridavaciOkno() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/pridatobleceni.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Přidání oblečení");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
-
-    }
-
-    public void otevriUpravovaciOkno() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/upravitobleceni.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-
-            Node content = fxmlLoader.load();
-
-            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
-
-            ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
-
-            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
-            obleceniListView.setItems(obleceniObservableList);
-
-            dialog.getDialogPane().setContent(content);
-            dialog.setTitle("Úprava oblečení");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        dialog.showAndWait();
-    }
-
-    public void otevriOknoLokalit() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/nacistlokalitu.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Načti lokalitu");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
-
-    }
-
     public void otevriMazaciOkno() {
         Dialog<ButtonType> dialog = new Dialog<>();
 
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
+        setupParent(dialog);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/smazatobleceni.fxml");
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/smazatobleceni.fxml");
 
         try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
@@ -266,23 +147,7 @@ public class MainController implements Initializable {
     }
 
     public void otevriMazaciOknoLokalit() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/smazatlokalitu.fxml");
-
-        try {
-            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("Odeber lokalitu");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        dialog.showAndWait();
+        otevriOknoPodleJmena("smazatlokalitu.fxml", "Odeber lokalitu");
     }
 
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
@@ -292,26 +157,14 @@ public class MainController implements Initializable {
         boolean vzitSiDestnik = vygenerovanyOutfit.isDestnik();
 
         Dialog<ButtonType> dialog = new Dialog<>();
-
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        //dialog.initOwner(mainGridPane.getScene().getWindow());
+        setupParent(dialog);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/predpovedbleceni.fxml");
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/predpovedbleceni.fxml");
 
         try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
-
             Node content = fxmlLoader.load();
-
-            ListView<Obleceni> zakladniObleceniListView = (ListView<Obleceni>) content.lookup("#zakladniObleceniListView");
-            ObservableList<Obleceni> zakladniObleceniObservableList = FXCollections.observableArrayList(zakladniObleceni);
-            zakladniObleceniListView.setItems(zakladniObleceniObservableList);
-
-            ListView<Obleceni> alternativniObleceniListView = (ListView<Obleceni>) content.lookup("#alternativniObleceniListView");
-            ObservableList<Obleceni> alternativniObleceniObservableList = FXCollections.observableArrayList(alternativniObleceni);
-            alternativniObleceniListView.setItems(alternativniObleceniObservableList);
-
+            zaradObleceniDoGUI(zakladniObleceni, alternativniObleceni, content);
             Label destnikLabel = (Label) content.lookup("#destnikLabel");
             if (vzitSiDestnik) {
                 destnikLabel.setText("Pravděpodobnost deště. Vezmi si deštník.");
@@ -330,22 +183,128 @@ public class MainController implements Initializable {
     }
 
     public void otevriInformaceOAplikaci() {
+        otevriOknoPodleJmena("oaplikaci.fxml", "O aplikaci");
+    }
+
+    public void otevriPridavaciOkno() {
+        otevriOknoPodleJmena("pridatobleceni.fxml", "Přidání oblečení");
+    }
+
+    public void otevriUpravovaciOkno() {
         Dialog<ButtonType> dialog = new Dialog<>();
 
-        Window window = dialog.getDialogPane().getScene().getWindow();
-        window.setOnCloseRequest(event -> window.hide());
-        dialog.initOwner(mainGridPane.getScene().getWindow());
+        setupParent(dialog);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/oaplikaci.fxml");
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/upravitobleceni.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+
+            Node content = fxmlLoader.load();
+
+            ListView<Obleceni> obleceniListView = (ListView<Obleceni>) content.lookup("#obleceniListView");
+
+            ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();
+
+            ObservableList<Obleceni> obleceniObservableList = FXCollections.observableArrayList(obleceni);
+            obleceniListView.setItems(obleceniObservableList);
+
+            dialog.getDialogPane().setContent(content);
+            dialog.setTitle("Úprava oblečení");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.showAndWait();
+    }
+
+    public void otevriOknoLokalit() {
+        otevriOknoPodleJmena("nacistlokalitu.fxml", "Načti lokalitu");
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        okButton.setDisable(true);
+        googleMapView.addMapInitializedListener(this::configureMap);
+
+    }
+
+    @FXML
+    private void zkontrolujVsechnyUdaje() {
+        appendLabel.setText("");
+        okButton.setDisable(false);
+
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
+            okButton.setDisable(true);
+        }
+    }
+
+
+    private boolean chybaVDatumech(LocalDateTime convertedStartDate, LocalDateTime convertedEndDate, LocalDateTime check) {
+        return convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()));
+    }
+
+    private void zobrazZFXThread(String text) {
+        Runnable task = () -> Platform.runLater(() -> appendLabel.setText(text));
+        new Thread(task).start();
+    }
+
+
+    private void configureMap() {
+        MapOptions mapOptions = new MapOptions();
+
+        mapOptions.center(new LatLong(50.0832, 14.4353))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .zoom(10);
+        map = googleMapView.createMap(mapOptions, false);
+
+        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+            LatLong latLong = event.getLatLong();
+            latitudeLabel.setText(formatter.format(latLong.getLatitude()));
+            longitudeLabel.setText(formatter.format(latLong.getLongitude()));
+            latitude = latLong.getLatitude();
+            longtitude = latLong.getLongitude();
+            zkontrolujVsechnyUdaje();
+        });
+
+
+    }
+
+
+    private void otevriOknoPodleJmena(String s, String s2) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        setupParent(dialog);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/" + s);
 
         try {
             fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
             dialog.getDialogPane().setContent(fxmlLoader.load());
-            dialog.setTitle("O aplikaci");
+            dialog.setTitle(s2);
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
         dialog.showAndWait();
+    }
+
+    private void setupParent(Dialog<ButtonType> dialog) {
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+    }
+
+
+    private void zaradObleceniDoGUI(List<Obleceni> zakladniObleceni, List<Obleceni> alternativniObleceni, Node content) {
+        ListView<Obleceni> zakladniObleceniListView = (ListView<Obleceni>) content.lookup("#zakladniObleceniListView");
+        ObservableList<Obleceni> zakladniObleceniObservableList = FXCollections.observableArrayList(zakladniObleceni);
+        zakladniObleceniListView.setItems(zakladniObleceniObservableList);
+
+        ListView<Obleceni> alternativniObleceniListView = (ListView<Obleceni>) content.lookup("#alternativniObleceniListView");
+        ObservableList<Obleceni> alternativniObleceniObservableList = FXCollections.observableArrayList(alternativniObleceni);
+        alternativniObleceniListView.setItems(alternativniObleceniObservableList);
     }
 }

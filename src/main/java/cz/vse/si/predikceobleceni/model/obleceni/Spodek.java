@@ -1,4 +1,4 @@
-package cz.vse.si.predikceobleceni.model;
+package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Spodek extends Obleceni {
     public Spodek(Obleceni obleceni) {

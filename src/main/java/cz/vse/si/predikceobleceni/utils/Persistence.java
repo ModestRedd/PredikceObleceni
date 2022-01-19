@@ -3,8 +3,8 @@ package cz.vse.si.predikceobleceni.utils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import cz.vse.si.predikceobleceni.model.*;
-import cz.vse.si.predikceobleceni.svet.Casoprostor;
+import cz.vse.si.predikceobleceni.model.obleceni.*;
+import cz.vse.si.predikceobleceni.model.svet.Casoprostor;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,29 +14,20 @@ import java.util.List;
 
 public final class Persistence {
     private static final Persistence persistence = new Persistence();
-
-    public static Persistence getInstance() {
-        return persistence;
-    }
-
     private final String pathToObleceni = "data/Obleceni.json";
     private final String pathToLokality = "data/Lokality.json";
-
-    private final ArrayList<Obleceni> obleceni = new ArrayList<>();
-    private final ArrayList<Casoprostor> lokality = new ArrayList<>();
-
     boolean jsouSeznamyObleceniAktualni = true;
+    private ArrayList<Obleceni> obleceni = new ArrayList<>();
+    private ArrayList<Casoprostor> lokality = new ArrayList<>();
     private ArrayList<Cepice> hlava = new ArrayList<Cepice>();
     private ArrayList<Vrsek> vrsek = new ArrayList<Vrsek>();
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
-
     private Persistence() {
         /*
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
         String lokalityJson = Files.readString(Path.of(pathToLokality), StandardCharsets.UTF_8);
          */
-
 
         String obleceniJson = "";
         String lokalityJson = "";
@@ -56,6 +47,44 @@ public final class Persistence {
         }
 
         pridejObleceni(obleceniJson);
+        pridejLokality(lokalityJson);
+    }
+
+    public static Persistence getInstance() {
+        return persistence;
+    }
+
+    private void znovuNactiObleceni() {
+        jsouSeznamyObleceniAktualni = false;
+        obleceni = new ArrayList<>();
+        hlava = new ArrayList<>();
+        vrsek = new ArrayList<>();
+        spodek = new ArrayList<>();
+        boty = new ArrayList<>();
+
+        String obleceniJson = "";
+
+        try {
+            obleceniJson = new String(Files.readAllBytes(Paths.get(pathToObleceni)));
+        } catch (Exception e) {
+            obleceniJson = "[]";
+        }
+
+        pridejObleceni(obleceniJson);
+    }
+
+    private void znovuNactiLokality() {
+        lokality = new ArrayList<>();
+
+        String lokalityJson = "";
+
+        try {
+            lokalityJson = new String(Files.readAllBytes(Paths.get(pathToLokality)));
+        } catch (Exception e) {
+            //System.out.println("[ERROR] Doslo k chybe pri nacitani dat. Jsou dostupne datove soubory?" + e);
+            lokalityJson = "[]";
+        }
+
         pridejLokality(lokalityJson);
     }
 
@@ -239,6 +268,8 @@ public final class Persistence {
             System.out.println("[ERROR] Nelze zapisovat do souboru obleceni!" + exception);
         }
         //Files.write(Path.of(pathToObleceni), List.of(json), StandardCharsets.UTF_8);
+
+        znovuNactiObleceni();
     }
 
     private void dumpLokalityJson() {
@@ -252,6 +283,8 @@ public final class Persistence {
             System.out.println("[ERROR] Nelze zapisovat do souboru lokalit!" + exception);
         }
         //Files.write(Path.of(pathToLokality), List.of(json), StandardCharsets.UTF_8);
+
+        znovuNactiLokality();
     }
 
     public ArrayList<Casoprostor> getLokality() {

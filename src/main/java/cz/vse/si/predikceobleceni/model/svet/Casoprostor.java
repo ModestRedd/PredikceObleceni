@@ -1,27 +1,26 @@
-package cz.vse.si.predikceobleceni.svet;
+package cz.vse.si.predikceobleceni.model.svet;
 
-import cz.vse.si.predikceobleceni.model.Formalni;
+import cz.vse.si.predikceobleceni.model.obleceni.Formalni;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 public class Casoprostor {
-    private int id;
-
     private final double zemepisnaSirka;
     private final double zemepisnaDelka;
     private final LocalDateTime pocatecniCas;
     private final LocalDateTime konecnyCas;
-    private Pocasi nejchladnejsiPocasi;
-    private Pocasi nejteplejsiPocasi;
-    private boolean dest;
     /**
      * možné formální oblečení, které je uživatel ochoten nosit,
      * například je ochoten si vzít někam málo/středně formální oblečení, tak kalkulátor
      * bere v potaz obě možnosti při výběru outfitu.
      */
     private final List<Formalni> formalnostObleceni;
+    private int id;
+    private Pocasi nejchladnejsiPocasi;
+    private Pocasi nejteplejsiPocasi;
+    private boolean dest;
 
     /*
     public Casoprostor(String nazev, double zemepisnaSirka, double zemepisnaDelka, LocalDateTime pocatecniCas, LocalDateTime konecnyCas, List<Formalni> formalni) {
@@ -86,12 +85,12 @@ public class Casoprostor {
         return formalnostObleceni;
     }
 
-    public void setId(int newId) {
-        this.id = newId;
-    }
-
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int newId) {
+        this.id = newId;
     }
 
     @Override

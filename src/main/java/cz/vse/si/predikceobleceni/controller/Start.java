@@ -17,34 +17,6 @@ import java.nio.file.Path;
 
 public class Start extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        try {
-
-            String json = VolacApi.getInstance().zavolejApi(10, 10);
-            if (json == null) {
-                throw new Exception("Bez internetového připojení");
-            }
-            FXMLLoader loader = new FXMLLoader();
-            URL url = new File("src/main/java/cz/vse/si/predikceobleceni/resources/gui.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-
-            //Parent root = loader.load(getClass().getClassLoader().getResource("gui.fxml"));
-
-            Scene scene = new Scene(root);
-            Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/resources/clouds.png");
-
-            stage.getIcons().add(new Image("file:" + path.toAbsolutePath()));
-            stage.setTitle("Předpověď oblečení");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            InternetAlert.zobrazNoInternetAlert();
-            System.exit(0);
-        }
-    }
-
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -55,6 +27,30 @@ public class Start extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) {
+
+        try {
+            String json = VolacApi.getInstance().zavolejApi(10, 10);
+            if (json == null) {
+                throw new Exception("Bez internetového připojení");
+            }
+            URL url = new File("src/main/java/cz/vse/si/predikceobleceni/view/gui.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+
+            Scene scene = new Scene(root);
+            Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/view/clouds.png");
+
+            stage.getIcons().add(new Image("file:" + path.toAbsolutePath()));
+            stage.setTitle("Předpověď oblečení");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            InternetAlert.zobrazNoInternetAlert();
+            System.exit(0);
+        }
     }
 
 }
