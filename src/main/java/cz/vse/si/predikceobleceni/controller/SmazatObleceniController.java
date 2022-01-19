@@ -12,17 +12,16 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class SmazatObleceniController {
+    int currentId = Integer.MIN_VALUE;
     @FXML
     private ListView<Obleceni> obleceniListView;
     @FXML
     private Button smazatButton;
 
-    int currentId = Integer.MIN_VALUE;
-
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         if (obleceniListView.equals(mouseEvent.getSource())) {
             Obleceni obleceni = obleceniListView.getSelectionModel().getSelectedItem();
-            if (obleceni == null){
+            if (obleceni == null) {
                 return;
             }
             currentId = obleceni.getId();

@@ -90,7 +90,7 @@ public class NacistLokalituController {
 
     public void zpracujKliknutiMysi(MouseEvent mouseEvent) {
         Casoprostor casoprostor = lokace.getSelectionModel().getSelectedItem();
-        if (casoprostor == null){
+        if (casoprostor == null) {
             okButton.setDisable(true);
             return;
         }

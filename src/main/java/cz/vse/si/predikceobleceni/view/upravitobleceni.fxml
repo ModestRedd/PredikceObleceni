@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import java.lang.*?>
-<AnchorPane stylesheets="@styles.css" id="main-mape" prefHeight="400.0" prefWidth="700.0"
-            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@styles.css" id="main-mape" prefHeight="400.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx"
             fx:controller="cz.vse.si.predikceobleceni.controller.UpravitObleceniController">
     <children>
         <GridPane prefHeight="400.0" prefWidth="700.0">

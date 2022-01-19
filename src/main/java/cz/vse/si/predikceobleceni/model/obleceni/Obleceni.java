@@ -1,14 +1,13 @@
 package cz.vse.si.predikceobleceni.model.obleceni;
 
 public class Obleceni {
-    private int id = -1;
-
     protected String nazev;
     protected Vrstva vrstva;
     protected CastTela castTela;
     protected int minimalniTeplota;
     protected int maximalniTeplota;
     protected Formalni formalni;
+    private int id = -1;
 
     public Obleceni(int id, String nazev, Vrstva vrstva, CastTela castTela, int minimalniTeplota, int maximalniTeplota, Formalni formalni) {
         this.id = id;

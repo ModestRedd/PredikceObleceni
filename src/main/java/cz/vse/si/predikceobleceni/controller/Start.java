@@ -17,8 +17,20 @@ import java.nio.file.Path;
 
 public class Start extends Application {
 
+    /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
 
         try {
             String json = VolacApi.getInstance().zavolejApi(10, 10);
@@ -39,18 +51,6 @@ public class Start extends Application {
             InternetAlert.zobrazNoInternetAlert();
             System.exit(0);
         }
-    }
-
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

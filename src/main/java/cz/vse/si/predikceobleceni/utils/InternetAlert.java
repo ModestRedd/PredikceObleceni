@@ -12,7 +12,7 @@ public class InternetAlert {
         alert.showAndWait();
     }
 
-    public static void zobrazMalyRozsahAlert(){
+    public static void zobrazMalyRozsahAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Malý rozsah");
         alert.setHeaderText("Pro tak malý časový rozsah neznáme předpověď. Zkuste to prosím znovu.");

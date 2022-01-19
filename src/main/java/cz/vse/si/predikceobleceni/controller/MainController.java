@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private final DecimalFormat formatter = new DecimalFormat("###.00000");
     private double latitude;
     private double longtitude;
     @FXML
@@ -66,7 +67,6 @@ public class MainController implements Initializable {
     @FXML
     private Button okButton;
     private GoogleMap map;
-    private final DecimalFormat formatter = new DecimalFormat("###.00000");
 
     @FXML
     public void handleOk() {
@@ -181,13 +181,13 @@ public class MainController implements Initializable {
 
         dialog.showAndWait();
     }
+
     public void otevriInformaceOAplikaci() {
         otevriOknoPodleJmena("oaplikaci.fxml", "O aplikaci");
     }
 
     public void otevriPridavaciOkno() {
         otevriOknoPodleJmena("pridatobleceni.fxml", "Přidání oblečení");
-
     }
 
     public void otevriUpravovaciOkno() {
@@ -223,6 +223,7 @@ public class MainController implements Initializable {
         otevriOknoPodleJmena("nacistlokalitu.fxml", "Načti lokalitu");
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         okButton.setDisable(true);
@@ -241,12 +242,11 @@ public class MainController implements Initializable {
     }
 
 
-
     private boolean chybaVDatumech(LocalDateTime convertedStartDate, LocalDateTime convertedEndDate, LocalDateTime check) {
         return convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()));
     }
 
-    private void zobrazZFXThread(String text){
+    private void zobrazZFXThread(String text) {
         Runnable task = () -> Platform.runLater(() -> appendLabel.setText(text));
         new Thread(task).start();
     }

@@ -14,23 +14,15 @@ import java.util.List;
 
 public final class Persistence {
     private static final Persistence persistence = new Persistence();
-
-    public static Persistence getInstance() {
-        return persistence;
-    }
-
     private final String pathToObleceni = "data/Obleceni.json";
     private final String pathToLokality = "data/Lokality.json";
-
+    boolean jsouSeznamyObleceniAktualni = true;
     private ArrayList<Obleceni> obleceni = new ArrayList<>();
     private ArrayList<Casoprostor> lokality = new ArrayList<>();
-
-    boolean jsouSeznamyObleceniAktualni = true;
     private ArrayList<Cepice> hlava = new ArrayList<Cepice>();
     private ArrayList<Vrsek> vrsek = new ArrayList<Vrsek>();
     private ArrayList<Spodek> spodek = new ArrayList<Spodek>();
     private ArrayList<Boty> boty = new ArrayList<Boty>();
-
     private Persistence() {
         /*
         String obleceniJson = Files.readString(Path.of(pathToObleceni), StandardCharsets.UTF_8);
@@ -56,6 +48,10 @@ public final class Persistence {
 
         pridejObleceni(obleceniJson);
         pridejLokality(lokalityJson);
+    }
+
+    public static Persistence getInstance() {
+        return persistence;
     }
 
     private void znovuNactiObleceni() {

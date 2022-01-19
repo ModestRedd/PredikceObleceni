@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class UpravitObleceniController {
+    int currentId = Integer.MIN_VALUE;
+    CastTela currentCastTela;
+    Vrstva currentVrstva;
     @FXML
     private TextField nazev;
     @FXML
@@ -33,10 +36,6 @@ public class UpravitObleceniController {
     private Button ulozitButton;
     @FXML
     private Label appendArea;
-
-    int currentId = Integer.MIN_VALUE;
-    CastTela currentCastTela;
-    Vrstva currentVrstva;
 
     private void nacistListView() {
         ArrayList<Obleceni> obleceni = Persistence.getInstance().getAllObleceni();

@@ -12,12 +12,11 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class SmazatLokalituController {
+    int currentId = Integer.MIN_VALUE;
     @FXML
     private ListView<Casoprostor> lokalityListView;
     @FXML
     private Button smazatButton;
-
-    int currentId = Integer.MIN_VALUE;
 
     @FXML
     private void initialize() {

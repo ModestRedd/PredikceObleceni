@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane id="main-pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css"
-            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns:fx="http://javafx.com/fxml" id="main-pane" prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles.css" xmlns="http://javafx.com/javafx"
             fx:controller="cz.vse.si.predikceobleceni.controller.PredpovedObleceniController">
     <children>
         <GridPane prefHeight="400.0" prefWidth="600.0">
