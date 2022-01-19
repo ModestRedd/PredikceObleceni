@@ -68,15 +68,19 @@ public class Controller implements Initializable {
     private CheckBox neformalni;
     @FXML
     private GridPane mainGridPane;
+    @FXML
+    private Button okButton;
 
+    @FXML
+    private void zkontrolujVsechnyUdaje(){
+        okButton.setDisable(false);
+        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
+            okButton.setDisable(true);
+        }
+    }
 
     @FXML
     public void handleOk() {
-        if (startDate.getValue() == null || endDate.getValue() == null || latitude == 0 || longtitude == 0 || (!formalni.isSelected() && !neformalni.isSelected() && !stredne.isSelected())) {
-            appendLabel.setText("Musíš zadat všechy údaje");
-            return;
-        }
-
         List<Formalni> formalniList = new ArrayList<>();
 
         if (formalni.isSelected()) {
@@ -119,7 +123,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        okButton.setDisable(true);
         googleMapView.addMapInitializedListener(this::configureMap);
 
     }
@@ -138,6 +142,7 @@ public class Controller implements Initializable {
                 longitudeLabel.setText(formatter.format(latLong.getLongitude()));
                 latitude = latLong.getLatitude();
                 longtitude = latLong.getLongitude();
+                zkontrolujVsechnyUdaje();
             });
 
 

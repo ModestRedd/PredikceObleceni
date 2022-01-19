@@ -61,9 +61,9 @@
                                 <Font name="System Bold" size="12.0"/>
                             </font>
                         </Label>
-                        <DatePicker fx:id="endDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="endDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                                     GridPane.valignment="CENTER"/>
-                        <Slider fx:id="endTime" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" minorTickCount="1"
+                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="endTime" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" minorTickCount="1"
                                 showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
                     </children>
                 </GridPane>
@@ -85,9 +85,9 @@
                                 <Font name="System Bold" size="12.0"/>
                             </font>
                         </Label>
-                        <DatePicker fx:id="startDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                        <DatePicker onAction="#zkontrolujVsechnyUdaje" fx:id="startDate" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                                     GridPane.valignment="CENTER"/>
-                        <Slider fx:id="startTime" blockIncrement="2.0" majorTickUnit="2.0" max="23.0" minorTickCount="2"
+                        <Slider onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="startTime" blockIncrement="2.0" majorTickUnit="2.0" max="23.0" minorTickCount="2"
                                 showTickLabels="true" snapToTicks="true" value="12.0" GridPane.rowIndex="2"/>
                     </children>
                 </GridPane>
@@ -109,7 +109,7 @@
                                 <Font name="System Bold" size="15.0"/>
                             </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#handleOk" text="Ok" GridPane.halignment="CENTER"
+                        <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" text="Ok" GridPane.halignment="CENTER"
                                 GridPane.rowIndex="2">
                             <font>
                                 <Font name="System Bold" size="13.0"/>
@@ -125,11 +125,11 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <CheckBox fx:id="neformalni" mnemonicParsing="false" text="neformální"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="neformalni" mnemonicParsing="false" text="neformální"
                                           GridPane.halignment="CENTER"/>
-                                <CheckBox fx:id="stredne" mnemonicParsing="false" text="středně"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="stredne" mnemonicParsing="false" text="středně"
                                           GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
-                                <CheckBox fx:id="formalni" mnemonicParsing="false" text="formální"
+                                <CheckBox onMouseReleased="#zkontrolujVsechnyUdaje" fx:id="formalni" mnemonicParsing="false" text="formální"
                                           GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
                             </children>
                         </GridPane>
