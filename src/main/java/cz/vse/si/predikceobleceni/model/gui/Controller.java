@@ -208,7 +208,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void otevriMazaciOknoObleceni() {
+    public void otevriMazaciOkno() {
         Dialog<ButtonType> dialog = new Dialog<>();
 
         Window window = dialog.getDialogPane().getScene().getWindow();

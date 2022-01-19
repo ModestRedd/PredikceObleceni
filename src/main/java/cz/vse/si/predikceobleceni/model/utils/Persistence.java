@@ -198,11 +198,14 @@ public final class Persistence {
         } catch (JsonParseException exception) {
             System.out.println("ERROR: Zadany JSON s daty lokalit je nevalidni! Exception: " + exception);
         } finally {
-            lokality.forEach(lokalita -> {
+            List<Casoprostor> kOdstraneni = new ArrayList<>();
+            for (Casoprostor lokalita: lokality) {
                 if (lokalita.getPocatecniCas().isBefore(LocalDateTime.now())) {
-                    lokality.remove(lokalita);
+                    kOdstraneni.add(lokalita);
                 }
-            });
+            }
+            lokality.removeAll(kOdstraneni);
+            kOdstraneni.forEach(lokalita -> this.odeberLokalituPodleId(lokalita.getId()));
         }
     }
 
