@@ -96,7 +96,12 @@ public class Controller implements Initializable {
         if (convertedEndDate.isBefore(convertedStartDate) || convertedStartDate.isBefore(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth(), check.getHour(), 0)) || convertedEndDate.isAfter(LocalDateTime.of(check.getYear(), check.getMonth(), check.getDayOfMonth() + 5, check.getHour(), check.getMinute()))) {
             appendLabel.setText("Chyba v datumech");
         } else {
-            Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList));
+            Casoprostor casoprostor = new Casoprostor(latitude, longtitude, convertedStartDate, convertedEndDate, formalniList);
+
+            Persistence persistence = new Persistence();
+            persistence.pridejLokalitu(casoprostor);
+
+            Outfit vygenerovanyOutfit = Kalkulator.getInstance().predpovedObleceni(casoprostor);
             //System.out.println(vygenerovanyOutfit.toString());
             zobrazOknoOutfitu(vygenerovanyOutfit);
         }
@@ -181,7 +186,8 @@ public class Controller implements Initializable {
 
         dialog.showAndWait();
     }
-    public void otevriOknoLokalit(){
+
+    public void otevriOknoLokalit() {
         Dialog<ButtonType> dialog = new Dialog<>();
 
         Window window = dialog.getDialogPane().getScene().getWindow();
@@ -202,7 +208,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void otevriMazaciOkno() {
+    public void otevriMazaciOknoObleceni() {
         Dialog<ButtonType> dialog = new Dialog<>();
 
         Window window = dialog.getDialogPane().getScene().getWindow();
@@ -234,6 +240,26 @@ public class Controller implements Initializable {
         dialog.showAndWait();
     }
 
+    public void otevriMazaciOknoLokalit() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        Window window = dialog.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Path path = FileSystems.getDefault().getPath("./src/main/java/cz/vse/si/predikceobleceni/model/resources/smazatlokalitu.fxml");
+
+        try {
+            fxmlLoader.setLocation(new URL("file:" + path.toAbsolutePath()));
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+            dialog.setTitle("Odeber lokalitu");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        dialog.showAndWait();
+    }
+
     public void zobrazOknoOutfitu(Outfit vygenerovanyOutfit) {
         List<Obleceni> zakladniObleceni = vygenerovanyOutfit.vratVsechnoZakladniObleceni();
         List<Obleceni> alternativniObleceni = vygenerovanyOutfit.vratVsechnoAlternativniObleceni();
@@ -243,7 +269,7 @@ public class Controller implements Initializable {
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
- //       dialog.initOwner(mainGridPane.getScene().getWindow());
+        //dialog.initOwner(mainGridPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
         Path path = FileSystems.getDefault().getPath("src/main/java/cz/vse/si/predikceobleceni/model/resources/predpovedbleceni.fxml");
 

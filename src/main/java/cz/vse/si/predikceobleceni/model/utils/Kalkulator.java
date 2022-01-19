@@ -29,12 +29,11 @@ public final class Kalkulator {
      *                    Dochází k nastavení těchto hodnot v časoprostoru.
      *                    Tyto 2 hodnoty jsou poté použity ke generaci outfitu.
      */
-    //Viktor z UI v kontrolleru vygeneruje časoprostor, a zavolá tuto metodu. Vrátí mu hotový outfit.
     public Outfit predpovedObleceni(Casoprostor casoprostor) {
         Persistence persistence = new Persistence();
         persistence.pridejLokalitu(casoprostor);
         priradNejchladnejsiPocasiADest(casoprostor);
-        System.out.println(casoprostor);
+        //System.out.println(casoprostor);
         return vygenerujOutfit(casoprostor);
     }
 
@@ -49,9 +48,7 @@ public final class Kalkulator {
     /**
      * V této metodě dochází ke scrapenutí dat z API
      */
-
-    //todo pro testovani docasne public
-    public List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
+    private List<Pocasi> zjistiPocasiZApi(Casoprostor casoprostor) {
         String jsonOdpoved = VolacApi.getInstance().zavolejApi(casoprostor.getZemepisnaSirka(), casoprostor.getZemepisnaDelka());
         //System.out.println(jsonOdpoved);
         return konvertujJsonNaListPocasi(jsonOdpoved, casoprostor);
