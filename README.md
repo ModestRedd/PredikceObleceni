@@ -1,6 +1,6 @@
 # PredikceObleceniDlePocasi
 
-Desktopová aplikace, co doporučuje vhodné oblečení dle počasí.
+Desktopová aplikace s GUI, API a databází, co doporučuje vhodné oblečení dle počasí. JavaFX <3
 
 ## Getting started
 
